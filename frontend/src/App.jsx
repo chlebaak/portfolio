@@ -1879,45 +1879,7 @@ function App() {
         {t('footer.design')}
       </motion.p>
 
-      <motion.div
-        className="mt-4 sm:mt-0"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-      >
-        <motion.button
-          onClick={() => scrollToSection(homeRef)}
-          className="group flex items-center gap-2 text-white/40 hover:text-white text-xs uppercase tracking-wider transition-colors duration-300"
-          whileHover={{ y: -2 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          {t('footer.backToTop')}
-          <span className="group-hover:-translate-y-1 transition-transform duration-300">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8 3L8 13"
-                stroke="currentColor"
-                strokeWidth="1"
-                strokeLinecap="round"
-              />
-              <path
-                d="M3.5 7.5L8 3L12.5 7.5"
-                stroke="currentColor"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </span>
-        </motion.button>
-      </motion.div>
+      
     </div>
   </div>
 
