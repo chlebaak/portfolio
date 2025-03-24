@@ -586,7 +586,7 @@ function App() {
         
         {/* Social icons */}
         <motion.a 
-          href="#" 
+          href="https://github.com/chlebaak" 
           className="text-white/50 hover:text-white p-2 transition-colors"
           whileHover={{ scale: 1.2, rotate: 5, backgroundColor: "rgba(255,255,255,0.05)", borderRadius: "50%" }}
           whileTap={{ scale: 0.9 }}
@@ -720,7 +720,7 @@ function App() {
           </div>
           <div className="flex space-x-5">
             <motion.a
-              href="#"
+              href="https://github.com/chlebaak"
               className="text-white/70 hover:text-white transition-colors"
               whileHover={{
                 y: -5,
@@ -782,119 +782,51 @@ function App() {
   ref={homeRef}
   className="min-h-screen flex items-center relative overflow-hidden bg-black"
 >
-  {/* Jemnější pozadí elementy */}
-  <motion.div
-    className="absolute top-20 left-0 w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 bg-white/3 rounded-full blur-[120px]"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 0.4 }}
-    transition={{ duration: 1.5, delay: 0.2 }}
+  {/* Optimalizované pozadí elementy - menší blur a bez opakované animace */}
+  <div
+    className="absolute top-20 left-0 w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 bg-white/3 rounded-full blur-[60px]"
   />
-  <motion.div
-    className="absolute bottom-10 right-10 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-white/3 rounded-full blur-[100px]"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 0.3 }}
-    transition={{ duration: 1.5, delay: 0.4 }}
+  <div
+    className="absolute bottom-10 right-10 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-white/3 rounded-full blur-[60px]"
   />
 
   {/* Content container */}
   <div className="container mx-auto px-5 sm:px-8 pt-20 sm:pt-24 z-10">
     <div className="flex flex-col md:flex-row items-center gap-12 sm:gap-16 md:gap-20 lg:gap-28">
-      {/* Text content - výraznější typografie */}
-      <motion.div
+      {/* Text content - optimalizováno */}
+      <div
         className="flex-1 md:max-w-xl w-full text-center md:text-left"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
       >
-        {/* Professional badge s ostřejším vzhledem */}
-        <motion.div
-          className="mb-6 inline-block"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
+        {/* Professional badge */}
+        <div className="mb-6 inline-block">
           <span className="bg-white text-black text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full shadow-md">
             {t('hero.badge')}
           </span>
-        </motion.div>
+        </div>
 
-        {/* Main heading - kontrastnější typografie */}
+        {/* Main heading - redukovaná animace */}
         <motion.h1
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-8 sm:mb-10 leading-[0.9] tracking-tight"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <motion.div className="overflow-hidden">
-            <motion.span
-              className="block mb-2 sm:mb-3"
-              initial={{ y: 80 }}
-              animate={{ y: 0 }}
-              transition={{
-                duration: 0.8,
-                delay: 0.3,
-                ease: "easeOut",
-              }}
-            >
-              {t('hero.title1')}
-            </motion.span>
-          </motion.div>
-
-          <motion.div className="overflow-hidden">
-            <motion.span
-              className="block mb-2 sm:mb-3"
-              initial={{ y: 80 }}
-              animate={{ y: 0 }}
-              transition={{
-                duration: 0.8,
-                delay: 0.5,
-                ease: "easeOut",
-              }}
-            >
-              {t('hero.title2')}
-            </motion.span>
-          </motion.div>
-
-          <motion.div className="overflow-hidden">
-            <motion.span
-              className="block text-white/60"
-              initial={{ y: 80 }}
-              animate={{ y: 0 }}
-              transition={{
-                duration: 0.8,
-                delay: 0.7,
-                ease: "easeOut",
-              }}
-            >
-              {t('hero.title3')}
-            </motion.span>
-          </motion.div>
+          <span className="block mb-2 sm:mb-3">{t('hero.title1')}</span>
+          <span className="block mb-2 sm:mb-3">{t('hero.title2')}</span>
+          <span className="block text-white/60">{t('hero.title3')}</span>
         </motion.h1>
 
-        {/* Description - čistší typografie */}
-        <motion.p
-          className="text-white/70 mb-10 sm:mb-12 text-base sm:text-lg max-w-xs sm:max-w-sm md:max-w-md mx-auto md:mx-0 leading-relaxed"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.9 }}
-        >
+        {/* Description - optimalizováno */}
+        <p className="text-white/70 mb-10 sm:mb-12 text-base sm:text-lg max-w-xs sm:max-w-sm md:max-w-md mx-auto md:mx-0 leading-relaxed">
           {t('hero.description')}
-        </motion.p>
+        </p>
 
-        {/* Buttons - vysoký kontrast */}
-        <motion.div
-          className="flex flex-wrap justify-center md:justify-start gap-5 sm:gap-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1.1 }}
-        >
-          {/* Primary CTA - čistě černobílý */}
+        {/* Buttons - optimalizováno */}
+        <div className="flex flex-wrap justify-center md:justify-start gap-5 sm:gap-6">
+          {/* Primary CTA */}
           <motion.button
             className="bg-white text-black px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold flex items-center gap-2 group shadow-lg shadow-white/5 hover:shadow-white/10 text-sm sm:text-base"
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 10px 30px -10px rgba(255,255,255,0.2)",
-            }}
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => scrollToSection(projectsRef)}
           >
@@ -904,7 +836,7 @@ function App() {
             </span>
           </motion.button>
 
-          {/* Secondary CTA - elegantní border */}
+          {/* Secondary CTA */}
           <motion.button
             className="border-2 border-white/20 hover:border-white/40 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold transition-all duration-300 hover:bg-white/5 text-sm sm:text-base"
             whileHover={{ scale: 1.05 }}
@@ -913,22 +845,11 @@ function App() {
           >
             {t('hero.cta2')}
           </motion.button>
-        </motion.div>
+        </div>
 
-        {/* Stats - modernizovaný design */}
-        <motion.div
-          className="hidden flex gap-6 sm:gap-8 mt-12 sm:mt-16 justify-center md:justify-start"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.4 }}
-        >
+        {/* Stats - statické, bez animací */}
+        <div className="hidden md:flex gap-6 sm:gap-8 mt-12 sm:mt-16 justify-center md:justify-start">
           <div className="text-center relative">
-            <motion.div
-              className="absolute -top-2 -left-2 -right-2 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              transition={{ delay: 1.8, duration: 0.8 }}
-            />
             <div className="text-xl sm:text-2xl font-bold">5+</div>
             <div className="text-[10px] text-white/60 uppercase tracking-wider mt-1">
               {t('hero.stats.years')}
@@ -936,12 +857,6 @@ function App() {
           </div>
           <div className="h-12 w-px bg-white/10"></div>
           <div className="text-center relative">
-            <motion.div
-              className="absolute -top-2 -left-2 -right-2 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              transition={{ delay: 2, duration: 0.8 }}
-            />
             <div className="text-xl sm:text-2xl font-bold">50+</div>
             <div className="text-[10px] text-white/60 uppercase tracking-wider mt-1">
               {t('hero.stats.projects')}
@@ -949,372 +864,222 @@ function App() {
           </div>
           <div className="h-12 w-px bg-white/10"></div>
           <div className="text-center relative">
-            <motion.div
-              className="absolute -top-2 -left-2 -right-2 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              transition={{ delay: 2.2, duration: 0.8 }}
-            />
             <div className="text-xl sm:text-2xl font-bold">30+</div>
             <div className="text-[10px] text-white/60 uppercase tracking-wider mt-1">
               {t('hero.stats.clients')}
             </div>
           </div>
-        </motion.div>
+        </div>
+      </div>
+
+      {/* Profile image - optimalizováno */}
+      <motion.div
+        className="flex-1 md:flex-none md:w-2/5 mt-4 md:mt-0 max-w-[300px] sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto relative"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="relative">
+          {/* Jednodušší rámeček bez animace */}
+          <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-white/40 via-white/5 to-white/5"></div>
+
+          {/* Hlavní kontejner s profil fotkou */}
+          <div className="relative z-10 aspect-square bg-gradient-to-br from-gray-900 to-black rounded-2xl overflow-hidden shadow-2xl">
+            <img
+              src={profileImage}
+              alt="Jan Fiala"
+              className="w-full h-full object-cover"
+            />
+
+            {/* Statický grid pattern místo animovaného efektu */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.03)_1px,_transparent_1px)] bg-[length:20px_20px] opacity-20"></div>
+          </div>
+
+          {/* Tech tagy - statické na malých obrazovkách, animované jen na větších */}
+          <div className="hidden sm:block">
+            <div className="absolute -left-8 sm:-left-10 top-8 sm:top-10 bg-black px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs border border-white/10 shadow-xl shadow-black/50">
+              React.js
+            </div>
+            <div className="absolute -right-5 sm:-right-7 top-20 sm:top-24 bg-black px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs border border-white/10 shadow-xl shadow-black/50">
+              Tailwind CSS
+            </div>
+            <div className="absolute -left-5 sm:-left-7 bottom-16 sm:bottom-20 bg-black px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs border border-white/10 shadow-xl shadow-black/50">
+              Framer Motion
+            </div>
+          </div>
+
+          {/* Statické dekorativní elementy */}
+          <div className="absolute -top-4 -right-4 w-8 h-8 border border-white/20 rounded-full"></div>
+          <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-white rounded-full"></div>
+        </div>
       </motion.div>
+    </div>
 
-                {/* Profile image - modernější černobílý design */}
-                <motion.div
-                  className="flex-1 md:flex-none md:w-2/5 mt-4 md:mt-0 max-w-[300px] sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto relative"
-                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.5 }}
-                >
-                  <div className="relative">
-                    {/* Abstraktní rámeček */}
-                    <motion.div
-                      className="absolute -inset-px rounded-2xl bg-gradient-to-br from-white/40 via-white/5 to-white/5"
-                      animate={{
-                        boxShadow: [
-                          "0 0 20px 0px rgba(255,255,255,0.05)",
-                          "0 0 30px 2px rgba(255,255,255,0.15)",
-                          "0 0 20px 0px rgba(255,255,255,0.05)",
-                        ],
-                      }}
-                      transition={{ duration: 4, repeat: Infinity }}
-                    />
-
-                    {/* Hlavní kontejner s profil fotkou */}
-                    <motion.div
-                      className="relative z-10 aspect-square bg-gradient-to-br from-gray-900 to-black rounded-2xl overflow-hidden shadow-2xl"
-                      whileHover={{ scale: 1.03 }}
-                      transition={{ duration: 0.4 }}
-                    >
-                      <img
-                        src={profileImage}
-                        alt="Jan Fiala"
-                        className="w-full h-full object-cover"
-                      />
-
-                      {/* Světelný efekt nad obrázkem */}
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-br from-white/8 to-transparent opacity-0"
-                        animate={{ opacity: [0, 0.4, 0] }}
-                        transition={{
-                          duration: 5,
-                          repeat: Infinity,
-                          repeatDelay: 3,
-                        }}
-                      />
-
-                      {/* Rastry v pozadí - můžete ponechat nebo odstranit podle potřeby */}
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.03)_1px,_transparent_1px)] bg-[length:20px_20px] opacity-20"></div>
-                    </motion.div>
-
-                    {/* Tech tagy kolem obrázku */}
-                    <div className="hidden sm:block">
-                      <motion.div
-                        className="absolute -left-8 sm:-left-10 top-8 sm:top-10 bg-black px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs border border-white/10 shadow-xl shadow-black/50"
-                        initial={{ x: -30, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        transition={{ duration: 0.5, delay: 1.4 }}
-                      >
-                        React.js
-                      </motion.div>
-
-                      <motion.div
-                        className="absolute -right-5 sm:-right-7 top-20 sm:top-24 bg-black px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs border border-white/10 shadow-xl shadow-black/50"
-                        initial={{ x: 30, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        transition={{ duration: 0.5, delay: 1.6 }}
-                      >
-                        Tailwind CSS
-                      </motion.div>
-
-                      <motion.div
-                        className="absolute -left-5 sm:-left-7 bottom-16 sm:bottom-20 bg-black px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs border border-white/10 shadow-xl shadow-black/50"
-                        initial={{ x: -30, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        transition={{ duration: 0.5, delay: 1.8 }}
-                      >
-                        Framer Motion
-                      </motion.div>
-                    </div>
-
-                    {/* Dekorativní elementy */}
-                    <motion.div
-                      className="absolute -top-4 -right-4 w-8 h-8 border border-white/20 rounded-full"
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: 1.2, duration: 0.4 }}
-                    />
-                    <motion.div
-                      className="absolute -bottom-2 -left-2 w-4 h-4 bg-white rounded-full"
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: 1.4, duration: 0.3 }}
-                    />
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* Scroll down indikátor */}
-    <motion.div
-      className="absolute bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center"
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 2, duration: 0.8 }}
-    >
+    {/* Scroll down indikátor - zjednodušený */}
+    <div className="absolute bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center">
       <span className="text-[10px] sm:text-xs uppercase tracking-widest text-white/40 mb-2 sm:mb-3">
         {t('hero.scroll')}
       </span>
-      <motion.div
-        className="relative h-10 sm:h-12 overflow-hidden"
-        animate={{ y: [0, 8, 0] }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
+      <div className="relative h-10 sm:h-12 overflow-hidden">
         <span className="block w-px h-full bg-white/20 mx-auto"></span>
         <motion.span
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[3px] h-5 bg-white rounded-full blur-[1px]"
           animate={{
             y: ["-30%", "130%"],
-            opacity: [0, 1, 0],
           }}
           transition={{
-            duration: 1.5,
+            duration: 2,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: "linear",
           }}
         />
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   </div>
 </section>
 
-          {/* Projects Section - čistě černobílý */}
+{/* Projects Section - optimalizováno */}
 <section
   id="projects"
   ref={projectsRef}
   className="py-24 sm:py-32 relative overflow-hidden bg-black border-t border-white/5"
 >
-  {/* Abstraktní pozadí */}
-  <motion.div
-    className="absolute top-40 right-0 w-64 h-64 bg-white/2 rounded-full blur-[120px]"
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 0.6 }}
-    viewport={{ once: true }}
-    transition={{ duration: 1.5 }}
+  {/* Statické pozadí místo animovaného blur efektu */}
+  <div
+    className="absolute top-40 right-0 w-64 h-64 bg-white/2 rounded-full blur-[60px]"
   />
-  <motion.div
-    className="absolute -bottom-20 -left-20 w-96 h-96 bg-white/2 rounded-full blur-[150px]"
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 0.4 }}
-    viewport={{ once: true }}
-    transition={{ duration: 1.5, delay: 0.2 }}
+  <div
+    className="absolute -bottom-20 -left-20 w-96 h-96 bg-white/2 rounded-full blur-[60px]"
   />
 
   <div className="container mx-auto px-5 sm:px-8 relative z-10">
-    {/* Nadpis sekce */}
-    <motion.div
-      className="text-center mb-20"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.5 }}
-    >
-      <motion.span
-        className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50 block mb-4"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-      >
+    {/* Zjednodušený nadpis sekce */}
+    <div className="text-center mb-20">
+      <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50 block mb-4">
         {t('projects.subtitle')}
-      </motion.span>
-      <SectionHeader title={t('projects.title')} />
-      <motion.div
-        className="h-px w-24 bg-gradient-to-r from-white/5 via-white/60 to-white/5 mx-auto mt-8"
-        initial={{ scaleX: 0, opacity: 0 }}
-        whileInView={{ scaleX: 1, opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-      />
-    </motion.div>
-
-    {/* Grid projektů */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 sm:gap-10">
-      {projects.map((project, index) => (
-        <motion.div
-          key={project.id}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{
-            duration: 0.6,
-            delay: Math.min(index * 0.1, 0.5),
-            ease: "easeOut",
-          }}
-        >
-          <ProjectCard project={project} />
-        </motion.div>
-      ))}
+      </span>
+      
+      {/* Použití statického SectionHeader místo animovaného */}
+      <h2 className="text-4xl sm:text-5xl font-bold relative inline-block">
+        {t('projects.title')}
+        <span className="absolute -bottom-3 left-0 right-0 h-px bg-gradient-to-r from-white/5 via-white/60 to-white/5"></span>
+      </h2>
+      
+      <div className="h-px w-24 bg-gradient-to-r from-white/5 via-white/60 to-white/5 mx-auto mt-8" />
     </div>
 
-    {/* Tlačítko zobrazit více */}
-    <motion.div
-      className="mt-16 text-center"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: 0.5 }}
-    >
-      <motion.button
-        className="bg-white text-black px-8 py-3.5 rounded-full font-medium inline-flex items-center gap-2 shadow-md shadow-white/5 hover:shadow-white/10"
-        whileHover={{
-          scale: 1.03,
-          boxShadow: "0 15px 25px -5px rgba(0,0,0,0.3)",
-        }}
-        whileTap={{ scale: 0.98 }}
-      >
-        <span>{t('projects.viewAll')}</span>
-        <span className="bg-black/10 rounded-full p-1 ml-1">
-          <HiOutlineArrowNarrowRight className="transition-transform duration-300 w-4 h-4" />
-        </span>
-      </motion.button>
-    </motion.div>
+    {/* Grid projektů - optimalizace načítání */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 sm:gap-10">
+      {projects.map((project, index) => (
+        <div key={project.id} className="will-change-transform">
+          {/* Lazy loaded projekty s optimalizovanou animací */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }} // Snížení amount pro dřívější načtení
+            transition={{
+              duration: 0.4,
+              // Omezíme maximální zpoždění, aby se všechny projekty načetly rychleji
+              delay: Math.min(index * 0.05, 0.2), 
+            }}
+          >
+            <ProjectCard project={project} />
+          </motion.div>
+        </div>
+      ))}
+    </div>
   </div>
 </section>
 
           {/* About Section - vylepšený pro větší kontrast */}
-<section
+          <section
   id="about"
   ref={aboutRef}
   className="py-24 sm:py-32 relative overflow-hidden bg-black border-t border-white/5"
 >
-  {/* Dekorativní pozadí */}
-  <motion.div
-    className="absolute top-40 left-20 w-80 h-80 bg-white/3 rounded-full blur-[130px]"
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 0.5 }}
-    viewport={{ once: true }}
-    transition={{ duration: 1.5 }}
+  {/* Statické pozadí místo animovaného */}
+  <div
+    className="absolute top-40 left-20 w-80 h-80 bg-white/3 rounded-full blur-[60px]"
   />
 
   <div className="container mx-auto px-5 sm:px-8 relative z-10">
-    {/* Nadpis sekce */}
-    <motion.div
-      className="text-center mb-20"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.5 }}
-    >
-      <motion.span
-        className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50 block mb-4"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-      >
+    {/* Zjednodušený nadpis sekce */}
+    <div className="text-center mb-20">
+      <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50 block mb-4">
         {t('about.subtitle')}
-      </motion.span>
-      <SectionHeader title={t('about.title')} />
-      <motion.div
-        className="h-px w-24 bg-gradient-to-r from-white/5 via-white/60 to-white/5 mx-auto mt-8"
-        initial={{ scaleX: 0, opacity: 0 }}
-        whileInView={{ scaleX: 1, opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-      />
-    </motion.div>
+      </span>
+      
+      {/* Používáme statický nadpis místo animovaného */}
+      <h2 className="text-4xl sm:text-5xl font-bold relative inline-block">
+        {t('about.title')}
+        <span className="absolute -bottom-3 left-0 right-0 h-px bg-gradient-to-r from-white/5 via-white/60 to-white/5"></span>
+      </h2>
+      
+      <div className="h-px w-24 bg-gradient-to-r from-white/5 via-white/60 to-white/5 mx-auto mt-8" />
+    </div>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 lg:gap-20 items-center">
-      {/* Profil fotka container */}
+      {/* Optimalizovaný profil fotka container - jediná hlavní animace */}
       <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="relative"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
+        className="relative will-change-transform"
       >
         <div className="relative">
-          {/* Dekorativní rámeček */}
-          <motion.div
-            className="absolute -inset-5 rounded-2xl border border-white/10 z-0"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          />
+          {/* Statický dekorativní rámeček */}
+          <div className="absolute -inset-5 rounded-2xl border border-white/10 z-0" />
 
-          {/* AboutImage component */}
+          {/* AboutImage component - optimalizován uvnitř komponenty */}
           <div className="relative z-10">
             <AboutImage />
           </div>
 
-          {/* Dekorativní blur */}
-          <motion.div
-            className="absolute -bottom-10 -right-10 w-32 h-32 bg-white/3 rounded-full blur-xl z-0"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 0.6 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          />
+          {/* Statický dekorativní blur */}
+          <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-white/3 rounded-full blur-md z-0" />
 
-          {/* Experience badge */}
+          {/* Experience badge - ponecháme animaci pro lepší UX */}
           <motion.div
             className="absolute -top-6 -right-6 bg-white text-black text-xs font-bold px-4 py-2 rounded-full shadow-lg z-20"
-            initial={{ opacity: 0, scale: 0.8, y: 20 }}
-            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            transition={{ duration: 0.4 }}
           >
             {t('about.badge')}
           </motion.div>
         </div>
       </motion.div>
 
-      {/* About text content */}
+      {/* Optimalizovaný textový obsah */}
       <div>
-        <motion.h3
-          className="text-2xl sm:text-3xl font-bold mb-6 text-white"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-        >
+        {/* Statický nadpis */}
+        <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-white">
           {t('about.heading')}
-        </motion.h3>
+        </h3>
 
-        <motion.p
-          className="text-white/70 mb-8 text-base sm:text-lg leading-relaxed"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
+        {/* Statický popis */}
+        <p className="text-white/70 mb-8 text-base sm:text-lg leading-relaxed">
           {t('about.description')}
-        </motion.p>
+        </p>
 
-        {/* Skills and experience karty */}
+        {/* Skills and experience karty - jedna animace pro celý blok */}
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5 }}
         >
+          {/* Skills karta - zachováváme hover animaci pro lepší UX */}
           <motion.div
             className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10"
             whileHover={{
               y: -5,
               boxShadow: "0 15px 30px -10px rgba(0,0,0,0.5)",
             }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.3 }}
           >
             <h4 className="font-bold mb-4 flex items-center text-lg">
               <span className="bg-white text-black p-1.5 rounded mr-2">
@@ -1358,13 +1123,14 @@ function App() {
             </ul>
           </motion.div>
 
+          {/* Experience karta - zachováváme hover animaci pro lepší UX */}
           <motion.div
             className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10"
             whileHover={{
               y: -5,
               boxShadow: "0 15px 30px -10px rgba(0,0,0,0.5)",
             }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.3 }}
           >
             <h4 className="font-bold mb-4 flex items-center text-lg">
               <span className="bg-white text-black p-1.5 rounded mr-2">
@@ -1405,13 +1171,9 @@ function App() {
           </motion.div>
         </motion.div>
 
-        {/* Tlačítko CV */}
+        {/* Tlačítko CV - zachováváme animaci pro interaktivitu */}
         <motion.button
           className="bg-white text-black px-8 py-4 rounded-full font-semibold flex items-center gap-2 group shadow-md"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5, delay: 0.3 }}
           whileHover={{
             scale: 1.05,
             boxShadow: "0 15px 25px -5px rgba(0,0,0,0.3)",
@@ -1428,196 +1190,140 @@ function App() {
   </div>
 </section>
 
-          {/* Contact Section */}
+      {/* Contact Section - optimalizovaná verze */}
 <section
   id="contact"
   ref={contactRef}
   className="py-24 sm:py-32 relative overflow-hidden bg-black border-t border-white/5"
 >
-  {/* Dekorativní pozadí */}
-  <motion.div
-    className="absolute top-40 right-10 w-72 h-72 bg-white/3 rounded-full blur-[150px]"
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 0.4 }}
-    viewport={{ once: true }}
-    transition={{ duration: 1.5 }}
+  {/* Statické pozadí místo animovaného */}
+  <div 
+    className="absolute top-40 right-10 w-72 h-72 bg-white/3 rounded-full blur-[60px]"
   />
-  <motion.div
-    className="absolute -bottom-20 -left-20 w-96 h-96 bg-white/2 rounded-full blur-[150px]"
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 0.3 }}
-    viewport={{ once: true }}
-    transition={{ duration: 1.5, delay: 0.2 }}
+  <div 
+    className="absolute -bottom-20 -left-20 w-96 h-96 bg-white/2 rounded-full blur-[60px]"
   />
 
   <div className="container mx-auto px-5 sm:px-8 relative z-10">
-    {/* Nadpis sekce */}
+    {/* Zjednodušený nadpis sekce - jedna animace pro celý blok */}
     <motion.div
       className="text-center mb-20"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.5 }}
     >
-      <motion.span
+      <span
         className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50 block mb-4"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.1 }}
       >
         {t('contact.subtitle')}
-      </motion.span>
-      <SectionHeader title={t('contact.title')} />
-      <motion.div
-        className="h-px w-24 bg-gradient-to-r from-white/5 via-white/60 to-white/5 mx-auto mt-8"
-        initial={{ scaleX: 0, opacity: 0 }}
-        whileInView={{ scaleX: 1, opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-      />
+      </span>
+      
+      <h2 className="text-4xl sm:text-5xl font-bold relative inline-block">
+        {t('contact.title')}
+        <span className="absolute -bottom-3 left-0 right-0 h-px bg-gradient-to-r from-white/5 via-white/60 to-white/5"></span>
+      </h2>
+      
+      <div className="h-px w-24 bg-gradient-to-r from-white/5 via-white/60 to-white/5 mx-auto mt-8" />
     </motion.div>
 
-    {/* Kontaktní grid */}
+    {/* Kontaktní grid - optimalizovaný */}
     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 lg:gap-20 items-start">
-      {/* Kontaktní informace */}
+      {/* Kontaktní informace - jedna hlavní animace */}
       <motion.div
         className="bg-white/5 backdrop-blur-md p-8 sm:p-10 rounded-2xl border border-white/10 shadow-xl shadow-black/20"
-        initial={{ opacity: 0, x: -30 }}
+        initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.5 }}
       >
-        <motion.h3
-          className="text-2xl sm:text-3xl font-bold mb-6 text-white"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-        >
+        <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-white">
           {t('contact.infoTitle')}
-        </motion.h3>
+        </h3>
 
-        <motion.p
-          className="text-white/70 mb-10 text-base sm:text-lg leading-relaxed"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
+        <p className="text-white/70 mb-10 text-base sm:text-lg leading-relaxed">
           {t('contact.infoDesc')}
-        </motion.p>
+        </p>
 
         <div className="space-y-8 mt-10">
-          <ContactInfo
-            icon={<FiMail className="w-5 h-5" />}
-            title={t('contact.email')}
-            value="janfiala331@gmail.com"
-            delay={0.2}
-          />
+          {/* Optimalizovaná ContactInfo komponenta - použijeme přímo statické prvky */}
+          <div className="flex items-center space-x-4 group hover:translate-x-2 transition-transform duration-300">
+            <div className="w-10 h-10 bg-white/5 text-white/80 flex items-center justify-center rounded-full border border-white/10 shadow-md shadow-black/10">
+              <FiMail className="w-5 h-5" />
+            </div>
+            <div>
+              <h4 className="text-sm uppercase tracking-wider text-white/50 mb-1">
+                {t('contact.email')}
+              </h4>
+              <p className="text-white font-medium">janfiala331@gmail.com</p>
+            </div>
+          </div>
 
-          <ContactInfo
-            icon={<FiPhone className="w-5 h-5" />}
-            title={t('contact.phone')}
-            value="+420 733 164 585"
-            delay={0.3}
-          />
+          <div className="flex items-center space-x-4 group hover:translate-x-2 transition-transform duration-300">
+            <div className="w-10 h-10 bg-white/5 text-white/80 flex items-center justify-center rounded-full border border-white/10 shadow-md shadow-black/10">
+              <FiPhone className="w-5 h-5" />
+            </div>
+            <div>
+              <h4 className="text-sm uppercase tracking-wider text-white/50 mb-1">
+                {t('contact.phone')}
+              </h4>
+              <p className="text-white font-medium">+420 733 164 585</p>
+            </div>
+          </div>
 
-          <ContactInfo
-            icon={<FiMapPin className="w-5 h-5" />}
-            title={t('contact.location')}
-            value={t('contact.location')}
-            delay={0.4}
-          />
+          <div className="flex items-center space-x-4 group hover:translate-x-2 transition-transform duration-300">
+            <div className="w-10 h-10 bg-white/5 text-white/80 flex items-center justify-center rounded-full border border-white/10 shadow-md shadow-black/10">
+              <FiMapPin className="w-5 h-5" />
+            </div>
+            <div>
+              <h4 className="text-sm uppercase tracking-wider text-white/50 mb-1">
+                {t('contact.location')}
+              </h4>
+              <p className="text-white font-medium">{t('contact.location')}</p>
+            </div>
+          </div>
         </div>
 
-        {/* Sociální media */}
-        <motion.div
-          className="mt-12 pt-8 border-t border-white/10"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-        >
+        {/* Sociální media - statický blok s hover efekty */}
+        <div className="mt-12 pt-8 border-t border-white/10">
           <div className="text-white/50 text-xs uppercase tracking-[0.15em] mb-6">
             {t('contact.connect')}
           </div>
           <div className="flex space-x-5">
-            <motion.a
-              href="#"
-              className="w-11 h-11 rounded-full bg-white/5 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 border border-white/10"
-              whileHover={{
-                y: -5,
-                boxShadow: "0 10px 20px -5px rgba(0, 0, 0, 0.2)",
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FiGithub className="w-5 h-5" />
-            </motion.a>
-            <motion.a
-              href="#"
-              className="w-11 h-11 rounded-full bg-white/5 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 border border-white/10"
-              whileHover={{
-                y: -5,
-                boxShadow: "0 10px 20px -5px rgba(0, 0, 0, 0.2)",
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FiTwitter className="w-5 h-5" />
-            </motion.a>
-            <motion.a
-              href="#"
-              className="w-11 h-11 rounded-full bg-white/5 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 border border-white/10"
-              whileHover={{
-                y: -5,
-                boxShadow: "0 10px 20px -5px rgba(0, 0, 0, 0.2)",
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FiLinkedin className="w-5 h-5" />
-            </motion.a>
-            <motion.a
-              href="#"
-              className="w-11 h-11 rounded-full bg-white/5 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 border border-white/10"
-              whileHover={{
-                y: -5,
-                boxShadow: "0 10px 20px -5px rgba(0, 0, 0, 0.2)",
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FiInstagram className="w-5 h-5" />
-            </motion.a>
+            {/* Použití mapy pro sociální ikony místo jednotlivých kompnent */}
+            {[
+              { Icon: FiGithub, href: "https://github.com/chlebaak" },
+              { Icon: FiTwitter, href: "#" },
+              { Icon: FiLinkedin, href: "#" },
+              { Icon: FiInstagram, href: "#" }
+            ].map((social, index) => (
+              <a
+                key={index}
+                href={social.href}
+                className="w-11 h-11 rounded-full bg-white/5 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 hover:-translate-y-2 hover:shadow-lg hover:shadow-black/20 transition-all duration-300 border border-white/10"
+              >
+                <social.Icon className="w-5 h-5" />
+              </a>
+            ))}
           </div>
-        </motion.div>
+        </div>
       </motion.div>
 
-      {/* Kontaktní formulář */}
+      {/* Kontaktní formulář - jedna animace */}
       <motion.div
         className="bg-white/5 backdrop-blur-md p-8 sm:p-10 rounded-2xl border border-white/10 shadow-xl shadow-black/20"
-        initial={{ opacity: 0, x: 30 }}
+        initial={{ opacity: 0, x: 20 }}
         whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.5, delay: 0.1 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.5 }}
       >
-        <motion.h3
-          className="text-2xl sm:text-3xl font-bold mb-6 text-white"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-        >
+        <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-white">
           {t('contact.formTitle')}
-        </motion.h3>
+        </h3>
 
-        <motion.p
-          className="text-white/70 mb-10 text-base sm:text-lg leading-relaxed"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
+        <p className="text-white/70 mb-10 text-base sm:text-lg leading-relaxed">
           {t('contact.formDesc')}
-        </motion.p>
+        </p>
 
         <ContactForm />
       </motion.div>
@@ -1627,57 +1333,37 @@ function App() {
         </main>
 
         {/* Elegantní Footer s vylepšeným černobílým designem */}
-<footer className="py-16 sm:py-20 relative overflow-hidden bg-black border-t border-white/10">
-  {/* Jemné světelné efekty v pozadí */}
-  <motion.div
-    className="absolute top-0 left-1/4 w-64 h-64 bg-white/2 rounded-full blur-[120px]"
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 0.3 }}
-    viewport={{ once: true }}
-    transition={{ duration: 1.5 }}
-  />
-  <motion.div
-    className="absolute bottom-0 right-1/4 w-80 h-80 bg-white/2 rounded-full blur-[150px]"
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 0.2 }}
-    viewport={{ once: true }}
-    transition={{ duration: 1.5, delay: 0.2 }}
-  />
+        <footer className="py-16 sm:py-20 relative overflow-hidden bg-black border-t border-white/10">
+  {/* Statické pozadí místo animovaného */}
+  <div className="absolute top-0 left-1/4 w-64 h-64 bg-white/2 rounded-full blur-[60px]" />
+  <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-white/2 rounded-full blur-[60px]" />
 
   <div className="container mx-auto px-6 sm:px-8 relative z-10">
-    {/* Tenký dekorativní horní oddělovač */}
-    <motion.div
-      className="h-px w-24 sm:w-32 bg-gradient-to-r from-white/5 via-white/30 to-white/5 mx-auto mb-16"
-      initial={{ scaleX: 0, opacity: 0 }}
-      whileInView={{ scaleX: 1, opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8 }}
-    />
+    {/* Statický oddělovač */}
+    <div className="h-px w-24 sm:w-32 bg-gradient-to-r from-white/5 via-white/30 to-white/5 mx-auto mb-16" />
 
     <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 items-start">
-      {/* Logo a copyright s modernějším designem */}
+      {/* Logo a copyright s jednou společnou animací */}
       <motion.div
         className="flex flex-col items-center md:items-start"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.5 }}
       >
-        <motion.div
-          className="relative group"
-          whileHover={{ scale: 1.05 }}
-        >
+        <div className="relative group">
           <div className="text-2xl sm:text-3xl font-bold tracking-tight flex items-center mb-5">
             <span className="text-white mr-1">JAN</span>
             <span className="text-white/50">FIALA</span>
           </div>
+          {/* Zachováme hover efekt - důležitý pro UX */}
           <motion.span
             className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-white/0 via-white to-white/0 origin-left"
             initial={{ scaleX: 0 }}
             whileHover={{ scaleX: 1 }}
             transition={{ duration: 0.3 }}
           />
-        </motion.div>
+        </div>
 
         <p className="text-white/40 mb-6 text-sm max-w-xs leading-relaxed">
           {t('footer.description')}
@@ -1688,13 +1374,13 @@ function App() {
         </p>
       </motion.div>
 
-      {/* Navigace v patičce s elegantním designem */}
+      {/* Navigace a kontakt - jedna animace pro celý blok */}
       <motion.div
         className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-10"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.5 }}
       >
         <div className="space-y-8">
           <div>
@@ -1707,14 +1393,9 @@ function App() {
                 { name: t('nav.projects'), ref: projectsRef },
                 { name: t('nav.about'), ref: aboutRef },
                 { name: t('nav.contact'), ref: contactRef },
-              ].map((item, i) => (
-                <motion.li
-                  key={item.name}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.1 + i * 0.1 }}
-                >
+              ].map((item) => (
+                <li key={item.name}>
+                  {/* Zachován hover efekt pro lepší UX */}
                   <motion.button
                     onClick={() => scrollToSection(item.ref)}
                     className="text-white/50 hover:text-white text-sm font-medium transition-all duration-300 flex items-center gap-1.5 group"
@@ -1724,7 +1405,7 @@ function App() {
                     <span className="h-px w-0 bg-white group-hover:w-4 transition-all duration-300"></span>
                     {item.name}
                   </motion.button>
-                </motion.li>
+                </li>
               ))}
             </ul>
           </div>
@@ -1736,160 +1417,89 @@ function App() {
               {t('footer.connect')}
             </h4>
             <div className="space-y-4">
-              <motion.a
-                href="mailto:hello@domain.com"
-                className="text-white/50 hover:text-white text-sm font-medium transition-all duration-300 flex items-center gap-2.5 group"
-                whileHover={{ x: 4 }}
-                whileTap={{ scale: 0.98 }}
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.5 }}
+              {/* Kontaktní odkazy - statické s hover efektem */}
+              <a
+                href="mailto:janfiala331@gmail.com"
+                className="text-white/50 hover:text-white text-sm font-medium transition-all duration-300 flex items-center gap-2.5 group hover:translate-x-1"
               >
                 <span className="w-5 h-5 flex items-center justify-center text-white/40 group-hover:text-white">
                   <FiMail size={14} />
                 </span>
                 janfiala331@gmail.com
-              </motion.a>
+              </a>
 
-              <motion.a
-                href="tel:+123456789"
-                className="text-white/50 hover:text-white text-sm font-medium transition-all duration-300 flex items-center gap-2.5 group"
-                whileHover={{ x: 4 }}
-                whileTap={{ scale: 0.98 }}
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.6 }}
+              <a
+                href="tel:+420733164585"
+                className="text-white/50 hover:text-white text-sm font-medium transition-all duration-300 flex items-center gap-2.5 group hover:translate-x-1"
               >
                 <span className="w-5 h-5 flex items-center justify-center text-white/40 group-hover:text-white">
                   <FiPhone size={14} />
                 </span>
                 +420 733 164 585
-              </motion.a>
+              </a>
 
-              <motion.a
+              <a
                 href="#"
-                className="text-white/50 hover:text-white text-sm font-medium transition-all duration-300 flex items-center gap-2.5 group"
-                whileHover={{ x: 4 }}
-                whileTap={{ scale: 0.98 }}
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.7 }}
+                className="text-white/50 hover:text-white text-sm font-medium transition-all duration-300 flex items-center gap-2.5 group hover:translate-x-1"
               >
                 <span className="w-5 h-5 flex items-center justify-center text-white/40 group-hover:text-white">
                   <FiMapPin size={14} />
                 </span>
                 {t('contact.location')}
-              </motion.a>
+              </a>
             </div>
           </div>
 
-          {/* Sociální sítě s elegantním designem */}
+          {/* Sociální sítě - jedna animace pro celý blok */}
           <div>
             <h4 className="text-sm uppercase tracking-widest text-white/30 mb-5 after:content-[''] after:block after:w-8 after:h-px after:bg-white/20 after:mt-2">
               {t('footer.follow')}
             </h4>
             <div className="flex items-center gap-4">
-              <motion.a
-                href="#"
-                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 hover:border-white/30 transition-all duration-300"
-                whileHover={{
-                  y: -5,
-                  boxShadow: "0 10px 20px -5px rgba(0,0,0,0.5)",
-                }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.8 }}
-              >
-                <FiGithub className="w-4 h-4" />
-              </motion.a>
-              <motion.a
-                href="#"
-                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 hover:border-white/30 transition-all duration-300"
-                whileHover={{
-                  y: -5,
-                  boxShadow: "0 10px 20px -5px rgba(0,0,0,0.5)",
-                }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.9 }}
-              >
-                <FiTwitter className="w-4 h-4" />
-              </motion.a>
-              <motion.a
-                href="#"
-                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 hover:border-white/30 transition-all duration-300"
-                whileHover={{
-                  y: -5,
-                  boxShadow: "0 10px 20px -5px rgba(0,0,0,0.5)",
-                }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 1 }}
-              >
-                <FiLinkedin className="w-4 h-4" />
-              </motion.a>
-              <motion.a
-                href="#"
-                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 hover:border-white/30 transition-all duration-300"
-                whileHover={{
-                  y: -5,
-                  boxShadow: "0 10px 20px -5px rgba(0,0,0,0.5)",
-                }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 1.1 }}
-              >
-                <FiInstagram className="w-4 h-4" />
-              </motion.a>
+              {/* Sociální ikony se zachovaným hover efektem */}
+              {[
+                { icon: <FiGithub className="w-4 h-4" />, href: "https://github.com/chlebaak" },
+                { icon: <FiTwitter className="w-4 h-4" />, href: "#" },
+                { icon: <FiLinkedin className="w-4 h-4" />, href: "#" },
+                { icon: <FiInstagram className="w-4 h-4" />, href: "https://www.instagram.com/honzafiala_/" }
+              ].map((social, index) => (
+                <motion.a
+                  key={index}
+                  href={social.href}
+                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 hover:border-white/30 transition-all duration-300"
+                  whileHover={{
+                    y: -5,
+                    boxShadow: "0 10px 20px -5px rgba(0,0,0,0.5)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {social.icon}
+                </motion.a>
+              ))}
             </div>
           </div>
         </div>
       </motion.div>
     </div>
 
-    {/* Tenká oddělovací linka */}
-    <motion.div
-      className="h-px w-full bg-white/5 my-12"
-      initial={{ scaleX: 0, opacity: 0 }}
-      whileInView={{ scaleX: 1, opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 1, delay: 0.5 }}
-    />
+    {/* Statická oddělovací linka */}
+    <div className="h-px w-full bg-white/5 my-12" />
 
-    {/* Footer spodní část */}
+    {/* Footer spodní část - statická */}
     <div className="flex flex-col sm:flex-row justify-between items-center">
-      <motion.p
-        className="text-white/30 text-xs"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-      >
+      <p className="text-white/30 text-xs">
         {t('footer.design')}
-      </motion.p>
-
-      
+      </p>
     </div>
   </div>
 
-  {/* Elegantní "nahoru" tlačítko */}
+  {/* "Nahoru" tlačítko - zachována animace pro lepší UX */}
   <motion.div
     className="absolute right-6 sm:right-10 bottom-10 sm:bottom-12"
-    initial={{ opacity: 0, scale: 0.8 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5, delay: 0.7 }}
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    viewport={{ once: true, amount: 0.3 }}
+    transition={{ duration: 0.5 }}
   >
     <motion.button
       onClick={() => scrollToSection(homeRef)}
@@ -1945,241 +1555,174 @@ function ProjectCard({ project }) {
   const { title, category, description, image, tech, url } = project;
 
   return (
-    <motion.div
-      className="group relative"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.5 }}
-      whileHover={{ y: -10 }}
-    >
-      {/* Project image container with enhanced styling */}
+    <div className="group relative will-change-transform">
+      {/* Základní obal bez vícenásobných animací */}
       <motion.div
-        className="aspect-video rounded-xl overflow-hidden relative mb-5 border border-white/10 bg-black shadow-lg shadow-black/30"
-        whileHover={{
-          scale: 1.03,
-          boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.5)",
-        }}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.1 }}
         transition={{ duration: 0.4 }}
+        whileHover={{ y: -5 }} // Zjednodušený hover efekt
+        className="h-full"
       >
-        {/* Skutečný obrázek projektu */}
-        <img
-          src={image}
-          alt={title}
-          className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-300"
-        />
-
-        {/* Category badge */}
-        <motion.div
-          className="absolute top-4 left-4 py-1 px-3 rounded-full bg-black/70 backdrop-blur-sm border border-white/10 text-[10px] text-white/80 font-medium tracking-wider z-10"
-          initial={{ opacity: 0, y: -10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.3 }}
+        {/* Project image container s jednou animací */}
+        <div
+          className="aspect-video rounded-xl overflow-hidden relative mb-5 border border-white/10 bg-black shadow-lg shadow-black/30 transition-all duration-300 group-hover:shadow-xl group-hover:scale-[1.01]"
         >
-          {category}
-        </motion.div>
+          {/* Obrázek projektu */}
+          <img
+            src={image}
+            alt={title}
+            className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+            loading="lazy" // Lazy loading pro lepší výkon
+          />
 
-        {/* Modern overlay with gradient and detailed info */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <h3 className="text-xl font-medium mb-2 text-white">{title}</h3>
-            <p className="text-white/70 text-sm mb-5 line-clamp-2">
-              {description}
-            </p>
+          {/* Statický Category badge */}
+          <div className="absolute top-4 left-4 py-1 px-3 rounded-full bg-black/70 backdrop-blur-sm border border-white/10 text-[10px] text-white/80 font-medium tracking-wider z-10">
+            {category}
+          </div>
 
-            {/* Tech stack pills */}
-            <div className="flex flex-wrap gap-2 mb-5">
-              {tech.map((item) => (
-                <span
-                  key={item}
-                  className="text-[10px] py-0.5 px-2 bg-white/5 rounded-full border border-white/10 text-white/70"
-                >
-                  {item}
+          {/* Overlay s informacemi - bez vnitřních animací */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-6">
+            <div>
+              <h3 className="text-xl font-medium mb-2 text-white">{title}</h3>
+              <p className="text-white/70 text-sm mb-5 line-clamp-2">
+                {description}
+              </p>
+
+              {/* Tech stack pills - statické */}
+              <div className="flex flex-wrap gap-2 mb-5">
+                {tech.map((item) => (
+                  <span
+                    key={item}
+                    className="text-[10px] py-0.5 px-2 bg-white/5 rounded-full border border-white/10 text-white/70"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+
+              {/* Tlačítko - zachována interaktivita */}
+              <motion.a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white text-black px-5 py-2.5 rounded-full text-sm font-medium flex items-center gap-2 group/btn transform-gpu shadow-lg shadow-black/20 w-fit"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span>View Project</span>
+                <span className="bg-black/10 rounded-full p-1">
+                  <HiOutlineArrowNarrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform duration-300" />
                 </span>
-              ))}
+              </motion.a>
             </div>
-
-            <motion.a
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white text-black px-5 py-2.5 rounded-full text-sm font-medium flex items-center gap-2 group/btn transform-gpu shadow-lg shadow-black/20 w-fit"
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 15px 25px -5px rgba(0,0,0,0.5)",
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span>View Project</span>
-              <span className="bg-black/10 rounded-full p-1">
-                <HiOutlineArrowNarrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform duration-300" />
-              </span>
-            </motion.a>
-          </motion.div>
+          </div>
         </div>
+
+        {/* Project info below thumbnail - statické */}
+        <div className="space-y-2">
+          <div className="h-px w-8 bg-white/20 mb-3"></div>
+          <h3 className="font-medium text-xl text-white group-hover:text-white transition-colors">
+            {title}
+          </h3>
+          <p className="text-white/60 text-sm">{category}</p>
+        </div>
+
+        {/* Hover indicator dot - bez zbytečné animace */}
+        <div className="absolute -bottom-1 left-0 w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
       </motion.div>
-
-      {/* Project info below thumbnail */}
-      <div className="space-y-2">
-        <motion.div
-          initial={{ width: 0 }}
-          whileInView={{ width: "2rem" }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="h-px bg-white/20 mb-3"
-        />
-
-        <motion.h3
-          className="font-medium text-xl text-white group-hover:text-white transition-colors"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-        >
-          {title}
-        </motion.h3>
-
-        <motion.p
-          className="text-white/60 text-sm"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.3 }}
-        >
-          {category}
-        </motion.p>
-      </div>
-
-      {/* Hover indicator dot */}
-      <motion.div
-        className="absolute -bottom-1 left-0 w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-all duration-300"
-        initial={{ scale: 0 }}
-        whileInView={{ scale: 1 }}
-        transition={{ delay: 0.4 }}
-      />
-    </motion.div>
+    </div>
   );
 }
 
 function AboutImage() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.6 }}
-      className="relative"
+      className="relative will-change-transform"
     >
-      {/* Inner border glow effect */}
+      {/* Hlavní kontejner - jediná animace pro hlavní obsah */}
       <motion.div
-        className="absolute inset-3 rounded-2xl bg-gradient-to-br from-white/20 to-white/5 blur-lg z-0"
         initial={{ opacity: 0 }}
-        animate={
-          isInView
-            ? {
-                opacity: [0, 0.4, 0.2, 0.4],
-                scale: [0.95, 1, 0.98, 1],
-              }
-            : { opacity: 0 }
-        }
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          repeatType: "reverse",
-        }}
-      />
-
-      {/* Main image container */}
-      <div className="aspect-square rounded-2xl overflow-hidden relative z-10 border border-white/10 shadow-xl shadow-black/50 bg-black">
-        {/* Skutečný obrázek místo placeholderu */}
-        <img
-          src={profileImage2} // Můžete použít kterýkoliv z vašich importovaných obrázků
-          alt="Jan Fiala"
-          className="w-full h-full object-cover"
+        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.6 }}
+        className="relative"
+      >
+        {/* Zjednodušený efekt vnitřního okraje */}
+        <div
+          className="absolute inset-3 rounded-2xl bg-gradient-to-br from-white/20 to-white/5 blur-lg z-0"
         />
 
-        {/* Gradient overlay with shine effect */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        />
+        {/* Hlavní kontejner s obrázkem */}
+        <div className="aspect-square rounded-2xl overflow-hidden relative z-10 border border-white/10 shadow-xl shadow-black/50 bg-black">
+          {/* Obrázek */}
+          <img
+            src={profileImage2}
+            alt="Jan Fiala"
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
 
-        {/* Moving shine effect */}
-        <motion.div
-          className="absolute -inset-full w-[200%] h-[200%] bg-gradient-to-r from-transparent via-white/10 to-transparent transform -rotate-45"
-          animate={{
-            left: ["120%", "-120%"],
-            top: ["120%", "-120%"],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            repeatDelay: 4,
-          }}
-        />
+          {/* Statický gradient overlay místo animovaného */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
 
-        {/* Subtle grid pattern */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.03)_1px,_transparent_1px)] bg-[length:20px_20px] opacity-20"></div>
-      </div>
+          {/* Omezená verze shine efektu - pouze jedna animace */}
+          <motion.div
+            className="absolute -inset-full w-[200%] h-[200%] bg-gradient-to-r from-transparent via-white/10 to-transparent transform -rotate-45"
+            animate={{
+              left: ["120%", "-120%"],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              repeatDelay: 8, // Delší pauza mezi opakováním
+            }}
+          />
 
-      {/* Decorative dots */}
-      <div className="absolute -bottom-4 -right-4 z-20">
-        <motion.div
-          className="grid grid-cols-2 gap-2"
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={
-            isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }
-          }
-          transition={{ duration: 0.5, delay: 0.5 }}
-        >
-          <div className="w-2 h-2 rounded-full bg-white/40"></div>
-          <div className="w-2 h-2 rounded-full bg-white/20"></div>
-          <div className="w-2 h-2 rounded-full bg-white/20"></div>
-          <div className="w-2 h-2 rounded-full bg-white/40"></div>
-        </motion.div>
-      </div>
+          {/* Grid pattern */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.03)_1px,_transparent_1px)] bg-[length:20px_20px] opacity-20"></div>
+        </div>
 
-      {/* Decorative circle */}
-      <motion.div
-        className="absolute -top-4 -left-4 w-8 h-8 border border-white/20 rounded-full"
-        initial={{ scale: 0 }}
-        animate={isInView ? { scale: 1 } : { scale: 0 }}
-        transition={{ duration: 0.4, delay: 0.6 }}
-      />
+        {/* Zjednodušené dekorativní prvky - statické */}
+        <div className="absolute -bottom-4 -right-4 z-20">
+          <div className="grid grid-cols-2 gap-2">
+            <div className="w-2 h-2 rounded-full bg-white/40"></div>
+            <div className="w-2 h-2 rounded-full bg-white/20"></div>
+            <div className="w-2 h-2 rounded-full bg-white/20"></div>
+            <div className="w-2 h-2 rounded-full bg-white/40"></div>
+          </div>
+        </div>
 
-      {/* Bottom decorative line */}
-      <motion.div
-        className="absolute -bottom-8 left-1/4 h-px w-0 bg-gradient-to-r from-white/5 via-white/40 to-white/5"
-        initial={{ width: 0 }}
-        animate={isInView ? { width: "50%" } : { width: 0 }}
-        transition={{ duration: 1, delay: 0.7 }}
-      />
+        {/* Statický kruh místo animovaného */}
+        <div className="absolute -top-4 -left-4 w-8 h-8 border border-white/20 rounded-full"></div>
 
-      {/* Floating skill badges around the profile */}
-      <motion.div
+        {/* Statická dekorativní linka místo animované */}
+        <div className="absolute -bottom-8 left-1/4 h-px w-1/2 bg-gradient-to-r from-white/5 via-white/40 to-white/5"></div>
+      </motion.div>
+
+      {/* Redukované skill badges - ponecháme pouze jednu animaci pro všechny */}
+      <motion.div 
         className="absolute -left-12 top-1/3 py-1.5 px-3 rounded-full bg-black backdrop-blur-sm text-white/80 text-xs border border-white/10 shadow-xl shadow-black/30"
-        initial={{ opacity: 0, x: -20 }}
-        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-        transition={{ duration: 0.5, delay: 0.8 }}
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
       >
         Frontend
       </motion.div>
 
       <motion.div
         className="absolute -right-16 top-2/3 py-1.5 px-3 rounded-full bg-black backdrop-blur-sm text-white/80 text-xs border border-white/10 shadow-xl shadow-black/30"
-        initial={{ opacity: 0, x: 20 }}
-        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-        transition={{ duration: 0.5, delay: 1 }}
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
       >
         UX/UI Design
       </motion.div>
-    </motion.div>
+    </div>
   );
 }
 
