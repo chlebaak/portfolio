@@ -8,7 +8,6 @@ import {
 } from "framer-motion";
 import {
   FiGithub,
-  FiTwitter,
   FiLinkedin,
   FiInstagram,
   FiMail,
@@ -18,12 +17,30 @@ import {
 } from "react-icons/fi";
 import { BiMenuAltRight } from "react-icons/bi";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
-import "./App.css";
-import emailjs from "@emailjs/browser";
-import profileImage from "./assets/jfpfp.jpg"; // Upravte cestu podle vašeho pojmenování
-import profileImage2 from "./assets/pfp3.png"; // Upravte cestu podle vašeho pojmenování
-import project1Image from "./assets/project1.png";
+import FloatingGeometry from "./components/FloatingGeometry";
+import { 
+  ScrollProgress, 
+  RevealText, 
+  StaggeredList, 
+  ParallaxElement, 
+  ScaleOnScroll, 
+  MagneticButton, 
+  AnimatedCounter 
+} from "./components/GSAPComponents";
+import { 
+  AdvancedGSAPAnimations, 
+  CustomCursor, 
+  FloatingParticles, 
+  SplitText,
+  RevealUp 
+} from "./components/AdvancedGSAP";
 import logo from "./assets/JF.png";
+import project2Image from "./assets/image.png";
+import profileImage from "./assets/jfpfp.jpg";
+import profileImage2 from "./assets/pfp3.png";
+import project1Image from "./assets/project1.png";
+import emailjs from "@emailjs/browser";
+import "./App.css";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -108,10 +125,10 @@ function App() {
     },
     cs: {
       nav: {
-        home: "domů",
-        projects: "projekty",
-        about: "o mně",
-        contact: "kontakt",
+        home: "DOMŮ",
+        projects: "PROJEKTY",
+        about: "O MĚ",
+        contact: "KONTAKT",
       },
       hero: {
         badge: "Full stack vývojář",
@@ -223,6 +240,11 @@ function App() {
     [0, 0.05, 0.1],
     [0, 0.5, 1]
   );
+  
+  // Parallax transforms
+  const parallaxY1 = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const parallaxY2 = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const parallaxY3 = useTransform(scrollYProgress, [0, 1], [0, -30]);
 
   useEffect(() => {
     // Loading animation
@@ -268,7 +290,7 @@ function App() {
     {
       id: 1,
       title: "Sociální síť pro čtenáře",
-      category: "Web Development",
+      category: "Full stack",
       description:
         "Kompletní sociální síť pro čtenáře knih s možností sdílení oblíbených knih, recenzí a komentářů.",
       image: project1Image,
@@ -280,6 +302,21 @@ function App() {
         "Tailwind CSS",
       ],
       url: "https://knihotok.vercel.app/",
+    },
+    {
+      id: 2,
+      title: "Restaurace refugio",
+      category: "Frontend",
+      description:
+        "Moderní a responzivní webová stránka pro restauraci Refugio, vytvořená s důrazem na uživatelskou přívětivost a estetiku.",
+      image: project2Image,
+      tech: [
+        "React/Vite",
+        "Tailwind CSS",
+        "Javascript",
+        "Figma",
+      ],
+      url: "https://eshop.vercel.app/",
     },
   ];
 
@@ -490,10 +527,22 @@ function App() {
 
   return (
     <LanguageContext.Provider value={{ language, toggleLanguage, t }}>
-      <div className="bg-black text-white min-h-screen relative">
-        {/* Progress bar - tenčí, čistě v odstínech bílé */}
+      <div className="bg-black text-stone-100 min-h-screen relative cursor-none">
+        {/* Advanced GSAP Animations */}
+        <AdvancedGSAPAnimations />
+        
+        {/* Custom Cursor */}
+        <CustomCursor />
+        
+        {/* Floating Particles */}
+        <FloatingParticles count={10} />
+        
+        {/* GSAP Scroll Progress */}
+        <ScrollProgress />
+
+        {/* Progress bar with earth tones */}
         <motion.div
-          className="fixed top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-white/50 via-white to-white/50 z-50"
+          className="fixed top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-stone-600/50 via-amber-700 to-stone-600/50 z-50"
           style={{
             scaleX: scrollYProgress,
             opacity: progressOpacity,
@@ -501,139 +550,128 @@ function App() {
           }}
         />
 
-        {/* Header & Navigation */}
-        <header className="fixed top-0 left-0 right-0 backdrop-blur-lg bg-black/60 border-b border-white/5 z-40">
-  <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
-    <div className="flex justify-between items-center">
-      {/* Logo */}
-      
+        {/* Modern Black & White Navigation Header */}
+<header className="fixed top-0 left-0 right-0 backdrop-blur-md bg-black/90 border-b border-white/10 z-50">
+  <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <div className="flex justify-between items-center h-16">
+      {/* Minimalist Logo */}
       <motion.div 
-  className="relative group"
-  initial={{ opacity: 0, x: -20 }}
-  animate={{ opacity: 1, x: 0 }}
-  transition={{ duration: 0.5 }}
-  whileHover={{ scale: 1.05 }}
->
-  <div className="flex items-center gap-3">
-    <img src={logo} alt="Jan Fiala" className="h-10" />
-    <span className="text-xl sm:text-2xl font-bold tracking-tight flex items-center">
-      <span className="text-white mr-1">JAN</span>
-      <span className="text-white/60">FIALA</span>
-    </span>
-  </div>
-  <motion.span 
-    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-white/0 via-white to-white/0 origin-left"
-    initial={{ scaleX: 0 }}
-    whileHover={{ scaleX: 1 }}
-    transition={{ duration: 0.3 }}
-  />
-</motion.div>
+        className="flex items-center space-x-3"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <motion.img 
+          src={logo} 
+          alt="Jan Fiala" 
+          className="h-8 w-8"
+          whileHover={{ scale: 1.1 }}
+          transition={{ duration: 0.2 }}
+        />
+        <div className="text-xl font-light tracking-wide">
+          <span className="text-white">JAN</span>
+          <span className="text-gray-400 ml-1">FIALA</span>
+        </div>
+      </motion.div>
       
       {/* Desktop Navigation */}
       <motion.nav 
-        className="hidden md:block"
+        className="hidden md:flex items-center space-x-8"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        <ul className="flex space-x-1 lg:space-x-2">
-          {[
-            { name: t('nav.home'), ref: homeRef },
-            { name: t('nav.projects'), ref: projectsRef },
-            { name: t('nav.about'), ref: aboutRef },
-            { name: t('nav.contact'), ref: contactRef }
-          ].map((item) => (
-            <li key={item.name}>
-              <motion.button 
-                onClick={() => scrollToSection(item.ref)}
-                className={`relative px-4 py-2 text-sm font-medium tracking-wider rounded-full transition-all duration-300 ${
-                  activeSection === item.name.toLowerCase() 
-                    ? 'text-white bg-white/10' 
-                    : 'text-white/60 hover:text-white hover:bg-white/5'
-                }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <span className="relative z-10 uppercase text-xs">
-                  {item.name}
-                </span>
-                {activeSection === item.name.toLowerCase() && (
-                  <motion.div 
-                    className="absolute bottom-0 left-0 right-0 h-full bg-white/10 rounded-full"
-                    layoutId="activeNavSection"
-                    initial={false}
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-              </motion.button>
-            </li>
-          ))}
-        </ul>
+        {[
+          { name: t('nav.home'), ref: homeRef },
+          { name: t('nav.projects'), ref: projectsRef },
+          { name: t('nav.about'), ref: aboutRef },
+          { name: t('nav.contact'), ref: contactRef }
+        ].map((item) => (
+          <motion.button 
+            key={item.name}
+            onClick={() => scrollToSection(item.ref)}
+            className={`relative text-sm font-medium transition-colors duration-200 ${
+              activeSection === item.name.toLowerCase() 
+                ? 'text-white' 
+                : 'text-gray-400 hover:text-white'
+            }`}
+            whileHover={{ y: -1 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            {item.name}
+            {activeSection === item.name.toLowerCase() && (
+              <motion.div 
+                className="absolute -bottom-2 left-0 right-0 h-0.5 bg-white"
+                layoutId="underline"
+                initial={false}
+                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+              />
+            )}
+          </motion.button>
+        ))}
       </motion.nav>
       
-      {/* Language toggle + Social icons */}
-      <div className="hidden lg:flex items-center space-x-3">
-        {/* Language toggle button */}
+      {/* Right Section */}
+      <div className="hidden md:flex items-center space-x-4">
+        {/* Language Toggle */}
         <motion.button
           onClick={toggleLanguage}
-          className="text-white/50 hover:text-white p-2 transition-colors flex items-center gap-1"
-          whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.05)", borderRadius: "50%" }}
-          whileTap={{ scale: 0.9 }}
+          className="flex items-center space-x-2 px-3 py-1.5 rounded-md text-gray-400 hover:text-white hover:bg-white/5 transition-colors duration-200"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
-          <FiGlobe size={18} />
-          <span className="text-xs font-medium ml-1">{language === 'cs' ? 'EN' : 'CS'}</span>
+          <FiGlobe className="w-4 h-4" />
+          <span className="text-sm font-medium">
+            {language === 'cs' ? 'EN' : 'CS'}
+          </span>
         </motion.button>
         
-        {/* Social icons */}
-        <motion.a 
-          href="https://github.com/chlebaak" 
-          className="text-white/50 hover:text-white p-2 transition-colors"
-          whileHover={{ scale: 1.2, rotate: 5, backgroundColor: "rgba(255,255,255,0.05)", borderRadius: "50%" }}
-          whileTap={{ scale: 0.9 }}
-        >
-          <FiGithub size={18} />
-        </motion.a>
-        <motion.a 
-          href="#" 
-          className="text-white/50 hover:text-white p-2 transition-colors"
-          whileHover={{ scale: 1.2, rotate: -5, backgroundColor: "rgba(255,255,255,0.05)", borderRadius: "50%" }}
-          whileTap={{ scale: 0.9 }}
-        >
-          <FiLinkedin size={18} />
-        </motion.a>
+        {/* Social Icons */}
+        <div className="flex items-center space-x-2">
+          {[
+            { icon: <FiGithub />, href: "https://github.com/chlebaak" },
+            { icon: <FiLinkedin />, href: "#" }
+          ].map((social, index) => (
+            <motion.a
+              key={index}
+              href={social.href}
+              className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-md transition-colors duration-200"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {social.icon}
+            </motion.a>
+          ))}
+        </div>
       </div>
 
-      {/* Vylepšené tlačítko mobilního menu s výraznějším efektem */}
+      {/* Mobile Menu Button */}
       <motion.button
-        className="md:hidden relative w-10 h-10 flex items-center justify-center rounded-full bg-white/5 text-white border border-white/10"
+        className="md:hidden p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-md transition-colors duration-200"
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        whileHover={{ backgroundColor: "rgba(255,255,255,0.1)" }}
-        whileTap={{ scale: 0.9 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
       >
         <AnimatePresence mode="wait">
           {mobileMenuOpen ? (
-            <motion.span
+            <motion.div
               key="close"
               initial={{ rotate: -90, opacity: 0 }}
               animate={{ rotate: 0, opacity: 1 }}
               exit={{ rotate: 90, opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="text-xl"
             >
               ✕
-            </motion.span>
+            </motion.div>
           ) : (
-            <motion.span
+            <motion.div
               key="menu"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="text-2xl"
             >
-              <BiMenuAltRight />
-            </motion.span>
+              <BiMenuAltRight className="w-6 h-6" />
+            </motion.div>
           )}
         </AnimatePresence>
       </motion.button>
@@ -641,128 +679,101 @@ function App() {
   </div>
 </header>
 
-{/* Vylepšené mobilní menu - černobílý design s gradientním pozadím */}
+{/* Modern Mobile Menu */}
 <AnimatePresence>
   {mobileMenuOpen && (
     <motion.div 
-      className="fixed inset-0 bg-gradient-to-b from-black/98 to-black/95 backdrop-blur-md z-30 flex flex-col"
-      initial={{ opacity: 0, clipPath: "circle(0% at top right)" }}
-      animate={{ opacity: 1, clipPath: "circle(150% at top right)" }}
-      exit={{ opacity: 0, clipPath: "circle(0% at top right)" }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      className="fixed inset-0 bg-black/95 backdrop-blur-md z-40"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      onClick={() => setMobileMenuOpen(false)}
     >
-      <div className="container mx-auto px-6 py-24 h-full flex flex-col justify-between">
-        <motion.ul className="space-y-6 pt-6">
+      <div className="flex flex-col h-full px-6 py-20" onClick={(e) => e.stopPropagation()}>
+        <nav className="flex-1 flex flex-col justify-center space-y-8">
           {[
             { name: t('nav.home'), ref: homeRef },
             { name: t('nav.projects'), ref: projectsRef },
             { name: t('nav.about'), ref: aboutRef },
             { name: t('nav.contact'), ref: contactRef }
           ].map((item, i) => (
-            <motion.li 
+            <motion.button
               key={item.name}
-              initial={{ opacity: 0, x: -50 }}
+              onClick={() => {
+                scrollToSection(item.ref);
+                setMobileMenuOpen(false);
+              }}
+              className="text-left group"
+              initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.1, duration: 0.4 }}
-              exit={{ opacity: 0, x: -50, transition: { delay: 0 } }}
+              exit={{ opacity: 0, x: -30 }}
+              transition={{ delay: i * 0.1, duration: 0.3 }}
             >
-              <button
-                onClick={() => scrollToSection(item.ref)}
-                className="text-3xl sm:text-4xl font-light tracking-wide text-left w-full group flex items-center"
+              <motion.div
+                className="text-2xl sm:text-3xl font-light text-white group-hover:text-gray-300 transition-colors duration-200 flex items-center"
+                whileHover={{ x: 10 }}
+                whileTap={{ scale: 0.98 }}
               >
+                <span>{item.name}</span>
                 <motion.span
-                  className="inline-block text-white/80 group-hover:text-white transition-colors"
-                  whileHover={{ x: 10 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  {item.name}
-                </motion.span>
-                <motion.span
-                  className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="ml-4 opacity-0 group-hover:opacity-100 transition-opacity"
                   animate={{ x: [0, 5, 0] }}
-                  transition={{
-                    repeat: Infinity,
-                    duration: 1,
-                    repeatDelay: 0.2,
-                  }}
+                  transition={{ repeat: Infinity, duration: 2 }}
                 >
-                  <HiOutlineArrowNarrowRight className="w-6 h-6" />
+                  <HiOutlineArrowNarrowRight className="w-5 h-5" />
                 </motion.span>
-              </button>
-            </motion.li>
+              </motion.div>
+            </motion.button>
           ))}
-        </motion.ul>
+        </nav>
         
-        {/* Language toggle for mobile - opraveno pozicování a zvýrazněno */}
+        {/* Language toggle for mobile */}
         <motion.button
           onClick={toggleLanguage}
-          className="fixed top-20 right-6 text-white/80 hover:text-white p-2.5 flex items-center justify-center gap-1.5 bg-white/10 rounded-full border border-white/20"
-          whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.15)" }}
-          whileTap={{ scale: 0.9 }}
+          className="absolute top-20 right-6 flex items-center space-x-2 px-3 py-2 bg-white/10 rounded-md text-white hover:bg-white/20 transition-colors duration-200"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
-          <FiGlobe size={18} />
-          <span className="text-xs font-medium">{language === 'cs' ? 'EN' : 'CS'}</span>
+          <FiGlobe className="w-4 h-4" />
+          <span className="text-sm font-medium">{language === 'cs' ? 'EN' : 'CS'}</span>
         </motion.button>
 
-        {/* Vylepšené sociální ikony s monochromním designem */}
+        {/* Social icons */}
         <motion.div
-          className="mt-auto pt-6 border-t border-white/10"
+          className="pt-8 border-t border-white/10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          exit={{ opacity: 0 }}
         >
-          <div className="text-white/40 text-xs uppercase tracking-widest mb-4">
+          <div className="text-gray-400 text-xs uppercase tracking-widest mb-4">
             {t('footer.connect')}
           </div>
-          <div className="flex space-x-5">
+          <div className="flex space-x-6">
             <motion.a
               href="https://github.com/chlebaak"
-              className="text-white/70 hover:text-white transition-colors"
-              whileHover={{
-                y: -5,
-                filter:
-                  "drop-shadow(0 10px 8px rgba(255, 255, 255, 0.1))",
-              }}
+              className="text-gray-400 hover:text-white transition-colors duration-200"
+              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
               <FiGithub className="w-6 h-6" />
             </motion.a>
+           
             <motion.a
               href="#"
-              className="text-white/70 hover:text-white transition-colors"
-              whileHover={{
-                y: -5,
-                filter:
-                  "drop-shadow(0 10px 8px rgba(255, 255, 255, 0.1))",
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FiTwitter className="w-6 h-6" />
-            </motion.a>
-            <motion.a
-              href="#"
-              className="text-white/70 hover:text-white transition-colors"
-              whileHover={{
-                y: -5,
-                filter:
-                  "drop-shadow(0 10px 8px rgba(255, 255, 255, 0.1))",
-              }}
+              className="text-gray-400 hover:text-white transition-colors duration-200"
+              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
               <FiLinkedin className="w-6 h-6" />
             </motion.a>
             <motion.a
               href="#"
-              className="text-white/70 hover:text-white transition-colors"
-              whileHover={{
-                y: -5,
-                filter:
-                  "drop-shadow(0 10px 8px rgba(255, 255, 255, 0.1))",
-              }}
+              className="text-gray-400 hover:text-white transition-colors duration-200"
+              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
               <FiInstagram className="w-6 h-6" />
@@ -776,778 +787,839 @@ function App() {
 
         {/* Main Content */}
         <main>
-          {/* Hero Section - minimalistický design s ostrými kontrasty */}
-          <section
+        <section
   id="home"
   ref={homeRef}
-  className="min-h-screen flex items-center relative overflow-hidden bg-black"
+  className="min-h-screen relative overflow-hidden bg-black pt-20 pb-12"
 >
-  {/* Optimalizované pozadí elementy - menší blur a bez opakované animace */}
-  <div
-    className="absolute top-20 left-0 w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 bg-white/3 rounded-full blur-[60px]"
-  />
-  <div
-    className="absolute bottom-10 right-10 w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 bg-white/3 rounded-full blur-[60px]"
-  />
+  {/* 3D Floating Geometry Background */}
+  <FloatingGeometry />
+  
+  {/* Minimal background elements */}
+  <div className="absolute inset-0">
+    <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-gray-900/5" />
+    <div className="absolute top-32 left-16 w-px h-20 bg-white/5 rotate-45" />
+    <div className="absolute bottom-32 right-20 w-px h-16 bg-white/5 -rotate-45" />
+  </div>
 
-  {/* Content container */}
-  <div className="container mx-auto px-5 sm:px-8 pt-20 sm:pt-24 z-10">
-    <div className="flex flex-col md:flex-row items-center gap-12 sm:gap-16 md:gap-20 lg:gap-28">
-      {/* Text content - optimalizováno */}
-      <div
-        className="flex-1 md:max-w-xl w-full text-center md:text-left"
-      >
-        {/* Professional badge */}
-        <div className="mb-6 inline-block">
-          <span className="bg-white text-black text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full shadow-md">
-            {t('hero.badge')}
-          </span>
-        </div>
-
-        {/* Main heading - redukovaná animace */}
-        <motion.h1
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-8 sm:mb-10 leading-[0.9] tracking-tight"
-          initial={{ opacity: 0, y: 20 }}
+  <div className="container mx-auto px-6 lg:px-8 relative z-10 flex items-center min-h-screen">
+    <div className="w-full max-w-7xl mx-auto">
+      
+      {/* Simple Bento Grid - 3x3 Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 auto-rows-fr">
+        
+        {/* Main Hero Card - Spans 2 columns */}
+        <motion.div
+          className="lg:col-span-2 bg-white/5 border border-white/10 rounded-3xl p-8 lg:p-12 flex flex-col justify-center min-h-[400px] relative overflow-hidden"
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
         >
-          <span className="block mb-2 sm:mb-3">{t('hero.title1')}</span>
-          <span className="block mb-2 sm:mb-3">{t('hero.title2')}</span>
-          <span className="block text-white/60">{t('hero.title3')}</span>
-        </motion.h1>
+          {/* Background Pattern */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-16 translate-x-16" />
+          <FloatingGeometry />
+          <div className="relative z-10">
+            <motion.div
+              className="inline-block mb-6"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <span className="bg-white text-black text-xs font-bold uppercase tracking-[0.2em] px-4 py-2 rounded-full">
+                {t('hero.badge')}
+              </span>
+            </motion.div>
 
-        {/* Description - optimalizováno */}
-        <p className="text-white/70 mb-10 sm:mb-12 text-base sm:text-lg max-w-xs sm:max-w-sm md:max-w-md mx-auto md:mx-0 leading-relaxed">
-          {t('hero.description')}
-        </p>
+            <motion.h1
+              className="text-3xl lg:text-5xl xl:text-6xl font-light tracking-tight leading-tight mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <RevealText className="text-white block">{t('hero.title1')}</RevealText>
+              <RevealText className="text-white block">{t('hero.title2')}</RevealText>
+              <RevealText className="text-white/60 block">{t('hero.title3')}</RevealText>
+            </motion.h1>
 
-        {/* Buttons - optimalizováno */}
-        <div className="flex flex-wrap justify-center md:justify-start gap-5 sm:gap-6">
-          {/* Primary CTA */}
-          <motion.button
-            className="bg-white text-black px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold flex items-center gap-2 group shadow-lg shadow-white/5 hover:shadow-white/10 text-sm sm:text-base"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => scrollToSection(projectsRef)}
-          >
-            <span>{t('hero.cta1')}</span>
-            <span className="bg-black/10 rounded-full p-1 ml-1">
-              <HiOutlineArrowNarrowRight className="group-hover:translate-x-1 transition-all duration-300 w-3.5 h-3.5 sm:w-4 sm:h-4" />
-            </span>
-          </motion.button>
+            <motion.p
+              className="text-white/60 text-lg leading-relaxed mb-8 max-w-lg"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
+              {t('hero.description')}
+            </motion.p>
 
-          {/* Secondary CTA */}
-          <motion.button
-            className="border-2 border-white/20 hover:border-white/40 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold transition-all duration-300 hover:bg-white/5 text-sm sm:text-base"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => scrollToSection(contactRef)}
-          >
-            {t('hero.cta2')}
-          </motion.button>
-        </div>
+            {/* CTA Buttons */}
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+            >
+              <MagneticButton
+                className="group px-8 py-4 bg-white text-black rounded-2xl font-medium flex items-center justify-center gap-2 hover:bg-white/90 transition-all duration-200"
+                onClick={() => scrollToSection(projectsRef)}
+              >
+                {t('hero.cta1')}
+                <HiOutlineArrowNarrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+              </MagneticButton>
 
-        {/* Stats - statické, bez animací */}
-        <div className="hidden md:flex gap-6 sm:gap-8 mt-12 sm:mt-16 justify-center md:justify-start">
-          <div className="text-center relative">
-            <div className="text-xl sm:text-2xl font-bold">5+</div>
-            <div className="text-[10px] text-white/60 uppercase tracking-wider mt-1">
-              {t('hero.stats.years')}
+              <MagneticButton
+                className="px-8 py-4 rounded-2xl border border-white/30 text-white font-medium hover:bg-white/5 transition-all duration-200"
+                onClick={() => scrollToSection(contactRef)}
+              >
+                {t('hero.cta2')}
+              </MagneticButton>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Profile Card */}
+        <motion.div
+          className="bg-white/5 border border-white/10 rounded-3xl p-8 flex flex-col items-center justify-center text-center min-h-[400px] relative overflow-hidden"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
+          <div className="relative z-10">
+            <div className="w-24 h-24 bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+              <span className="text-2xl font-bold text-white">JF</span>
+            </div>
+            <h3 className="text-white font-medium text-xl mb-2">Jan Fiala</h3>
+            <p className="text-white/60 text-base mb-4">Full Stack Developer</p>
+            <div className="flex items-center justify-center gap-2 mb-6">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+              <span className="text-white/60 text-sm">Available for projects</span>
+            </div>
+            
+            {/* Location */}
+            <div className="flex items-center justify-center gap-2 text-white/50">
+              <FiMapPin className="w-4 h-4" />
+              <span className="text-sm">Czech Republic</span>
             </div>
           </div>
-          <div className="h-12 w-px bg-white/10"></div>
-          <div className="text-center relative">
-            <div className="text-xl sm:text-2xl font-bold">50+</div>
-            <div className="text-[10px] text-white/60 uppercase tracking-wider mt-1">
-              {t('hero.stats.projects')}
+        </motion.div>
+
+        {/* Stats Card */}
+        <motion.div
+          className="bg-white/5 border border-white/10 rounded-3xl p-8 flex flex-col justify-center min-h-[200px]"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <h4 className="text-white/40 text-xs uppercase tracking-[0.2em] mb-6 text-center">Statistics</h4>
+          <div className="grid grid-cols-3 gap-4">
+            {[
+              { value: 5, label: "Years" },
+              { value: 50, label: "Projects" },
+              { value: 30, label: "Clients" }
+            ].map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="text-2xl font-light text-white mb-1">
+                  <AnimatedCounter target={stat.value} />
+                  <span>+</span>
+                </div>
+                <span className="text-xs text-white/40 uppercase tracking-wider">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Tech Stack Card */}
+        <motion.div
+          className="lg:col-span-2 bg-white/5 border border-white/10 rounded-3xl p-8 flex flex-col justify-center min-h-[200px] relative overflow-hidden"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <div className="absolute top-0 left-0 w-20 h-20 bg-white/5 rounded-full -translate-x-10 -translate-y-10" />
+          
+          <div className="relative z-10">
+            <div className="flex items-center justify-between mb-6">
+              <h4 className="text-white font-medium text-lg flex items-center gap-2">
+                <div className="w-6 h-6 bg-white/10 rounded-lg flex items-center justify-center">
+                  <span className="text-xs">⚡</span>
+                </div>
+                Tech Stack
+              </h4>
+            </div>
+            
+            <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
+              {['React/Next.js', 'Node.js', 'Javascript', 'SQL/PostgreSQL', 'Tailwind CSS/CSS', 'C#', "Figma"].map((tech, index) => (
+                <motion.div
+                  key={tech}
+                  className="bg-white/5 border border-white/5 rounded-xl p-3 text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
+                >
+                  <span className="text-white/80 text-sm font-medium">{tech}</span>
+                </motion.div>
+              ))}
             </div>
           </div>
-          <div className="h-12 w-px bg-white/10"></div>
-          <div className="text-center relative">
-            <div className="text-xl sm:text-2xl font-bold">30+</div>
-            <div className="text-[10px] text-white/60 uppercase tracking-wider mt-1">
-              {t('hero.stats.clients')}
-            </div>
-          </div>
-        </div>
+        </motion.div>
       </div>
 
-      {/* Profile image - optimalizováno */}
+      {/* Scroll Indicator */}
       <motion.div
-        className="flex-1 md:flex-none md:w-2/5 mt-4 md:mt-0 max-w-[300px] sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto relative"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
+        className="flex items-center justify-center mt-16"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 0.8 }}
       >
-        <div className="relative">
-          {/* Jednodušší rámeček bez animace */}
-          <div className="absolute -inset-px rounded-2xl bg-gradient-to-br from-white/40 via-white/5 to-white/5"></div>
-
-          {/* Hlavní kontejner s profil fotkou */}
-          <div className="relative z-10 aspect-square bg-gradient-to-br from-gray-900 to-black rounded-2xl overflow-hidden shadow-2xl">
-            <img
-              src={profileImage}
-              alt="Jan Fiala"
-              className="w-full h-full object-cover"
+        <div className="flex flex-col items-center">
+          <span className="text-xs uppercase tracking-[0.2em] text-white/30 mb-3">
+            {t('hero.scroll')}
+          </span>
+          <div className="w-px h-8 bg-white/20 relative">
+            <motion.div
+              className="w-px h-2 bg-white absolute top-0"
+              animate={{ y: [0, 24, 0] }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
             />
-
-            {/* Statický grid pattern místo animovaného efektu */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.03)_1px,_transparent_1px)] bg-[length:20px_20px] opacity-20"></div>
           </div>
-
-          {/* Tech tagy - statické na malých obrazovkách, animované jen na větších */}
-          <div className="hidden sm:block">
-            <div className="absolute -left-8 sm:-left-10 top-8 sm:top-10 bg-black px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs border border-white/10 shadow-xl shadow-black/50">
-              React.js
-            </div>
-            <div className="absolute -right-5 sm:-right-7 top-20 sm:top-24 bg-black px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs border border-white/10 shadow-xl shadow-black/50">
-              Tailwind CSS
-            </div>
-            <div className="absolute -left-5 sm:-left-7 bottom-16 sm:bottom-20 bg-black px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs border border-white/10 shadow-xl shadow-black/50">
-              Framer Motion
-            </div>
-          </div>
-
-          {/* Statické dekorativní elementy */}
-          <div className="absolute -top-4 -right-4 w-8 h-8 border border-white/20 rounded-full"></div>
-          <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-white rounded-full"></div>
         </div>
       </motion.div>
-    </div>
-
-    {/* Scroll down indikátor - zjednodušený */}
-    <div className="absolute bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center">
-      <span className="text-[10px] sm:text-xs uppercase tracking-widest text-white/40 mb-2 sm:mb-3">
-        {t('hero.scroll')}
-      </span>
-      <div className="relative h-10 sm:h-12 overflow-hidden">
-        <span className="block w-px h-full bg-white/20 mx-auto"></span>
-        <motion.span
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[3px] h-5 bg-white rounded-full blur-[1px]"
-          animate={{
-            y: ["-30%", "130%"],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-      </div>
     </div>
   </div>
 </section>
 
-{/* Projects Section - optimalizováno */}
+{/* Modern Black & White Projects Section */}
 <section
   id="projects"
   ref={projectsRef}
-  className="py-24 sm:py-32 relative overflow-hidden bg-black border-t border-white/5"
+  className="py-20 sm:py-24 relative overflow-hidden bg-black border-t border-white/10"
 >
-  {/* Statické pozadí místo animovaného blur efektu */}
-  <div
-    className="absolute top-40 right-0 w-64 h-64 bg-white/2 rounded-full blur-[60px]"
-  />
-  <div
-    className="absolute -bottom-20 -left-20 w-96 h-96 bg-white/2 rounded-full blur-[60px]"
-  />
+  {/* Minimal background elements with parallax */}
+  <div className="absolute inset-0">
+    <motion.div
+      className="absolute top-32 right-16 w-px h-20 bg-white/5 rotate-45"
+      style={{ y: parallaxY1 }}
+    />
+    <motion.div
+      className="absolute bottom-32 left-16 w-px h-16 bg-white/5 -rotate-45"
+      style={{ y: parallaxY2 }}
+    />
+    <motion.div
+      className="absolute top-1/2 left-1/3 w-12 h-px bg-white/5"
+      style={{ y: parallaxY3 }}
+    />
+  </div>
 
-  <div className="container mx-auto px-5 sm:px-8 relative z-10">
-    {/* Zjednodušený nadpis sekce */}
-    <div className="text-center mb-20">
-      <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50 block mb-4">
+  <div className="container mx-auto px-6 lg:px-8 relative z-10">
+    {/* Modern Section header */}
+    <motion.div 
+      className="text-center mb-16"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6 }}
+    >
+      <span className="text-xs font-medium uppercase tracking-[0.3em] text-white/40 block mb-6">
         {t('projects.subtitle')}
       </span>
       
-      {/* Použití statického SectionHeader místo animovaného */}
-      <h2 className="text-4xl sm:text-5xl font-bold relative inline-block">
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-4">
         {t('projects.title')}
-        <span className="absolute -bottom-3 left-0 right-0 h-px bg-gradient-to-r from-white/5 via-white/60 to-white/5"></span>
       </h2>
       
-      <div className="h-px w-24 bg-gradient-to-r from-white/5 via-white/60 to-white/5 mx-auto mt-8" />
-    </div>
+      <div className="w-16 h-px bg-white/20 mx-auto" />
+    </motion.div>
 
-    {/* Grid projektů - optimalizace načítání */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 sm:gap-10">
+    {/* Projects grid - modern layout with GSAP animations */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
       {projects.map((project, index) => (
-        <div key={project.id} className="will-change-transform">
-          {/* Lazy loaded projekty s optimalizovanou animací */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.1 }} // Snížení amount pro dřívější načtení
-            transition={{
-              duration: 0.4,
-              // Omezíme maximální zpoždění, aby se všechny projekty načetly rychleji
-              delay: Math.min(index * 0.05, 0.2), 
-            }}
-          >
-            <ProjectCard project={project} />
-          </motion.div>
-        </div>
+        <ScaleOnScroll key={project.id} className="project-card-gsap">
+          <ProjectCard project={project} index={index} />
+        </ScaleOnScroll>
       ))}
     </div>
   </div>
 </section>
 
-          {/* About Section - vylepšený pro větší kontrast */}
+          {/* Modern Black & White About Section */}
           <section
   id="about"
   ref={aboutRef}
-  className="py-24 sm:py-32 relative overflow-hidden bg-black border-t border-white/5"
+  className="py-20 sm:py-24 relative overflow-hidden bg-black border-t border-white/10"
 >
-  {/* Statické pozadí místo animovaného */}
-  <div
-    className="absolute top-40 left-20 w-80 h-80 bg-white/3 rounded-full blur-[60px]"
-  />
+  {/* Minimal geometric background elements */}
+  <div className="absolute inset-0">
+    <div className="absolute top-20 left-8 w-px h-24 bg-white/5 rotate-45" />
+    <div className="absolute bottom-20 right-8 w-px h-20 bg-white/5 -rotate-45" />
+    <div className="absolute top-1/2 left-1/4 w-16 h-px bg-white/5" />
+    <div className="absolute top-1/3 right-1/3 w-2 h-2 border border-white/10 rotate-45" />
+  </div>
 
-  <div className="container mx-auto px-5 sm:px-8 relative z-10">
-    {/* Zjednodušený nadpis sekce */}
-    <div className="text-center mb-20">
-      <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50 block mb-4">
+  <div className="container mx-auto px-6 lg:px-8 relative z-10">
+    {/* Modern Section Header */}
+    <motion.div 
+      className="text-center mb-16"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6 }}
+    >
+      <span className="text-xs font-medium uppercase tracking-[0.3em] text-white/40 block mb-6">
         {t('about.subtitle')}
       </span>
       
-      {/* Používáme statický nadpis místo animovaného */}
-      <h2 className="text-4xl sm:text-5xl font-bold relative inline-block">
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-4">
         {t('about.title')}
-        <span className="absolute -bottom-3 left-0 right-0 h-px bg-gradient-to-r from-white/5 via-white/60 to-white/5"></span>
       </h2>
       
-      <div className="h-px w-24 bg-gradient-to-r from-white/5 via-white/60 to-white/5 mx-auto mt-8" />
-    </div>
+      <div className="w-16 h-px bg-white/20 mx-auto" />
+    </motion.div>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 lg:gap-20 items-center">
-      {/* Optimalizovaný profil fotka container - jediná hlavní animace */}
+    {/* Single Column Content Layout */}
+    <div className="max-w-4xl mx-auto">
+      
+      {/* Experience Badge - Centered */}
       <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
+        className="flex justify-center mb-12"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6 }}
-        className="relative will-change-transform"
+        transition={{ duration: 0.5 }}
       >
-        <div className="relative">
-          {/* Statický dekorativní rámeček */}
-          <div className="absolute -inset-5 rounded-2xl border border-white/10 z-0" />
-
-          {/* AboutImage component - optimalizován uvnitř komponenty */}
-          <div className="relative z-10">
-            <AboutImage />
-          </div>
-
-          {/* Statický dekorativní blur */}
-          <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-white/3 rounded-full blur-md z-0" />
-
-          {/* Experience badge - ponecháme animaci pro lepší UX */}
-          <motion.div
-            className="absolute -top-6 -right-6 bg-white text-black text-xs font-bold px-4 py-2 rounded-full shadow-lg z-20"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-          >
-            {t('about.badge')}
-          </motion.div>
+        <div className="bg-white text-black px-6 py-3 rounded-2xl text-sm font-medium shadow-lg">
+          {t('about.badge')}
         </div>
       </motion.div>
 
-      {/* Optimalizovaný textový obsah */}
-      <div>
-        {/* Statický nadpis */}
-        <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-white">
-          {t('about.heading')}
-        </h3>
+      {/* Main Content */}
+      <motion.div
+        className="text-center"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        {/* Modern heading with centered alignment */}
+        <div className="mb-12">
+          <SplitText className="text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-6 leading-tight">
+            {t('about.heading')}
+          </SplitText>
+          <div className="w-16 h-0.5 bg-white/60 mx-auto mb-8" />
+          <p className="text-white/60 text-xl leading-relaxed max-w-3xl mx-auto">
+            {t('about.description')}
+          </p>
+        </div>
 
-        {/* Statický popis */}
-        <p className="text-white/70 mb-8 text-base sm:text-lg leading-relaxed">
-          {t('about.description')}
-        </p>
-
-        {/* Skills and experience karty - jedna animace pro celý blok */}
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5 }}
-        >
-          {/* Skills karta - zachováváme hover animaci pro lepší UX */}
+        {/* Modern Two-Column Skills & Experience Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 mb-12">
+          
+          {/* Skills Section */}
           <motion.div
-            className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10"
-            whileHover={{
-              y: -5,
-              boxShadow: "0 15px 30px -10px rgba(0,0,0,0.5)",
-            }}
-            transition={{ duration: 0.3 }}
+            className="space-y-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <h4 className="font-bold mb-4 flex items-center text-lg">
-              <span className="bg-white text-black p-1.5 rounded mr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+            <div className="text-center md:text-left">
+              <div className="inline-flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 bg-white text-black rounded-xl flex items-center justify-center">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h4 className="text-2xl font-medium text-white">{t('about.skills')}</h4>
+              </div>
+            </div>
+            
+            <StaggeredList className="grid grid-cols-1 gap-3">
+              {['Vite / React / Next.js', 'JavaScript / C#', 'Tailwind CSS', 'Node.js / Express.js', 'UI/UX Design', 'PostgreSQL'].map((skill) => (
+                <div
+                  key={skill}
+                  className="skill-item bg-white/5 border border-white/10 rounded-xl p-4 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
                 >
-                  <path d="M12 18V6M6 12l6-6 6 6" />
-                </svg>
-              </span>
-              {t('about.skills')}
-            </h4>
-            <ul className="text-white/70 space-y-3 pl-1">
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                Vite / React / Next.js
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                JavaScript / C#
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                Tailwind CSS
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                Node.js / Express.js
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                UI/UX Design
-              </li>
-            </ul>
+                  <span className="text-white/80 font-medium">{skill}</span>
+                </div>
+              ))}
+            </StaggeredList>
           </motion.div>
 
-          {/* Experience karta - zachováváme hover animaci pro lepší UX */}
+          {/* Experience Section */}
           <motion.div
-            className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10"
-            whileHover={{
-              y: -5,
-              boxShadow: "0 15px 30px -10px rgba(0,0,0,0.5)",
-            }}
-            transition={{ duration: 0.3 }}
+            className="space-y-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <h4 className="font-bold mb-4 flex items-center text-lg">
-              <span className="bg-white text-black p-1.5 rounded mr-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+            <div className="text-center md:text-left">
+              <div className="inline-flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 bg-white text-black rounded-xl flex items-center justify-center">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <h4 className="text-2xl font-medium text-white">{t('about.experience')}</h4>
+              </div>
+            </div>
+            
+            <div className="space-y-4">
+              {[
+                { company: 'DPMÚL', role: 'Internship', period: '2023' },
+                { company: 'DS Smith', role: 'Internship', period: '2024' }
+              ].map((exp, index) => (
+                <motion.div
+                  key={exp.company}
+                  className="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
                 >
-                  <rect
-                    x="2"
-                    y="7"
-                    width="20"
-                    height="14"
-                    rx="2"
-                    ry="2"
-                  ></rect>
-                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                </svg>
-              </span>
-              {t('about.experience')}
-            </h4>
-            <ul className="text-white/70 space-y-3 pl-1">
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                Internship at DPMÚL
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                Intership at DS Smith
-              </li>
-            </ul>
+                  <div>
+                    <h5 className="text-white font-medium">{exp.role} at {exp.company}</h5>
+                    <p className="text-white/60 text-sm">{exp.period}</p>
+                  </div>
+                  <div className="w-3 h-3 bg-white/40 rounded-full" />
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
-        </motion.div>
+        </div>
 
-        {/* Tlačítko CV - zachováváme animaci pro interaktivitu */}
-        <motion.button
-          className="bg-white text-black px-8 py-4 rounded-full font-semibold flex items-center gap-2 group shadow-md"
-          whileHover={{
-            scale: 1.05,
-            boxShadow: "0 15px 25px -5px rgba(0,0,0,0.3)",
-          }}
-          whileTap={{ scale: 0.98 }}
-        >
-          <span>{t('about.download')}</span>
-          <span className="bg-black/10 rounded-full p-1 ml-1">
-            <HiOutlineArrowNarrowRight className="group-hover:translate-x-1 transition-all duration-300 w-4 h-4" />
-          </span>
-        </motion.button>
-      </div>
+        {/* Modern CTA Button - Centered */}
+        <div className="flex justify-center">
+          <MagneticButton className="group inline-flex items-center gap-3 bg-white text-black px-10 py-5 rounded-2xl font-medium transition-all duration-300 hover:bg-white/90 hover:shadow-xl hover:shadow-white/10">
+            <span className="text-lg">{t('about.download')}</span>
+            <div className="w-6 h-6 bg-black/10 rounded-full flex items-center justify-center group-hover:bg-black/20 transition-colors">
+              <HiOutlineArrowNarrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
+            </div>
+          </MagneticButton>
+        </div>
+      </motion.div>
     </div>
   </div>
 </section>
 
-      {/* Contact Section - optimalizovaná verze */}
+      {/* Modern Black & White Contact Section */}
 <section
   id="contact"
   ref={contactRef}
-  className="py-24 sm:py-32 relative overflow-hidden bg-black border-t border-white/5"
+  className="py-20 sm:py-24 relative overflow-hidden bg-black border-t border-white/10"
 >
-  {/* Statické pozadí místo animovaného */}
-  <div 
-    className="absolute top-40 right-10 w-72 h-72 bg-white/3 rounded-full blur-[60px]"
-  />
-  <div 
-    className="absolute -bottom-20 -left-20 w-96 h-96 bg-white/2 rounded-full blur-[60px]"
-  />
+  {/* Minimal geometric background elements */}
+  <div className="absolute inset-0">
+    <div className="absolute top-16 left-16 w-px h-32 bg-white/5 rotate-45" />
+    <div className="absolute bottom-16 right-16 w-px h-24 bg-white/5 -rotate-45" />
+    <div className="absolute top-1/3 right-1/4 w-20 h-px bg-white/5" />
+    <div className="absolute bottom-1/3 left-1/3 w-4 h-4 border border-white/10 rotate-45" />
+  </div>
 
-  <div className="container mx-auto px-5 sm:px-8 relative z-10">
-    {/* Zjednodušený nadpis sekce - jedna animace pro celý blok */}
-    <motion.div
-      className="text-center mb-20"
+  <div className="container mx-auto px-6 lg:px-8 relative z-10">
+    {/* Modern Section Header */}
+    <motion.div 
+      className="text-center mb-16"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.6 }}
     >
-      <span
-        className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50 block mb-4"
-      >
+      <span className="text-xs font-medium uppercase tracking-[0.3em] text-white/40 block mb-6">
         {t('contact.subtitle')}
       </span>
       
-      <h2 className="text-4xl sm:text-5xl font-bold relative inline-block">
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-4">
         {t('contact.title')}
-        <span className="absolute -bottom-3 left-0 right-0 h-px bg-gradient-to-r from-white/5 via-white/60 to-white/5"></span>
       </h2>
       
-      <div className="h-px w-24 bg-gradient-to-r from-white/5 via-white/60 to-white/5 mx-auto mt-8" />
+      <div className="w-16 h-px bg-white/20 mx-auto" />
     </motion.div>
 
-    {/* Kontaktní grid - optimalizovaný */}
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 lg:gap-20 items-start">
-      {/* Kontaktní informace - jedna hlavní animace */}
+    {/* Modern Single Column Layout */}
+    <div className="max-w-5xl mx-auto">
+      
+      {/* Contact Methods - Horizontal Cards */}
       <motion.div
-        className="bg-white/5 backdrop-blur-md p-8 sm:p-10 rounded-2xl border border-white/10 shadow-xl shadow-black/20"
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.5 }}
+        className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
       >
-        <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-white">
-          {t('contact.infoTitle')}
-        </h3>
-
-        <p className="text-white/70 mb-10 text-base sm:text-lg leading-relaxed">
-          {t('contact.infoDesc')}
-        </p>
-
-        <div className="space-y-8 mt-10">
-          {/* Optimalizovaná ContactInfo komponenta - použijeme přímo statické prvky */}
-          <div className="flex items-center space-x-4 group hover:translate-x-2 transition-transform duration-300">
-            <div className="w-10 h-10 bg-white/5 text-white/80 flex items-center justify-center rounded-full border border-white/10 shadow-md shadow-black/10">
-              <FiMail className="w-5 h-5" />
+        {/* Email Card */}
+        <motion.a
+          href="mailto:janfiala331@gmail.com"
+          className="group relative bg-black border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-all duration-300 hover:-translate-y-2"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <div className="flex flex-col items-center text-center">
+            <div className="w-16 h-16 bg-white text-black rounded-2xl flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform duration-300">
+              <FiMail className="w-7 h-7" />
             </div>
-            <div>
-              <h4 className="text-sm uppercase tracking-wider text-white/50 mb-1">
-                {t('contact.email')}
-              </h4>
-              <p className="text-white font-medium">janfiala331@gmail.com</p>
-            </div>
+            <h3 className="text-lg font-medium text-white mb-2">{t('contact.email')}</h3>
+            <p className="text-white/60 text-sm mb-3">janfiala331@gmail.com</p>
+            <div className="text-xs text-white/40 uppercase tracking-wider">Click to send</div>
           </div>
+          <div className="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+        </motion.a>
 
-          <div className="flex items-center space-x-4 group hover:translate-x-2 transition-transform duration-300">
-            <div className="w-10 h-10 bg-white/5 text-white/80 flex items-center justify-center rounded-full border border-white/10 shadow-md shadow-black/10">
-              <FiPhone className="w-5 h-5" />
+        {/* Phone Card */}
+        <motion.a
+          href="tel:+420733164585"
+          className="group relative bg-black border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-all duration-300 hover:-translate-y-2"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <div className="flex flex-col items-center text-center">
+            <div className="w-16 h-16 bg-white text-black rounded-2xl flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform duration-300">
+              <FiPhone className="w-7 h-7" />
             </div>
-            <div>
-              <h4 className="text-sm uppercase tracking-wider text-white/50 mb-1">
-                {t('contact.phone')}
-              </h4>
-              <p className="text-white font-medium">+420 733 164 585</p>
-            </div>
+            <h3 className="text-lg font-medium text-white mb-2">{t('contact.phone')}</h3>
+            <p className="text-white/60 text-sm mb-3">+420 733 164 585</p>
+            <div className="text-xs text-white/40 uppercase tracking-wider">Click to call</div>
           </div>
+          <div className="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+        </motion.a>
 
-          <div className="flex items-center space-x-4 group hover:translate-x-2 transition-transform duration-300">
-            <div className="w-10 h-10 bg-white/5 text-white/80 flex items-center justify-center rounded-full border border-white/10 shadow-md shadow-black/10">
-              <FiMapPin className="w-5 h-5" />
+        {/* Location Card */}
+        <motion.div
+          className="group relative bg-black border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-all duration-300 hover:-translate-y-2"
+          whileHover={{ scale: 1.02 }}
+        >
+          <div className="flex flex-col items-center text-center">
+            <div className="w-16 h-16 bg-white text-black rounded-2xl flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform duration-300">
+              <FiMapPin className="w-7 h-7" />
             </div>
-            <div>
-              <h4 className="text-sm uppercase tracking-wider text-white/50 mb-1">
-                {t('contact.location')}
-              </h4>
-              <p className="text-white font-medium">{t('contact.location')}</p>
-            </div>
+            <h3 className="text-lg font-medium text-white mb-2">Location</h3>
+            <p className="text-white/60 text-sm mb-3">{t('contact.location')}</p>
+            <div className="text-xs text-white/40 uppercase tracking-wider">Czech Republic</div>
           </div>
-        </div>
-
-        {/* Sociální media - statický blok s hover efekty */}
-        <div className="mt-12 pt-8 border-t border-white/10">
-          <div className="text-white/50 text-xs uppercase tracking-[0.15em] mb-6">
-            {t('contact.connect')}
-          </div>
-          <div className="flex space-x-5">
-            {/* Použití mapy pro sociální ikony místo jednotlivých kompnent */}
-            {[
-              { Icon: FiGithub, href: "https://github.com/chlebaak" },
-              { Icon: FiTwitter, href: "#" },
-              { Icon: FiLinkedin, href: "#" },
-              { Icon: FiInstagram, href: "#" }
-            ].map((social, index) => (
-              <a
-                key={index}
-                href={social.href}
-                className="w-11 h-11 rounded-full bg-white/5 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 hover:-translate-y-2 hover:shadow-lg hover:shadow-black/20 transition-all duration-300 border border-white/10"
-              >
-                <social.Icon className="w-5 h-5" />
-              </a>
-            ))}
-          </div>
-        </div>
+          <div className="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+        </motion.div>
       </motion.div>
 
-      {/* Kontaktní formulář - jedna animace */}
-      <motion.div
-        className="bg-white/5 backdrop-blur-md p-8 sm:p-10 rounded-2xl border border-white/10 shadow-xl shadow-black/20"
-        initial={{ opacity: 0, x: 20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-white">
-          {t('contact.formTitle')}
-        </h3>
+      {/* Main Content Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        {/* Left Column - Contact Info */}
+        <motion.div
+          className="lg:col-span-5"
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="space-y-8">
+            <div>
+              <RevealUp>
+                <h3 className="text-2xl sm:text-3xl font-light text-white mb-4">
+                  {t('contact.infoTitle')}
+                </h3>
+              </RevealUp>
+              <div className="w-12 h-0.5 bg-white/60 mb-6" />
+              <p className="text-white/60 text-lg leading-relaxed">
+                {t('contact.infoDesc')}
+              </p>
+            </div>
 
-        <p className="text-white/70 mb-10 text-base sm:text-lg leading-relaxed">
-          {t('contact.formDesc')}
-        </p>
+            {/* Social Media Links */}
+            <div className="pt-8">
+              <h4 className="text-white/40 text-sm uppercase tracking-[0.2em] mb-6">
+                {t('contact.connect')}
+              </h4>
+              <div className="flex gap-4">
+                {[
+                  { Icon: FiGithub, href: "https://github.com/chlebaak", label: "GitHub" },
+                  { Icon: FiLinkedin, href: "#", label: "LinkedIn" },
+                  { Icon: FiInstagram, href: "#", label: "Instagram" }
+                ].map((social) => (
+                  <motion.a
+                    key={social.label}
+                    href={social.href}
+                    className="group w-12 h-12 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+                    whileHover={{ y: -4, scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    title={social.label}
+                  >
+                    <social.Icon className="w-5 h-5" />
+                  </motion.a>
+                ))}
+              </div>
+            </div>
 
-        <ContactForm />
-      </motion.div>
+            {/* Availability Status */}
+            <motion.div
+              className="bg-white/5 border border-white/10 rounded-2xl p-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
+                <span className="text-white font-medium">Available for projects</span>
+              </div>
+              <p className="text-white/60 text-sm">
+                Currently accepting new freelance projects and collaborations.
+              </p>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Right Column - Contact Form */}
+        <motion.div
+          className="lg:col-span-7"
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <div className="bg-white/5 border border-white/10 rounded-3xl p-8 lg:p-10">
+            <div className="mb-8">
+              <h3 className="text-2xl sm:text-3xl font-light text-white mb-4">
+                {t('contact.formTitle')}
+              </h3>
+              <div className="w-12 h-0.5 bg-white/60 mb-6" />
+              <p className="text-white/60 text-lg leading-relaxed">
+                {t('contact.formDesc')}
+              </p>
+            </div>
+            
+            <ContactForm />
+          </div>
+        </motion.div>
+      </div>
     </div>
   </div>
 </section>
         </main>
 
-        {/* Elegantní Footer s vylepšeným černobílým designem */}
-        <footer className="py-16 sm:py-20 relative overflow-hidden bg-black border-t border-white/10">
-  {/* Statické pozadí místo animovaného */}
-  <div className="absolute top-0 left-1/4 w-64 h-64 bg-white/2 rounded-full blur-[60px]" />
-  <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-white/2 rounded-full blur-[60px]" />
-
-  <div className="container mx-auto px-6 sm:px-8 relative z-10">
-    {/* Statický oddělovač */}
-    <div className="h-px w-24 sm:w-32 bg-gradient-to-r from-white/5 via-white/30 to-white/5 mx-auto mb-16" />
-
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 items-start">
-      {/* Logo a copyright s jednou společnou animací */}
-      <motion.div
-        className="flex flex-col items-center md:items-start"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="relative group">
-          <div className="text-2xl sm:text-3xl font-bold tracking-tight flex items-center mb-5">
-            <span className="text-white mr-1">JAN</span>
-            <span className="text-white/50">FIALA</span>
-          </div>
-          {/* Zachováme hover efekt - důležitý pro UX */}
-          <motion.span
-            className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-white/0 via-white to-white/0 origin-left"
-            initial={{ scaleX: 0 }}
-            whileHover={{ scaleX: 1 }}
-            transition={{ duration: 0.3 }}
-          />
-        </div>
-
-        <p className="text-white/40 mb-6 text-sm max-w-xs leading-relaxed">
-          {t('footer.description')}
-        </p>
-
-        <p className="text-white/30 text-xs">
-          © {new Date().getFullYear()} Jan Fiala. {t('footer.rights')}
-        </p>
-      </motion.div>
-
-      {/* Navigace a kontakt - jedna animace pro celý blok */}
-      <motion.div
-        className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-10"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="space-y-8">
-          <div>
-            <h4 className="text-sm uppercase tracking-widest text-white/30 mb-5 after:content-[''] after:block after:w-8 after:h-px after:bg-white/20 after:mt-2">
-              {t('footer.navigation')}
-            </h4>
-            <ul className="space-y-4">
-              {[
-                { name: t('nav.home'), ref: homeRef },
-                { name: t('nav.projects'), ref: projectsRef },
-                { name: t('nav.about'), ref: aboutRef },
-                { name: t('nav.contact'), ref: contactRef },
-              ].map((item) => (
-                <li key={item.name}>
-                  {/* Zachován hover efekt pro lepší UX */}
-                  <motion.button
-                    onClick={() => scrollToSection(item.ref)}
-                    className="text-white/50 hover:text-white text-sm font-medium transition-all duration-300 flex items-center gap-1.5 group"
-                    whileHover={{ x: 4 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <span className="h-px w-0 bg-white group-hover:w-4 transition-all duration-300"></span>
-                    {item.name}
-                  </motion.button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <div className="space-y-8">
-          <div>
-            <h4 className="text-sm uppercase tracking-widest text-white/30 mb-5 after:content-[''] after:block after:w-8 after:h-px after:bg-white/20 after:mt-2">
-              {t('footer.connect')}
-            </h4>
-            <div className="space-y-4">
-              {/* Kontaktní odkazy - statické s hover efektem */}
-              <a
-                href="mailto:janfiala331@gmail.com"
-                className="text-white/50 hover:text-white text-sm font-medium transition-all duration-300 flex items-center gap-2.5 group hover:translate-x-1"
-              >
-                <span className="w-5 h-5 flex items-center justify-center text-white/40 group-hover:text-white">
-                  <FiMail size={14} />
-                </span>
-                janfiala331@gmail.com
-              </a>
-
-              <a
-                href="tel:+420733164585"
-                className="text-white/50 hover:text-white text-sm font-medium transition-all duration-300 flex items-center gap-2.5 group hover:translate-x-1"
-              >
-                <span className="w-5 h-5 flex items-center justify-center text-white/40 group-hover:text-white">
-                  <FiPhone size={14} />
-                </span>
-                +420 733 164 585
-              </a>
-
-              <a
-                href="#"
-                className="text-white/50 hover:text-white text-sm font-medium transition-all duration-300 flex items-center gap-2.5 group hover:translate-x-1"
-              >
-                <span className="w-5 h-5 flex items-center justify-center text-white/40 group-hover:text-white">
-                  <FiMapPin size={14} />
-                </span>
-                {t('contact.location')}
-              </a>
-            </div>
-          </div>
-
-          {/* Sociální sítě - jedna animace pro celý blok */}
-          <div>
-            <h4 className="text-sm uppercase tracking-widest text-white/30 mb-5 after:content-[''] after:block after:w-8 after:h-px after:bg-white/20 after:mt-2">
-              {t('footer.follow')}
-            </h4>
-            <div className="flex items-center gap-4">
-              {/* Sociální ikony se zachovaným hover efektem */}
-              {[
-                { icon: <FiGithub className="w-4 h-4" />, href: "https://github.com/chlebaak" },
-                { icon: <FiTwitter className="w-4 h-4" />, href: "#" },
-                { icon: <FiLinkedin className="w-4 h-4" />, href: "#" },
-                { icon: <FiInstagram className="w-4 h-4" />, href: "https://www.instagram.com/honzafiala_/" }
-              ].map((social, index) => (
-                <motion.a
-                  key={index}
-                  href={social.href}
-                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 hover:border-white/30 transition-all duration-300"
-                  whileHover={{
-                    y: -5,
-                    boxShadow: "0 10px 20px -5px rgba(0,0,0,0.5)",
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {social.icon}
-                </motion.a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </div>
-
-    {/* Statická oddělovací linka */}
-    <div className="h-px w-full bg-white/5 my-12" />
-
-    {/* Footer spodní část - statická */}
-    <div className="flex flex-col sm:flex-row justify-between items-center">
-      <p className="text-white/30 text-xs">
-        {t('footer.design')}
-      </p>
-    </div>
+        {/* Revolutionary Modern Footer Design */}
+        <footer className="relative overflow-hidden bg-black">
+  {/* Innovative Border Design */}
+  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+  
+  {/* Minimal Geometric Background */}
+  <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute top-20 left-16 w-1 h-32 bg-white/5 transform rotate-12" />
+    <div className="absolute bottom-20 right-16 w-1 h-24 bg-white/5 transform -rotate-12" />
+    <div className="absolute top-1/2 left-1/2 w-64 h-px bg-white/5 transform -translate-x-1/2 -translate-y-1/2 rotate-45" />
   </div>
 
-  {/* "Nahoru" tlačítko - zachována animace pro lepší UX */}
-  <motion.div
-    className="absolute right-6 sm:right-10 bottom-10 sm:bottom-12"
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 1 }}
-    viewport={{ once: true, amount: 0.3 }}
-    transition={{ duration: 0.5 }}
-  >
-    <motion.button
-      onClick={() => scrollToSection(homeRef)}
-      className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.15)] hover:shadow-[0_0_40px_rgba(255,255,255,0.25)] transition-all duration-500"
-      whileHover={{ y: -6 }}
-      whileTap={{ scale: 0.95 }}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-5 w-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
+  <div className="container mx-auto px-6 lg:px-8 relative z-10">
+    
+    {/* Main Footer Content - Asymmetrical Grid */}
+    <div className="pt-20 pb-12 grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-8">
+      
+      {/* Brand Column - Takes 2 columns on large screens */}
+      <motion.div
+        className="lg:col-span-2 space-y-8"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
       >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M5 10l7-7m0 0l7 7m-7-7v18"
-        />
-      </svg>
-    </motion.button>
-  </motion.div>
+        {/* Innovative Logo Design */}
+        <div className="space-y-6">
+          <motion.div
+            className="group cursor-pointer"
+            whileHover={{ scale: 1.02 }}
+            onClick={() => scrollToSection(homeRef)}
+          >
+            <div className="text-4xl sm:text-5xl font-extralight tracking-[-0.02em] mb-4">
+              <span className="text-white">JAN</span>
+              <span className="text-white/30 ml-2">FIALA</span>
+            </div>
+            <div className="w-16 h-0.5 bg-white transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+          </motion.div>
+
+          <p className="text-white/50 text-lg leading-relaxed max-w-md">
+            {t('footer.description')}
+          </p>
+
+          {/* Status Indicator */}
+          <div className="flex items-center gap-3 p-4 bg-white/5 border border-white/10 rounded-2xl max-w-fit">
+            <div className="relative">
+              <div className="w-3 h-3 bg-green-400 rounded-full" />
+              <div className="absolute inset-0 w-3 h-3 bg-green-400 rounded-full animate-ping opacity-30" />
+            </div>
+            <span className="text-white/80 text-sm font-medium">Available for new projects</span>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Navigation Column */}
+      <motion.div
+        className="space-y-6"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+      >
+        <h4 className="text-white/40 text-xs uppercase tracking-[0.3em] mb-8">
+          {t('footer.navigation')}
+        </h4>
+        
+        <nav className="space-y-4">
+          {[
+            { name: t('nav.home'), ref: homeRef, number: '01' },
+            { name: t('nav.projects'), ref: projectsRef, number: '02' },
+            { name: t('nav.about'), ref: aboutRef, number: '03' },
+            { name: t('nav.contact'), ref: contactRef, number: '04' },
+          ].map((item) => (
+            <motion.button
+              key={item.name}
+              onClick={() => scrollToSection(item.ref)}
+              className="group flex items-center gap-4 text-left w-full hover:translate-x-2 transition-transform duration-300"
+              whileHover={{ x: 4 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <span className="text-white/20 text-xs font-mono w-6">{item.number}</span>
+              <span className="text-white/60 group-hover:text-white font-medium transition-colors duration-300">
+                {item.name}
+              </span>
+              <div className="flex-1 h-px bg-white/10 group-hover:bg-white/30 transition-colors duration-300" />
+            </motion.button>
+          ))}
+        </nav>
+      </motion.div>
+
+      {/* Contact & Social Column */}
+      <motion.div
+        className="space-y-8"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <h4 className="text-white/40 text-xs uppercase tracking-[0.3em]">
+          {t('footer.connect')}
+        </h4>
+
+        {/* Contact Links - Modern Card Style */}
+        <div className="space-y-3">
+          <motion.a
+            href="mailto:janfiala331@gmail.com"
+            className="group flex items-center gap-3 p-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+            whileHover={{ x: 4 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <FiMail className="w-4 h-4 text-white/60 group-hover:text-white transition-colors" />
+            <span className="text-white/60 group-hover:text-white text-sm font-medium transition-colors">
+              Email
+            </span>
+          </motion.a>
+
+          <motion.a
+            href="tel:+420733164585"
+            className="group flex items-center gap-3 p-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+            whileHover={{ x: 4 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <FiPhone className="w-4 h-4 text-white/60 group-hover:text-white transition-colors" />
+            <span className="text-white/60 group-hover:text-white text-sm font-medium transition-colors">
+              Phone
+            </span>
+          </motion.a>
+
+          <motion.div
+            className="flex items-center gap-3 p-3 bg-white/5 border border-white/10 rounded-xl"
+          >
+            <FiMapPin className="w-4 h-4 text-white/60" />
+            <span className="text-white/60 text-sm font-medium">
+              Czech Republic
+            </span>
+          </motion.div>
+        </div>
+
+        {/* Social Media - Floating Design */}
+        <div className="space-y-4">
+          <h5 className="text-white/40 text-xs uppercase tracking-[0.2em]">
+            {t('footer.follow')}
+          </h5>
+          <div className="flex gap-3">
+            {[
+              { Icon: FiGithub, href: "https://github.com/chlebaak", label: "GitHub" },
+              { Icon: FiLinkedin, href: "#", label: "LinkedIn" },
+              { Icon: FiInstagram, href: "https://www.instagram.com/honzafiala_/", label: "Instagram" }
+            ].map((social) => (
+              <motion.a
+                key={social.label}
+                href={social.href}
+                className="group relative w-11 h-11 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-white/60 hover:text-white transition-all duration-300 overflow-hidden"
+                whileHover={{ 
+                  y: -6, 
+                  backgroundColor: "rgba(255,255,255,0.1)",
+                  borderColor: "rgba(255,255,255,0.3)"
+                }}
+                whileTap={{ scale: 0.95 }}
+                title={social.label}
+              >
+                <social.Icon className="w-4 h-4 relative z-10" />
+                {/* Hover effect background */}
+                <div className="absolute inset-0 bg-white/5 transform scale-0 group-hover:scale-100 transition-transform duration-300 rounded-xl" />
+              </motion.a>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+    </div>
+
+    {/* Bottom Section - Modern Minimal */}
+    <motion.div
+      className="pt-8 pb-8 border-t border-white/10"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6, delay: 0.3 }}
+    >
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="flex items-center gap-6">
+          <p className="text-white/30 text-xs font-mono">
+            © {new Date().getFullYear()} Jan Fiala
+          </p>
+          <div className="w-px h-4 bg-white/20" />
+          <p className="text-white/30 text-xs">
+            {t('footer.rights')}
+          </p>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <p className="text-white/30 text-xs">
+            {t('footer.design')}
+          </p>
+          
+          {/* Back to Top - Integrated Design */}
+          <motion.button
+            onClick={() => scrollToSection(homeRef)}
+            className="group flex items-center gap-2 px-4 py-2 bg-white text-black rounded-full text-xs font-medium hover:bg-white/90 transition-all duration-300"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span>{t('footer.backToTop')}</span>
+            <motion.div
+              className="w-4 h-4 flex items-center justify-center"
+              animate={{ y: [0, -2, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
+              </svg>
+            </motion.div>
+          </motion.button>
+        </div>
+      </div>
+    </motion.div>
+  </div>
 </footer>
       </div>
     </LanguageContext.Provider>
-  );
-}
-
-// Reusable Components
-function SectionHeader({ title }) {
-  return (
-    <motion.h2
-      className="text-4xl sm:text-5xl font-bold relative inline-block"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.5 }}
-    >
-      {title}
-      <motion.span
-        className="absolute -bottom-3 left-0 right-0 h-px bg-gradient-to-r from-white/5 via-white/60 to-white/5"
-        initial={{ scaleX: 0, opacity: 0 }}
-        whileInView={{ scaleX: 1, opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-      />
-    </motion.h2>
   );
 }
 
@@ -1555,199 +1627,80 @@ function ProjectCard({ project }) {
   const { title, category, description, image, tech, url } = project;
 
   return (
-    <div className="group relative will-change-transform">
-      {/* Základní obal bez vícenásobných animací */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={{ duration: 0.4 }}
-        whileHover={{ y: -5 }} // Zjednodušený hover efekt
-        className="h-full"
-      >
-        {/* Project image container s jednou animací */}
-        <div
-          className="aspect-video rounded-xl overflow-hidden relative mb-5 border border-white/10 bg-black shadow-lg shadow-black/30 transition-all duration-300 group-hover:shadow-xl group-hover:scale-[1.01]"
-        >
-          {/* Obrázek projektu */}
+    <motion.div 
+      className="group relative"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.6 }}
+    >
+      {/* Modern Project Card */}
+      <div className="relative bg-black border border-white/10 rounded-2xl overflow-hidden transition-all duration-300 hover:border-white/20 hover:-translate-y-2">
+        
+        {/* Project Image */}
+        <div className="aspect-video relative overflow-hidden">
           <img
             src={image}
             alt={title}
-            className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300"
-            loading="lazy" // Lazy loading pro lepší výkon
-          />
-
-          {/* Statický Category badge */}
-          <div className="absolute top-4 left-4 py-1 px-3 rounded-full bg-black/70 backdrop-blur-sm border border-white/10 text-[10px] text-white/80 font-medium tracking-wider z-10">
-            {category}
-          </div>
-
-          {/* Overlay s informacemi - bez vnitřních animací */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-6">
-            <div>
-              <h3 className="text-xl font-medium mb-2 text-white">{title}</h3>
-              <p className="text-white/70 text-sm mb-5 line-clamp-2">
-                {description}
-              </p>
-
-              {/* Tech stack pills - statické */}
-              <div className="flex flex-wrap gap-2 mb-5">
-                {tech.map((item) => (
-                  <span
-                    key={item}
-                    className="text-[10px] py-0.5 px-2 bg-white/5 rounded-full border border-white/10 text-white/70"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-
-              {/* Tlačítko - zachována interaktivita */}
-              <motion.a
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white text-black px-5 py-2.5 rounded-full text-sm font-medium flex items-center gap-2 group/btn transform-gpu shadow-lg shadow-black/20 w-fit"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span>View Project</span>
-                <span className="bg-black/10 rounded-full p-1">
-                  <HiOutlineArrowNarrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                </span>
-              </motion.a>
-            </div>
-          </div>
-        </div>
-
-        {/* Project info below thumbnail - statické */}
-        <div className="space-y-2">
-          <div className="h-px w-8 bg-white/20 mb-3"></div>
-          <h3 className="font-medium text-xl text-white group-hover:text-white transition-colors">
-            {title}
-          </h3>
-          <p className="text-white/60 text-sm">{category}</p>
-        </div>
-
-        {/* Hover indicator dot - bez zbytečné animace */}
-        <div className="absolute -bottom-1 left-0 w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
-      </motion.div>
-    </div>
-  );
-}
-
-function AboutImage() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
-
-  return (
-    <div
-      ref={ref}
-      className="relative will-change-transform"
-    >
-      {/* Hlavní kontejner - jediná animace pro hlavní obsah */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 0.6 }}
-        className="relative"
-      >
-        {/* Zjednodušený efekt vnitřního okraje */}
-        <div
-          className="absolute inset-3 rounded-2xl bg-gradient-to-br from-white/20 to-white/5 blur-lg z-0"
-        />
-
-        {/* Hlavní kontejner s obrázkem */}
-        <div className="aspect-square rounded-2xl overflow-hidden relative z-10 border border-white/10 shadow-xl shadow-black/50 bg-black">
-          {/* Obrázek */}
-          <img
-            src={profileImage2}
-            alt="Jan Fiala"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
           />
-
-          {/* Statický gradient overlay místo animovaného */}
-          <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
-
-          {/* Omezená verze shine efektu - pouze jedna animace */}
-          <motion.div
-            className="absolute -inset-full w-[200%] h-[200%] bg-gradient-to-r from-transparent via-white/10 to-transparent transform -rotate-45"
-            animate={{
-              left: ["120%", "-120%"],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              repeatDelay: 8, // Delší pauza mezi opakováním
-            }}
-          />
-
-          {/* Grid pattern */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.03)_1px,_transparent_1px)] bg-[length:20px_20px] opacity-20"></div>
-        </div>
-
-        {/* Zjednodušené dekorativní prvky - statické */}
-        <div className="absolute -bottom-4 -right-4 z-20">
-          <div className="grid grid-cols-2 gap-2">
-            <div className="w-2 h-2 rounded-full bg-white/40"></div>
-            <div className="w-2 h-2 rounded-full bg-white/20"></div>
-            <div className="w-2 h-2 rounded-full bg-white/20"></div>
-            <div className="w-2 h-2 rounded-full bg-white/40"></div>
+          
+          {/* Overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          
+          {/* Category badge */}
+          <div className="absolute top-4 left-4 px-3 py-1 bg-white text-black text-xs font-medium rounded-full">
+            {category}
           </div>
         </div>
 
-        {/* Statický kruh místo animovaného */}
-        <div className="absolute -top-4 -left-4 w-8 h-8 border border-white/20 rounded-full"></div>
+        {/* Project Content */}
+        <div className="p-6">
+          {/* Title and description */}
+          <div className="mb-4">
+            <h3 className="text-xl font-light text-white mb-2 group-hover:text-white transition-colors">
+              {title}
+            </h3>
+            <p className="text-white/60 text-sm leading-relaxed line-clamp-2">
+              {description}
+            </p>
+          </div>
 
-        {/* Statická dekorativní linka místo animované */}
-        <div className="absolute -bottom-8 left-1/4 h-px w-1/2 bg-gradient-to-r from-white/5 via-white/40 to-white/5"></div>
-      </motion.div>
+          {/* Tech stack */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            {tech.map((item) => (
+              <span
+                key={item}
+                className="px-2 py-1 text-xs text-white/70 border border-white/20 rounded-md font-medium"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
 
-      {/* Redukované skill badges - ponecháme pouze jednu animaci pro všechny */}
-      <motion.div 
-        className="absolute -left-12 top-1/3 py-1.5 px-3 rounded-full bg-black backdrop-blur-sm text-white/80 text-xs border border-white/10 shadow-xl shadow-black/30"
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-      >
-        Frontend
-      </motion.div>
+          {/* Action button */}
+          <motion.a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-white/80 hover:text-white text-sm font-medium transition-colors duration-200 group/link"
+            whileHover={{ x: 5 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <span>View Project</span>
+            <HiOutlineArrowNarrowRight className="w-4 h-4 transition-transform duration-200 group-hover/link:translate-x-1" />
+          </motion.a>
+        </div>
 
-      <motion.div
-        className="absolute -right-16 top-2/3 py-1.5 px-3 rounded-full bg-black backdrop-blur-sm text-white/80 text-xs border border-white/10 shadow-xl shadow-black/30"
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-      >
-        UX/UI Design
-      </motion.div>
-    </div>
-  );
-}
-
-function ContactInfo({ icon, title, value, delay = 0 }) {
-  return (
-    <motion.div
-      className="flex items-center space-x-4"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.5, delay }}
-      whileHover={{ x: 5 }}
-    >
-      <div className="w-10 h-10 bg-white/5 text-white/80 flex items-center justify-center rounded-full border border-white/10 shadow-md shadow-black/10">
-        {icon}
-      </div>
-      <div>
-        <h4 className="text-sm uppercase tracking-wider text-white/50 mb-1">
-          {title}
-        </h4>
-        <p className="text-white font-medium">{value}</p>
+        {/* Subtle hover indicator */}
+        <div className="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
       </div>
     </motion.div>
   );
 }
+
+
 
 function ContactForm() {
   const [formData, setFormData] = useState({
@@ -1756,7 +1709,7 @@ function ContactForm() {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', null
+  const [submitStatus, setSubmitStatus] = useState(null);
   const formRef = useRef();
 
   const handleChange = (e) => {
@@ -1772,16 +1725,15 @@ function ContactForm() {
     setIsSubmitting(true);
     setSubmitStatus(null);
 
-    // EmailJS služba - nahraďte svými ID
-    // Nutno vytvořit účet na https://www.emailjs.com/
+    // EmailJS service integration
     emailjs
       .sendForm(
-        "service_2yp7s7k", // Service ID z EmailJS
-        "template_xu7xrj9", // Template ID z EmailJS
+        "service_2yp7s7k",
+        "template_xu7xrj9",
         formRef.current,
-        "1zn4cKqrcAjcGKLdv" // Veřejný klíč z EmailJS
+        "1zn4cKqrcAjcGKLdv"
       )
-      .then((result) => {
+      .then(() => {
         setSubmitStatus("success");
         setFormData({ name: "", email: "", message: "" });
       })
@@ -1795,178 +1747,96 @@ function ContactForm() {
   };
 
   return (
-    <motion.form
-      ref={formRef}
-      onSubmit={handleSubmit}
-      className="space-y-6"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.6 }}
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-      >
-        <label
-          htmlFor="name"
-          className="block text-sm text-white/70 font-medium mb-2"
-        >
-          Your Name
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+      
+      {/* Name Field */}
+      <div className="space-y-2">
+        <label htmlFor="name" className="block text-sm font-medium text-white/70">
+          Name
         </label>
         <input
           type="text"
           id="name"
-          name="name" // důležité pro EmailJS
+          name="name"
           value={formData.name}
           onChange={handleChange}
-          className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-white/30 transition-all placeholder-white/20 text-white"
-          placeholder="John Doe"
+          className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:bg-white/10 transition-all duration-200"
+          placeholder="Your name"
           required
         />
-      </motion.div>
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        <label
-          htmlFor="email"
-          className="block text-sm text-white/70 font-medium mb-2"
-        >
-          Your Email
+      {/* Email Field */}
+      <div className="space-y-2">
+        <label htmlFor="email" className="block text-sm font-medium text-white/70">
+          Email
         </label>
         <input
           type="email"
           id="email"
-          name="email" // důležité pro EmailJS
+          name="email"
           value={formData.email}
           onChange={handleChange}
-          className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-white/30 transition-all placeholder-white/20 text-white"
-          placeholder="john@example.com"
+          className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:bg-white/10 transition-all duration-200"
+          placeholder="your@email.com"
           required
         />
-      </motion.div>
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-      >
-        <label
-          htmlFor="message"
-          className="block text-sm text-white/70 font-medium mb-2"
-        >
-          Your Message
+      {/* Message Field */}
+      <div className="space-y-2">
+        <label htmlFor="message" className="block text-sm font-medium text-white/70">
+          Message
         </label>
         <textarea
           id="message"
-          name="message" // důležité pro EmailJS
+          name="message"
           value={formData.message}
           onChange={handleChange}
           rows="5"
-          className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white/40 focus:border-white/30 transition-all placeholder-white/20 text-white resize-none"
-          placeholder="How can I help you?"
+          className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:bg-white/10 transition-all duration-200 resize-none"
+          placeholder="Tell me about your project..."
           required
-        ></textarea>
-      </motion.div>
+        />
+      </div>
 
-      {/* Zobrazení statusu */}
-      <AnimatePresence>
-        {submitStatus === "success" && (
-          <motion.div
-            className="text-sm px-4 py-3 rounded-lg bg-white/10 border border-green-400/30 text-green-400"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-          >
-            Message sent successfully! I'll get back to you soon.
-          </motion.div>
-        )}
+      {/* Status Messages */}
+      {submitStatus === "success" && (
+        <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-xl">
+          <p className="text-green-400 text-sm font-medium">Message sent successfully!</p>
+          <p className="text-white/60 text-xs mt-1">I'll get back to you within 24 hours.</p>
+        </div>
+      )}
 
-        {submitStatus === "error" && (
-          <motion.div
-            className="text-sm px-4 py-3 rounded-lg bg-white/10 border border-red-400/30 text-red-400"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-          >
-            Failed to send message. Please try again or contact me directly.
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {submitStatus === "error" && (
+        <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
+          <p className="text-red-400 text-sm font-medium">Failed to send message</p>
+          <p className="text-white/60 text-xs mt-1">Please try again or contact me directly.</p>
+        </div>
+      )}
 
-      <motion.button
+      {/* Submit Button */}
+      <button
         type="submit"
         disabled={isSubmitting}
-        className={`bg-white text-black px-7 py-3.5 rounded-full font-medium flex items-center gap-2 group shadow-lg shadow-black/30 hover:shadow-xl hover:shadow-black/40 w-full justify-center sm:w-auto ${
-          isSubmitting ? "opacity-70 cursor-not-allowed" : ""
-        }`}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-        whileHover={{
-          scale: isSubmitting ? 1 : 1.03,
-          y: isSubmitting ? 0 : -2,
-        }}
-        whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+        className="w-full bg-white text-black py-4 px-6 rounded-xl font-medium text-lg hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-3"
       >
         {isSubmitting ? (
           <>
+            <div className="w-5 h-5 border-2 border-black/20 border-t-black rounded-full animate-spin" />
             <span>Sending...</span>
-            <span className="ml-2">
-              <svg
-                className="animate-spin h-4 w-4 text-black/70"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                ></circle>
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                ></path>
-              </svg>
-            </span>
           </>
         ) : (
           <>
             <span>Send Message</span>
-            <span className="bg-black/10 rounded-full p-1 ml-1">
-              <HiOutlineArrowNarrowRight className="group-hover:translate-x-1 transition-all duration-300 w-4 h-4" />
-            </span>
+            <HiOutlineArrowNarrowRight className="w-5 h-5" />
           </>
         )}
-      </motion.button>
-    </motion.form>
+      </button>
+    </form>
   );
 }
 
-function SocialIcon({ icon }) {
-  return (
-    <motion.a
-      href="#"
-      className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all duration-300"
-      whileHover={{ y: -5, boxShadow: "0 10px 20px -5px rgba(0,0,0,0.5)" }}
-      whileTap={{ scale: 0.95 }}
-    >
-      <div className="text-lg">{icon}</div>
-    </motion.a>
-  );
-}
+
 
 export default App;
