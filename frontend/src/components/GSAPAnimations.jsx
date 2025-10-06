@@ -164,7 +164,6 @@ export const GSAPAnimationProvider = ({ children }) => {
 
   return <>{children}</>
 }
-}
 
 // Komponenta pro GSAP timeline animace
 export const GSAPTimeline = ({ children, className = '' }) => {

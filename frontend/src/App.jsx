@@ -32,8 +32,13 @@ import {
   CustomCursor, 
   FloatingParticles, 
   SplitText,
-  RevealUp 
+  RevealUp,
+  GSAPLoadingScreen 
 } from "./components/AdvancedGSAP";
+import { 
+  GSAPAnimationProvider, 
+  GSAPTimeline 
+} from "./components/GSAPAnimations";
 import logo from "./assets/JF.png";
 import project2Image from "./assets/image.png";
 import profileImage from "./assets/jfpfp.jpg";
@@ -316,229 +321,31 @@ function App() {
         "Javascript",
         "Figma",
       ],
-      url: "https://eshop.vercel.app/",
+      url: "https://refugio-ruddy.vercel.app",
     },
   ];
 
   if (isLoading) {
     return (
-      <motion.div
-        className="fixed inset-0 bg-black flex items-center justify-center overflow-hidden"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        {/* Geometrické animované prvky v pozadí */}
-        <div className="absolute inset-0 overflow-hidden">
-          <motion.div
-            className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full border border-white/5"
-            animate={{
-              rotate: 360,
-              borderColor: [
-                "rgba(255,255,255,0.05)",
-                "rgba(255,255,255,0.2)",
-                "rgba(255,255,255,0.05)",
-              ],
-            }}
-            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          />
-          <motion.div
-            className="absolute top-1/3 left-1/3 w-64 h-64 rounded-full border border-white/10"
-            animate={{
-              rotate: -360,
-              scale: [1, 1.1, 1],
-              borderColor: [
-                "rgba(255,255,255,0.1)",
-                "rgba(255,255,255,0.2)",
-                "rgba(255,255,255,0.1)",
-              ],
-            }}
-            transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-          />
-          <motion.div
-            className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full border border-white/5"
-            animate={{
-              rotate: 360,
-              borderColor: [
-                "rgba(255,255,255,0.05)",
-                "rgba(255,255,255,0.15)",
-                "rgba(255,255,255,0.05)",
-              ],
-            }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          />
-        </div>
-
-        {/* Centrální animace */}
-        <div className="relative z-10 flex flex-col items-center">
-          {/* Logo animace */}
-          <motion.div
-            className="relative h-16 mb-12 overflow-hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            {/* Horizontální svítící linka */}
-            <motion.div
-              className="absolute top-1/2 left-1/2 h-px w-0 bg-white -translate-x-1/2 -translate-y-1/2"
-              animate={{ width: ["0%", "100%", "100%", "0%"] }}
-              transition={{
-                duration: 3,
-                times: [0, 0.2, 0.8, 1],
-                repeat: Infinity,
-              }}
-            />
-
-            {/* Animované portfolio logo */}
-            <div className="relative flex gap-1">
-              {["P", "O", "R", "T", "F", "O", "L", "I", "O"].map(
-                (letter, index) => (
-                  <motion.span
-                    key={index}
-                    className="text-3xl font-bold relative inline-block"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{
-                      opacity: 1,
-                      y: 0,
-                      filter: [
-                        "blur(0px)",
-                        index % 3 === 0 ? "blur(1px)" : "blur(0px)",
-                        "blur(0px)",
-                      ],
-                    }}
-                    transition={{
-                      delay: 0.1 + index * 0.08,
-                      duration: 0.4,
-                      filter: {
-                        duration: 2,
-                        repeat: Infinity,
-                        repeatType: "mirror",
-                      },
-                    }}
-                  >
-                    {letter}
-
-                    {/* Vertikální svítící linka pod každým písmenem */}
-                    <motion.div
-                      className="absolute bottom-0 left-1/2 w-px h-0 bg-white -translate-x-1/2"
-                      animate={{
-                        height: [0, 8, 0],
-                        opacity: [0, 1, 0],
-                      }}
-                      transition={{
-                        duration: 1.5,
-                        delay: 0.3 + index * 0.1,
-                        repeat: Infinity,
-                        repeatDelay: 2,
-                      }}
-                    />
-                  </motion.span>
-                )
-              )}
-            </div>
-          </motion.div>
-
-          {/* Minimalistický loading indikátor */}
-          <motion.div
-            className="relative w-24 h-24"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 1] }}
-            transition={{ delay: 1, duration: 0.5 }}
-          >
-            {/* Kruhová animace */}
-            <svg className="w-full h-full" viewBox="0 0 100 100">
-              <motion.circle
-                cx="50"
-                cy="50"
-                r="40"
-                stroke="rgba(255,255,255,0.1)"
-                strokeWidth="2"
-                fill="none"
-              />
-              <motion.circle
-                cx="50"
-                cy="50"
-                r="40"
-                stroke="white"
-                strokeWidth="2"
-                fill="none"
-                strokeDasharray="251"
-                strokeDashoffset="251"
-                animate={{ strokeDashoffset: [251, 0] }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-            </svg>
-
-            {/* Pulsující tečka uprostřed */}
-            <motion.div
-              className="absolute inset-0 flex items-center justify-center"
-              animate={{ scale: [0.8, 1.1, 0.8] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              <div className="w-1.5 h-1.5 bg-white rounded-full" />
-            </motion.div>
-          </motion.div>
-
-          {/* Loading text */}
-          <motion.span
-            className="mt-6 text-xs uppercase tracking-widest text-white/40"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 0.5 }}
-          >
-            <motion.span
-              animate={{ opacity: [0.4, 1, 0.4] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              Initializing
-            </motion.span>
-          </motion.span>
-        </div>
-
-        {/* Doplňková animace v dolní části */}
-        <motion.div
-          className="absolute bottom-20 inset-x-0 flex justify-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.5 }}
-        >
-          <div className="relative w-32 h-px bg-white/10">
-            <motion.div
-              className="absolute top-0 left-0 h-full w-6 bg-gradient-to-r from-white to-transparent"
-              animate={{
-                x: [-24, 128, -24],
-                opacity: [0, 1, 0],
-              }}
-              transition={{
-                duration: 2.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-          </div>
-        </motion.div>
-      </motion.div>
+      <GSAPLoadingScreen />
     );
   }
 
   return (
     <LanguageContext.Provider value={{ language, toggleLanguage, t }}>
-      <div className="bg-black text-stone-100 min-h-screen relative cursor-none">
-        {/* Advanced GSAP Animations */}
-        <AdvancedGSAPAnimations />
-        
-        {/* Custom Cursor */}
-        <CustomCursor />
-        
-        {/* Floating Particles */}
-        <FloatingParticles count={10} />
-        
-        {/* GSAP Scroll Progress */}
-        <ScrollProgress />
+      <GSAPAnimationProvider>
+        <div className="bg-black text-stone-100 min-h-screen relative cursor-none">
+          {/* Advanced GSAP Animations */}
+          <AdvancedGSAPAnimations />
+          
+          {/* Custom Cursor */}
+          <CustomCursor />
+          
+          {/* Floating Particles */}
+          <FloatingParticles count={10} />
+          
+          {/* GSAP Scroll Progress */}
+          <ScrollProgress />
 
         {/* Progress bar with earth tones */}
         <motion.div
@@ -858,7 +665,7 @@ function App() {
               transition={{ duration: 0.6, delay: 0.8 }}
             >
               <MagneticButton
-                className="group px-8 py-4 bg-white text-black rounded-2xl font-medium flex items-center justify-center gap-2 hover:bg-white/90 transition-all duration-200"
+                className="magnetic-button group px-8 py-4 bg-white text-black rounded-2xl font-medium flex items-center justify-center gap-2 hover:bg-white/90 transition-all duration-200"
                 onClick={() => scrollToSection(projectsRef)}
               >
                 {t('hero.cta1')}
@@ -866,7 +673,7 @@ function App() {
               </MagneticButton>
 
               <MagneticButton
-                className="px-8 py-4 rounded-2xl border border-white/30 text-white font-medium hover:bg-white/5 transition-all duration-200"
+                className="magnetic-button px-8 py-4 rounded-2xl border border-white/30 text-white font-medium hover:bg-white/5 transition-all duration-200"
                 onClick={() => scrollToSection(contactRef)}
               >
                 {t('hero.cta2')}
@@ -918,7 +725,7 @@ function App() {
             ].map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-2xl font-light text-white mb-1">
-                  <AnimatedCounter target={stat.value} />
+                  <span className="counter" data-target={stat.value}>0</span>
                   <span>+</span>
                 </div>
                 <span className="text-xs text-white/40 uppercase tracking-wider">
@@ -931,33 +738,34 @@ function App() {
 
         {/* Tech Stack Card */}
         <motion.div
-          className="lg:col-span-2 bg-white/5 border border-white/10 rounded-3xl p-8 flex flex-col justify-center min-h-[200px] relative overflow-hidden"
+          className="lg:col-span-2 bg-white/5 border border-white/10 rounded-3xl p-10 flex flex-col justify-center min-h-[260px] relative overflow-hidden"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <div className="absolute top-0 left-0 w-20 h-20 bg-white/5 rounded-full -translate-x-10 -translate-y-10" />
+          <div className="absolute top-0 left-0 w-24 h-24 bg-white/5 rounded-full -translate-x-12 -translate-y-12" />
           
           <div className="relative z-10">
-            <div className="flex items-center justify-between mb-6">
-              <h4 className="text-white font-medium text-lg flex items-center gap-2">
-                <div className="w-6 h-6 bg-white/10 rounded-lg flex items-center justify-center">
-                  <span className="text-xs">⚡</span>
+            <div className="flex items-center justify-between mb-8">
+              <h4 className="text-white font-medium text-xl flex items-center gap-3">
+                <div className="w-8 h-8 bg-white/10 rounded-xl flex items-center justify-center">
+                  <span className="text-sm">⚡</span>
                 </div>
                 Tech Stack
               </h4>
             </div>
             
-            <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
-              {['React/Next.js', 'Node.js', 'Javascript', 'SQL/PostgreSQL', 'Tailwind CSS/CSS', 'C#', "Figma"].map((tech, index) => (
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              {['React/Next.js', 'Node.js', 'JavaScript', 'PostgreSQL/SQL', 'Tailwind CSS', 'C#/.NET', "Figma", "Git", "PHP", "UI/UX", ].map((tech, index) => (
                 <motion.div
                   key={tech}
-                  className="bg-white/5 border border-white/5 rounded-xl p-3 text-center"
+                  className="bg-white/8 border border-white/10 rounded-2xl p-4 text-center hover:bg-white/12 hover:border-white/20 transition-all duration-300"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
+                  transition={{ duration: 0.4, delay: 0.5 + index * 0.08 }}
+                  whileHover={{ y: -2 }}
                 >
-                  <span className="text-white/80 text-sm font-medium">{tech}</span>
+                  <span className="text-white/85 text-sm font-medium">{tech}</span>
                 </motion.div>
               ))}
             </div>
@@ -997,7 +805,7 @@ function App() {
 <section
   id="projects"
   ref={projectsRef}
-  className="py-20 sm:py-24 relative overflow-hidden bg-black border-t border-white/10"
+  className="section-fade py-20 sm:py-24 relative overflow-hidden bg-black border-t border-white/10"
 >
   {/* Minimal background elements with parallax */}
   <div className="absolute inset-0">
@@ -1028,7 +836,7 @@ function App() {
         {t('projects.subtitle')}
       </span>
       
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-4">
+      <h2 className="text-reveal text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-4">
         {t('projects.title')}
       </h2>
       
@@ -1036,13 +844,13 @@ function App() {
     </motion.div>
 
     {/* Projects grid - modern layout with GSAP animations */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+    <GSAPTimeline className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
       {projects.map((project, index) => (
-        <ScaleOnScroll key={project.id} className="project-card-gsap">
+        <div key={project.id} className="project-card-gsap">
           <ProjectCard project={project} index={index} />
-        </ScaleOnScroll>
+        </div>
       ))}
-    </div>
+    </GSAPTimeline>
   </div>
 </section>
 
@@ -1050,14 +858,14 @@ function App() {
           <section
   id="about"
   ref={aboutRef}
-  className="py-20 sm:py-24 relative overflow-hidden bg-black border-t border-white/10"
+  className="section-fade py-20 sm:py-24 relative overflow-hidden bg-black border-t border-white/10"
 >
   {/* Minimal geometric background elements */}
   <div className="absolute inset-0">
-    <div className="absolute top-20 left-8 w-px h-24 bg-white/5 rotate-45" />
-    <div className="absolute bottom-20 right-8 w-px h-20 bg-white/5 -rotate-45" />
-    <div className="absolute top-1/2 left-1/4 w-16 h-px bg-white/5" />
-    <div className="absolute top-1/3 right-1/3 w-2 h-2 border border-white/10 rotate-45" />
+    <div className="parallax-slow absolute top-20 left-8 w-px h-24 bg-white/5 rotate-45" />
+    <div className="parallax-slow absolute bottom-20 right-8 w-px h-20 bg-white/5 -rotate-45" />
+    <div className="parallax-slow absolute top-1/2 left-1/4 w-16 h-px bg-white/5" />
+    <div className="parallax-slow absolute top-1/3 right-1/3 w-2 h-2 border border-white/10 rotate-45" />
   </div>
 
   <div className="container mx-auto px-6 lg:px-8 relative z-10">
@@ -1073,7 +881,7 @@ function App() {
         {t('about.subtitle')}
       </span>
       
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-4">
+      <h2 className="text-reveal text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-4">
         {t('about.title')}
       </h2>
       
@@ -1137,7 +945,7 @@ function App() {
               </div>
             </div>
             
-            <StaggeredList className="grid grid-cols-1 gap-3">
+            <div className="grid grid-cols-1 gap-3">
               {['Vite / React / Next.js', 'JavaScript / C#', 'Tailwind CSS', 'Node.js / Express.js', 'UI/UX Design', 'PostgreSQL'].map((skill) => (
                 <div
                   key={skill}
@@ -1146,7 +954,7 @@ function App() {
                   <span className="text-white/80 font-medium">{skill}</span>
                 </div>
               ))}
-            </StaggeredList>
+            </div>
           </motion.div>
 
           {/* Experience Section */}
@@ -1194,7 +1002,7 @@ function App() {
 
         {/* Modern CTA Button - Centered */}
         <div className="flex justify-center">
-          <MagneticButton className="group inline-flex items-center gap-3 bg-white text-black px-10 py-5 rounded-2xl font-medium transition-all duration-300 hover:bg-white/90 hover:shadow-xl hover:shadow-white/10">
+          <MagneticButton className="magnetic-button group inline-flex items-center gap-3 bg-white text-black px-10 py-5 rounded-2xl font-medium transition-all duration-300 hover:bg-white/90 hover:shadow-xl hover:shadow-white/10">
             <span className="text-lg">{t('about.download')}</span>
             <div className="w-6 h-6 bg-black/10 rounded-full flex items-center justify-center group-hover:bg-black/20 transition-colors">
               <HiOutlineArrowNarrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300" />
@@ -1210,14 +1018,14 @@ function App() {
 <section
   id="contact"
   ref={contactRef}
-  className="py-20 sm:py-24 relative overflow-hidden bg-black border-t border-white/10"
+  className="section-fade py-20 sm:py-24 relative overflow-hidden bg-black border-t border-white/10"
 >
   {/* Minimal geometric background elements */}
   <div className="absolute inset-0">
-    <div className="absolute top-16 left-16 w-px h-32 bg-white/5 rotate-45" />
-    <div className="absolute bottom-16 right-16 w-px h-24 bg-white/5 -rotate-45" />
-    <div className="absolute top-1/3 right-1/4 w-20 h-px bg-white/5" />
-    <div className="absolute bottom-1/3 left-1/3 w-4 h-4 border border-white/10 rotate-45" />
+    <div className="parallax-slow absolute top-16 left-16 w-px h-32 bg-white/5 rotate-45" />
+    <div className="parallax-slow absolute bottom-16 right-16 w-px h-24 bg-white/5 -rotate-45" />
+    <div className="parallax-slow absolute top-1/3 right-1/4 w-20 h-px bg-white/5" />
+    <div className="parallax-slow absolute bottom-1/3 left-1/3 w-4 h-4 border border-white/10 rotate-45" />
   </div>
 
   <div className="container mx-auto px-6 lg:px-8 relative z-10">
@@ -1233,7 +1041,7 @@ function App() {
         {t('contact.subtitle')}
       </span>
       
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-4">
+      <h2 className="text-reveal text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-4">
         {t('contact.title')}
       </h2>
       
@@ -1618,7 +1426,8 @@ function App() {
     </motion.div>
   </div>
 </footer>
-      </div>
+        </div>
+      </GSAPAnimationProvider>
     </LanguageContext.Provider>
   );
 }
