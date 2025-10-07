@@ -1,0 +1,29 @@
+{
+  "name": "Jan Fiala - Full Stack Developer Portfolio",
+  "short_name": "Jan Fiala",
+  "description": "Full Stack vývojář specializující se na React, Node.js a moderní webové technologie",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/src/assets/JF.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/src/assets/JF.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["portfolio", "developer", "technology"],
+  "lang": "cs",
+  "dir": "ltr",
+  "scope": "/",
+  "prefer_related_applications": false
+}

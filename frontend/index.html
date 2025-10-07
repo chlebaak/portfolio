@@ -1,10 +1,112 @@
 <!doctype html>
-<html lang="en">
+<html lang="cs">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="src/assets/JF.png" />
+    
+    <!-- Basic Meta Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <meta name="theme-color" content="#000000" />
+    <meta name="color-scheme" content="dark" />
+    
+    <!-- SEO Meta Tags -->
+    <title>Portfolio | Jan Fiala</title>
+    <meta name="description" content="Jan Fiala - Full Stack vývojář z České republiky. Specializuji se na React, Node.js, JavaScript a moderní webové technologie. Vytvářím elegantní digitální zážitky." />
+    <meta name="keywords" content="Jan Fiala, Full Stack Developer, React, Node.js, JavaScript, Web Developer, Portfolio, Czech Republic, Frontend, Backend" />
+    <meta name="author" content="Jan Fiala" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="Czech" />
+    <meta name="revisit-after" content="7 days" />
+    
+    <!-- Open Graph Meta Tags (Facebook, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Jan Fiala - Full Stack Developer | Portfolio" />
+    <meta property="og:description" content="Full Stack vývojář specializující se na React, Node.js a moderní webové technologie. Vytvářím elegantní digitální zážitky s důrazem na čistý kód a promyšlený design." />
+    <meta property="og:url" content="https://janfiala.dev" />
+    <meta property="og:site_name" content="Jan Fiala Portfolio" />
+    <meta property="og:image" content="https://janfiala.dev/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="cs_CZ" />
+    <meta property="og:locale:alternate" content="en_US" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Jan Fiala - Full Stack Developer" />
+    <meta name="twitter:description" content="Full Stack vývojář z České republiky. React, Node.js, JavaScript a moderní webové technologie." />
+    <meta name="twitter:image" content="https://janfiala.dev/twitter-card.jpg" />
+    <meta name="twitter:creator" content="@janfiala" />
+    <meta name="twitter:site" content="@janfiala" />
+    
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/src/assets/JF.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/assets/JF.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/src/assets/JF.png" />
+    <link rel="mask-icon" href="/src/assets/JF.png" color="#000000" />
+    <link rel="shortcut icon" href="/src/assets/JF.png" />
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- DNS Prefetch for Performance -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Jan Fiala",
+      "jobTitle": "Full Stack Developer",
+      "description": "Full Stack vývojář specializující se na React, Node.js a moderní webové technologie",
+      "url": "https://janfiala.dev",
+      "sameAs": [
+        "https://github.com/chlebaak",
+        "https://linkedin.com/in/janfiala",
+        "https://instagram.com/honzafiala_"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Ústí nad Labem",
+        "addressCountry": "CZ"
+      },
+      "email": "janfiala331@gmail.com",
+      "telephone": "+420733164585",
+      "knowsAbout": [
+        "React",
+        "Node.js",
+        "JavaScript",
+        "TypeScript",
+        "PostgreSQL",
+        "Tailwind CSS",
+        "C#",
+        "UI/UX Design",
+        "Web Development",
+        "Full Stack Development"
+      ],
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Střední průmyslová škola"
+      }
+    }
+    </script>
+    
+    <!-- Performance and Security -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-TileColor" content="#000000" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
+    
+    <!-- Preload Critical Resources -->
+    <!-- <link rel="preload" href="/src/assets/JF.png" as="image" /> -->
+    
+    <!-- Additional Meta for Czech Market -->
+    <meta name="geo.region" content="CZ" />
+    <meta name="geo.placename" content="Ústí nad Labem" />
+    <meta name="geo.position" content="50.6606;14.0383" />
+    <meta name="ICBM" content="50.6606, 14.0383" />
   </head>
   <body>
     <div id="root"></div>

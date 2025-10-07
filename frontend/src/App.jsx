@@ -3,7 +3,6 @@ import {
   motion,
   useScroll,
   useTransform,
-  useInView,
   AnimatePresence,
 } from "framer-motion";
 import {
@@ -41,18 +40,16 @@ import {
 } from "./components/GSAPAnimations";
 import logo from "./assets/JF.png";
 import project2Image from "./assets/image.png";
-import profileImage from "./assets/jfpfp.jpg";
-import profileImage2 from "./assets/pfp3.png";
 import project1Image from "./assets/project1.png";
 import emailjs from "@emailjs/browser";
 import "./App.css";
+
+const LanguageContext = createContext();
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState("home");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const LanguageContext = createContext();
 
   const translations = {
     en: {
@@ -127,6 +124,30 @@ function App() {
         design: "Designed with care and attention to detail",
         backToTop: "Back to top",
       },
+      common: {
+        statistics: "Statistics",
+        techStack: "Tech Stack",
+        available: "Available for projects",
+        jobTitle: "Full Stack Developer",
+        location: "Location",
+        clickToSend: "Click to send",
+        clickToCall: "Click to call",
+        czechRepublic: "Czech Republic",
+        currentlyAccepting: "Currently accepting new freelance projects and collaborations.",
+        name: "Name",
+        yourName: "Your name",
+        yourEmail: "your@email.com",
+        tellMeAbout: "Tell me about your project...",
+        messageSentSuccess: "Message sent successfully!",
+        getBackWithin: "I'll get back to you within 24 hours.",
+        failedToSend: "Failed to send message",
+        tryAgainOrContact: "Please try again or contact me directly.",
+        sending: "Sending...",
+        years: "Years",
+        projects: "Projects", 
+        clients: "Clients",
+        viewProject: "View Project",
+      },
     },
     cs: {
       nav: {
@@ -199,6 +220,30 @@ function App() {
         follow: "Sledujte mě",
         design: "Navrženo s péčí a důrazem na detail",
         backToTop: "Zpět nahoru",
+      },
+      common: {
+        statistics: "Statistiky",
+        techStack: "Technologie", 
+        available: "Dostupný pro projekty",
+        jobTitle: "Full Stack Vývojář",
+        location: "Lokace",
+        clickToSend: "Klikněte pro odeslání",
+        clickToCall: "Klikněte pro volání",
+        czechRepublic: "Česká republika",
+        currentlyAccepting: "V současné době přijímám nové freelance projekty a spolupráce.",
+        name: "Jméno",
+        yourName: "Vaše jméno",
+        yourEmail: "váš@email.cz",
+        tellMeAbout: "Napište mi o vašem projektu...",
+        messageSentSuccess: "Zpráva byla úspěšně odeslána!",
+        getBackWithin: "Ozvu se vám do 24 hodin.",
+        failedToSend: "Nepodařilo se odeslat zprávu",
+        tryAgainOrContact: "Zkuste to prosím znovu nebo mě kontaktujte přímo.",
+        sending: "Odesílání...",
+        years: "Let",
+        projects: "Projektů",
+        clients: "Klientů", 
+        viewProject: "Zobrazit projekt",
       },
     },
   };
@@ -695,16 +740,16 @@ function App() {
               <span className="text-2xl font-bold text-white">JF</span>
             </div>
             <h3 className="text-white font-medium text-xl mb-2">Jan Fiala</h3>
-            <p className="text-white/60 text-base mb-4">Full Stack Developer</p>
+            <p className="text-white/60 text-base mb-4">{t('common.jobTitle')}</p>
             <div className="flex items-center justify-center gap-2 mb-6">
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span className="text-white/60 text-sm">Available for projects</span>
+              <span className="text-white/60 text-sm">{t('common.available')}</span>
             </div>
             
             {/* Location */}
             <div className="flex items-center justify-center gap-2 text-white/50">
               <FiMapPin className="w-4 h-4" />
-              <span className="text-sm">Czech Republic</span>
+              <span className="text-sm">{t('common.czechRepublic')}</span>
             </div>
           </div>
         </motion.div>
@@ -716,12 +761,12 @@ function App() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <h4 className="text-white/40 text-xs uppercase tracking-[0.2em] mb-6 text-center">Statistics</h4>
+          <h4 className="text-white/40 text-xs uppercase tracking-[0.2em] mb-6 text-center">{t('common.statistics')}</h4>
           <div className="grid grid-cols-3 gap-4">
             {[
-              { value: 5, label: "Years" },
-              { value: 50, label: "Projects" },
-              { value: 30, label: "Clients" }
+              { value: 5, label: t('common.years') },
+              { value: 50, label: t('common.projects') },
+              { value: 30, label: t('common.clients') }
             ].map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-2xl font-light text-white mb-1">
@@ -751,7 +796,7 @@ function App() {
                 <div className="w-8 h-8 bg-white/10 rounded-xl flex items-center justify-center">
                   <span className="text-sm">⚡</span>
                 </div>
-                Tech Stack
+                {t('common.techStack')}
               </h4>
             </div>
             
@@ -1072,7 +1117,7 @@ function App() {
             </div>
             <h3 className="text-lg font-medium text-white mb-2">{t('contact.email')}</h3>
             <p className="text-white/60 text-sm mb-3">janfiala331@gmail.com</p>
-            <div className="text-xs text-white/40 uppercase tracking-wider">Click to send</div>
+            <div className="text-xs text-white/40 uppercase tracking-wider">{t('common.clickToSend')}</div>
           </div>
           <div className="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
         </motion.a>
@@ -1090,7 +1135,7 @@ function App() {
             </div>
             <h3 className="text-lg font-medium text-white mb-2">{t('contact.phone')}</h3>
             <p className="text-white/60 text-sm mb-3">+420 733 164 585</p>
-            <div className="text-xs text-white/40 uppercase tracking-wider">Click to call</div>
+            <div className="text-xs text-white/40 uppercase tracking-wider">{t('common.clickToCall')}</div>
           </div>
           <div className="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
         </motion.a>
@@ -1104,9 +1149,9 @@ function App() {
             <div className="w-16 h-16 bg-white text-black rounded-2xl flex items-center justify-center mb-4 group-hover:rotate-6 transition-transform duration-300">
               <FiMapPin className="w-7 h-7" />
             </div>
-            <h3 className="text-lg font-medium text-white mb-2">Location</h3>
+            <h3 className="text-lg font-medium text-white mb-2">{t('common.location')}</h3>
             <p className="text-white/60 text-sm mb-3">{t('contact.location')}</p>
-            <div className="text-xs text-white/40 uppercase tracking-wider">Czech Republic</div>
+            <div className="text-xs text-white/40 uppercase tracking-wider">{t('common.czechRepublic')}</div>
           </div>
           <div className="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
         </motion.div>
@@ -1171,10 +1216,10 @@ function App() {
             >
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
-                <span className="text-white font-medium">Available for projects</span>
+                <span className="text-white font-medium">{t('common.available')}</span>
               </div>
               <p className="text-white/60 text-sm">
-                Currently accepting new freelance projects and collaborations.
+                {t('common.currentlyAccepting')}
               </p>
             </motion.div>
           </div>
@@ -1257,7 +1302,7 @@ function App() {
               <div className="w-3 h-3 bg-green-400 rounded-full" />
               <div className="absolute inset-0 w-3 h-3 bg-green-400 rounded-full animate-ping opacity-30" />
             </div>
-            <span className="text-white/80 text-sm font-medium">Available for new projects</span>
+            <span className="text-white/80 text-sm font-medium">{t('common.available')}</span>
           </div>
         </div>
       </motion.div>
@@ -1320,7 +1365,7 @@ function App() {
           >
             <FiMail className="w-4 h-4 text-white/60 group-hover:text-white transition-colors" />
             <span className="text-white/60 group-hover:text-white text-sm font-medium transition-colors">
-              Email
+              {t('contact.email')}
             </span>
           </motion.a>
 
@@ -1332,7 +1377,7 @@ function App() {
           >
             <FiPhone className="w-4 h-4 text-white/60 group-hover:text-white transition-colors" />
             <span className="text-white/60 group-hover:text-white text-sm font-medium transition-colors">
-              Phone
+              {t('contact.phone')}
             </span>
           </motion.a>
 
@@ -1341,7 +1386,7 @@ function App() {
           >
             <FiMapPin className="w-4 h-4 text-white/60" />
             <span className="text-white/60 text-sm font-medium">
-              Czech Republic
+              {t('common.czechRepublic')}
             </span>
           </motion.div>
         </div>
@@ -1433,6 +1478,7 @@ function App() {
 }
 
 function ProjectCard({ project }) {
+  const { t } = useContext(LanguageContext);
   const { title, category, description, image, tech, url } = project;
 
   return (
@@ -1497,7 +1543,7 @@ function ProjectCard({ project }) {
             whileHover={{ x: 5 }}
             whileTap={{ scale: 0.98 }}
           >
-            <span>View Project</span>
+            <span>{t('common.viewProject')}</span>
             <HiOutlineArrowNarrowRight className="w-4 h-4 transition-transform duration-200 group-hover/link:translate-x-1" />
           </motion.a>
         </div>
@@ -1512,6 +1558,7 @@ function ProjectCard({ project }) {
 
 
 function ContactForm() {
+  const { t } = useContext(LanguageContext);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -1561,7 +1608,7 @@ function ContactForm() {
       {/* Name Field */}
       <div className="space-y-2">
         <label htmlFor="name" className="block text-sm font-medium text-white/70">
-          Name
+          {t('common.name')}
         </label>
         <input
           type="text"
@@ -1570,7 +1617,7 @@ function ContactForm() {
           value={formData.name}
           onChange={handleChange}
           className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:bg-white/10 transition-all duration-200"
-          placeholder="Your name"
+          placeholder={t('common.yourName')}
           required
         />
       </div>
@@ -1578,7 +1625,7 @@ function ContactForm() {
       {/* Email Field */}
       <div className="space-y-2">
         <label htmlFor="email" className="block text-sm font-medium text-white/70">
-          Email
+          {t('contact.email')}
         </label>
         <input
           type="email"
@@ -1587,7 +1634,7 @@ function ContactForm() {
           value={formData.email}
           onChange={handleChange}
           className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:bg-white/10 transition-all duration-200"
-          placeholder="your@email.com"
+          placeholder={t('common.yourEmail')}
           required
         />
       </div>
@@ -1595,7 +1642,7 @@ function ContactForm() {
       {/* Message Field */}
       <div className="space-y-2">
         <label htmlFor="message" className="block text-sm font-medium text-white/70">
-          Message
+          {t('contact.formMessage')}
         </label>
         <textarea
           id="message"
@@ -1604,7 +1651,7 @@ function ContactForm() {
           onChange={handleChange}
           rows="5"
           className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-white/40 focus:bg-white/10 transition-all duration-200 resize-none"
-          placeholder="Tell me about your project..."
+          placeholder={t('common.tellMeAbout')}
           required
         />
       </div>
@@ -1612,15 +1659,15 @@ function ContactForm() {
       {/* Status Messages */}
       {submitStatus === "success" && (
         <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-xl">
-          <p className="text-green-400 text-sm font-medium">Message sent successfully!</p>
-          <p className="text-white/60 text-xs mt-1">I'll get back to you within 24 hours.</p>
+          <p className="text-green-400 text-sm font-medium">{t('common.messageSentSuccess')}</p>
+          <p className="text-white/60 text-xs mt-1">{t('common.getBackWithin')}</p>
         </div>
       )}
 
       {submitStatus === "error" && (
         <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
-          <p className="text-red-400 text-sm font-medium">Failed to send message</p>
-          <p className="text-white/60 text-xs mt-1">Please try again or contact me directly.</p>
+          <p className="text-red-400 text-sm font-medium">{t('common.failedToSend')}</p>
+          <p className="text-white/60 text-xs mt-1">{t('common.tryAgainOrContact')}</p>
         </div>
       )}
 
@@ -1633,11 +1680,11 @@ function ContactForm() {
         {isSubmitting ? (
           <>
             <div className="w-5 h-5 border-2 border-black/20 border-t-black rounded-full animate-spin" />
-            <span>Sending...</span>
+            <span>{t('common.sending')}</span>
           </>
         ) : (
           <>
-            <span>Send Message</span>
+            <span>{t('contact.formButton')}</span>
             <HiOutlineArrowNarrowRight className="w-5 h-5" />
           </>
         )}
