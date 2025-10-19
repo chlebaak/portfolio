@@ -43,6 +43,7 @@ import project2Image from "./assets/image.png";
 import project1Image from "./assets/project1.png";
 import emailjs from "@emailjs/browser";
 import "./App.css";
+import pfp from "./assets/pfp.jpg";
 
 const LanguageContext = createContext();
 
@@ -736,8 +737,32 @@ function App() {
         >
           <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
           <div className="relative z-10">
-            <div className="w-24 h-24 bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center mb-6 mx-auto">
-              <span className="text-2xl font-bold text-white">JF</span>
+            <div className="relative w-40 h-40 mb-8 mx-auto group"> 
+              {/* Sleek gradient ring background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-white/10 to-transparent rounded-3xl blur-sm group-hover:blur-none transition-all duration-500" />
+              
+              {/* Modern profile image container with enhanced effects */}
+              <div className="relative w-full h-full rounded-3xl overflow-hidden border border-white/30 group-hover:border-white/50 transition-all duration-500 shadow-2xl group-hover:shadow-white/10">
+                <img 
+                  src={pfp}
+                  alt="Jan Fiala"
+                  className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 filter brightness-105"
+                />
+                {/* Sophisticated overlay gradients */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-white/5 opacity-60 group-hover:opacity-30 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </div>
+              
+              {/* Elegant status indicator with glow */}
+              <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-gradient-to-br from-green-400 to-green-500 rounded-full border-3 border-black shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <div className="w-3 h-3 bg-white rounded-full animate-pulse shadow-sm" />
+                {/* Subtle glow effect */}
+                <div className="absolute inset-0 bg-green-400 rounded-full animate-ping opacity-20" />
+              </div>
+              
+              {/* Floating accent elements */}
+              <div className="absolute -top-1 -left-1 w-4 h-4 border-l-2 border-t-2 border-white/20 rounded-tl-lg opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100" />
+              <div className="absolute -top-1 -right-1 w-4 h-4 border-r-2 border-t-2 border-white/20 rounded-tr-lg opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200" />
             </div>
             <h3 className="text-white font-medium text-xl mb-2">Jan Fiala</h3>
             <p className="text-white/60 text-base mb-4">{t('common.jobTitle')}</p>
@@ -756,7 +781,7 @@ function App() {
 
         {/* Stats Card */}
         <motion.div
-          className="bg-white/5 border border-white/10 rounded-3xl p-8 flex flex-col justify-center min-h-[200px]"
+          className="bg-white/5 border border-white/10 rounded-3xl p-4 flex flex-col justify-center min-h-[200px]"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
@@ -783,7 +808,7 @@ function App() {
 
         {/* Tech Stack Card */}
         <motion.div
-          className="lg:col-span-2 bg-white/5 border border-white/10 rounded-3xl p-10 flex flex-col justify-center min-h-[260px] relative overflow-hidden"
+          className="lg:col-span-2 bg-white/5 border border-white/10 rounded-3xl p-6 flex flex-col justify-center min-h-[260px] relative overflow-hidden"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
