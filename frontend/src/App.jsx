@@ -1583,15 +1583,73 @@ function ProjectCard({ project }) {
 
 
 function ContactForm() {
-  const { t } = useContext(LanguageContext);
+  const { t, language } = useContext(LanguageContext);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
+    website: "", // Honeypot field - should remain empty
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [cooldownRemaining, setCooldownRemaining] = useState(0);
   const formRef = useRef();
+  
+  // Anti-spam ochrana
+  const COOLDOWN_TIME = 60000; // 1 minuta v milisekundách
+  const MAX_ATTEMPTS = 3; // Maximum 3 pokusy za hodinu
+  const HOUR_MS = 60 * 60 * 1000; // 1 hodina v milisekundách
+
+  // Funkce pro kontrolu rate limitu
+  const checkRateLimit = () => {
+    const now = Date.now();
+    const attempts = JSON.parse(localStorage.getItem('emailAttempts') || '[]');
+    
+    // Vyčistit staré pokusy (starší než 1 hodina)
+    const recentAttempts = attempts.filter(timestamp => now - timestamp < HOUR_MS);
+    localStorage.setItem('emailAttempts', JSON.stringify(recentAttempts));
+    
+    // Kontrola počtu pokusů
+    if (recentAttempts.length >= MAX_ATTEMPTS) {
+      return false;
+    }
+    
+    // Kontrola cooldown periody
+    const lastAttempt = localStorage.getItem('lastEmailAttempt');
+    if (lastAttempt && now - parseInt(lastAttempt) < COOLDOWN_TIME) {
+      const remaining = COOLDOWN_TIME - (now - parseInt(lastAttempt));
+      setCooldownRemaining(Math.ceil(remaining / 1000));
+      return false;
+    }
+    
+    return true;
+  };
+
+  // Funkce pro zaznamenání pokusu
+  const recordAttempt = () => {
+    const now = Date.now();
+    const attempts = JSON.parse(localStorage.getItem('emailAttempts') || '[]');
+    attempts.push(now);
+    localStorage.setItem('emailAttempts', JSON.stringify(attempts));
+    localStorage.setItem('lastEmailAttempt', now.toString());
+  };
+
+  // Cooldown timer effect
+  useEffect(() => {
+    let interval;
+    if (cooldownRemaining > 0) {
+      interval = setInterval(() => {
+        setCooldownRemaining(prev => {
+          if (prev <= 1) {
+            clearInterval(interval);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [cooldownRemaining]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -1603,8 +1661,29 @@ function ContactForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Honeypot kontrola - pokud je vyplněné, je to bot
+    if (formData.website) {
+      console.log("Spam bot detected via honeypot");
+      setSubmitStatus("honeypot");
+      return;
+    }
+    
+    // Anti-spam kontrola
+    if (!checkRateLimit()) {
+      if (cooldownRemaining > 0) {
+        setSubmitStatus("cooldown");
+      } else {
+        setSubmitStatus("rateLimit");
+      }
+      return;
+    }
+    
     setIsSubmitting(true);
     setSubmitStatus(null);
+
+    // Zaznamenat pokus
+    recordAttempt();
 
     // EmailJS service integration
     emailjs
@@ -1616,7 +1695,7 @@ function ContactForm() {
       )
       .then(() => {
         setSubmitStatus("success");
-        setFormData({ name: "", email: "", message: "" });
+        setFormData({ name: "", email: "", message: "", website: "" });
       })
       .catch((error) => {
         console.error("Email send failed:", error);
@@ -1664,6 +1743,25 @@ function ContactForm() {
         />
       </div>
 
+      {/* Honeypot Field - Hidden from users, visible to bots */}
+      <input
+        type="text"
+        id="website"
+        name="website"
+        value={formData.website}
+        onChange={handleChange}
+        style={{ 
+          position: 'absolute',
+          left: '-9999px',
+          opacity: 0,
+          pointerEvents: 'none',
+          tabIndex: -1
+        }}
+        autoComplete="off"
+        placeholder="Leave this field empty"
+        aria-hidden="true"
+      />
+
       {/* Message Field */}
       <div className="space-y-2">
         <label htmlFor="message" className="block text-sm font-medium text-white/70">
@@ -1696,16 +1794,67 @@ function ContactForm() {
         </div>
       )}
 
+      {submitStatus === "cooldown" && (
+        <div className="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl">
+          <p className="text-yellow-400 text-sm font-medium">
+            {language === 'cs' ? 'Příliš rychlé odesílání' : 'Too fast sending'}
+          </p>
+          <p className="text-white/60 text-xs mt-1">
+            {language === 'cs' 
+              ? `Počkejte prosím ${cooldownRemaining} sekund před dalším pokusem.`
+              : `Please wait ${cooldownRemaining} seconds before trying again.`
+            }
+          </p>
+        </div>
+      )}
+
+      {submitStatus === "rateLimit" && (
+        <div className="p-4 bg-orange-500/10 border border-orange-500/20 rounded-xl">
+          <p className="text-orange-400 text-sm font-medium">
+            {language === 'cs' ? 'Příliš mnoho pokusů' : 'Too many attempts'}
+          </p>
+          <p className="text-white/60 text-xs mt-1">
+            {language === 'cs' 
+              ? 'Dosáhli jste maximálního počtu pokusů za hodinu. Zkuste to později.'
+              : 'You have reached the maximum number of attempts per hour. Please try again later.'
+            }
+          </p>
+        </div>
+      )}
+
+      {submitStatus === "honeypot" && (
+        <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
+          <p className="text-red-400 text-sm font-medium">
+            {language === 'cs' ? 'Podezřelá aktivita' : 'Suspicious activity'}
+          </p>
+          <p className="text-white/60 text-xs mt-1">
+            {language === 'cs' 
+              ? 'Vaše zpráva byla označena jako spam.'
+              : 'Your message has been flagged as spam.'
+            }
+          </p>
+        </div>
+      )}
+
       {/* Submit Button */}
       <button
         type="submit"
-        disabled={isSubmitting}
+        disabled={isSubmitting || cooldownRemaining > 0}
         className="w-full bg-white text-black py-4 px-6 rounded-xl font-medium text-lg hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-3"
       >
         {isSubmitting ? (
           <>
             <div className="w-5 h-5 border-2 border-black/20 border-t-black rounded-full animate-spin" />
             <span>{t('common.sending')}</span>
+          </>
+        ) : cooldownRemaining > 0 ? (
+          <>
+            <span>
+              {language === 'cs' 
+                ? `Počkejte ${cooldownRemaining}s` 
+                : `Wait ${cooldownRemaining}s`
+              }
+            </span>
           </>
         ) : (
           <>
