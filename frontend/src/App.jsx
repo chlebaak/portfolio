@@ -43,7 +43,7 @@ import project2Image from "./assets/image.png";
 import project1Image from "./assets/project1.png";
 import emailjs from "@emailjs/browser";
 import "./App.css";
-import pfp from "./assets/pfp.jpg";
+import pfp from "./assets/image0.jpg";
 
 const LanguageContext = createContext();
 
@@ -61,7 +61,7 @@ function App() {
         contact: "contact",
       },
       hero: {
-        badge: "Full stack developer",
+        badge: "Frontend developer",
         title1: "Web",
         title2: "Designer &",
         title3: "Developer",
@@ -87,11 +87,11 @@ function App() {
         title: "About Me",
         heading: "I'm a passionate developer based in Czech Republic",
         description:
-          "With over 5 years of experience in web development, I specialize in creating engaging digital experiences that connect brands with their audiences. My approach combines clean code with thoughtful design to deliver projects that exceed expectations.",
+          "With over 4 years of experience in web development, I specialize in creating engaging digital experiences that connect brands with their audiences. My approach combines clean code with thoughtful design to deliver projects that exceed expectations.",
         skills: "Skills",
         experience: "Experience",
         download: "Download CV",
-        badge: "5+ Years Experience",
+        badge: "4+ Years Experience",
       },
       contact: {
         subtitle: "Say Hello",
@@ -129,7 +129,7 @@ function App() {
         statistics: "Statistics",
         techStack: "Tech Stack",
         available: "Available for projects",
-        jobTitle: "Full Stack Developer",
+        jobTitle: "Frontend Developer",
         location: "Location",
         clickToSend: "Click to send",
         clickToCall: "Click to call",
@@ -158,7 +158,7 @@ function App() {
         contact: "KONTAKT",
       },
       hero: {
-        badge: "Full stack vývojář",
+        badge: "Frontend vývojář",
         title1: "Webový",
         title2: "Designér &",
         title3: "Vývojář",
@@ -184,11 +184,11 @@ function App() {
         title: "O mně",
         heading: "Jsem vášnivý vývojář z České republiky",
         description:
-          "S více než 5 lety zkušeností ve vývoji webových aplikací se specializuji na vytváření poutavých digitálních zážitků, které propojují značky s jejich publikem. Můj přístup kombinuje čistý kód s promyšleným designem, abych dodal projekty překonávající očekávání.",
+          "S více než 4 lety zkušeností ve vývoji webových aplikací se specializuji na vytváření poutavých digitálních zážitků, které propojují značky s jejich publikem. Můj přístup kombinuje čistý kód s promyšleným designem, abych dodal projekty překonávající očekávání.",
         skills: "Dovednosti",
         experience: "Zkušenosti",
         download: "Stáhnout CV",
-        badge: "5+ let zkušeností",
+        badge: "4+ let zkušeností",
       },
       contact: {
         subtitle: "Řekněte ahoj",
@@ -226,7 +226,7 @@ function App() {
         statistics: "Statistiky",
         techStack: "Technologie", 
         available: "Dostupný pro projekty",
-        jobTitle: "Full Stack Vývojář",
+        jobTitle: "Frontend Vývojář",
         location: "Lokace",
         clickToSend: "Klikněte pro odeslání",
         clickToCall: "Klikněte pro volání",
@@ -789,9 +789,9 @@ function App() {
           <h4 className="text-white/40 text-xs uppercase tracking-[0.2em] mb-6 text-center">{t('common.statistics')}</h4>
           <div className="grid grid-cols-3 gap-4">
             {[
-              { value: 5, label: t('common.years') },
-              { value: 50, label: t('common.projects') },
-              { value: 30, label: t('common.clients') }
+              { value: 4, label: t('common.years') },
+              { value: 20, label: t('common.projects') },
+              { value: 5, label: t('common.clients') }
             ].map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-2xl font-light text-white mb-1">
@@ -819,14 +819,14 @@ function App() {
             <div className="flex items-center justify-between mb-8">
               <h4 className="text-white font-medium text-xl flex items-center gap-3">
                 <div className="w-8 h-8 bg-white/10 rounded-xl flex items-center justify-center">
-                  <span className="text-sm">⚡</span>
+                  <span className="text-sm">⚡</span>       
                 </div>
                 {t('common.techStack')}
               </h4>
             </div>
             
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              {['React/Next.js', 'Node.js', 'JavaScript', 'PostgreSQL/SQL', 'Tailwind CSS', 'C#/.NET', "Figma", "Git", "PHP", "UI/UX", ].map((tech, index) => (
+              {['React', 'Next.js', 'HTML', 'CSS', 'Tailwind CSS', 'Node.js', 'JavaScript', 'Typescript', 'PostgreSQL ', 'SQL', 'C#', '.NET', "Figma", "Git", "PHP", "UI/UX", ].map((tech, index) => (
                 <motion.div
                   key={tech}
                   className="bg-white/8 border border-white/10 rounded-2xl p-4 text-center hover:bg-white/12 hover:border-white/20 transition-all duration-300"
@@ -1007,9 +1007,7 @@ function App() {
             <div className="text-center md:text-left">
               <div className="inline-flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 bg-white text-black rounded-xl flex items-center justify-center">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+                  <span className="text-lg">💻</span>
                 </div>
                 <h4 className="text-2xl font-medium text-white">{t('about.skills')}</h4>
               </div>
@@ -1038,9 +1036,7 @@ function App() {
             <div className="text-center md:text-left">
               <div className="inline-flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 bg-white text-black rounded-xl flex items-center justify-center">
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" />
-                  </svg>
+                  <span className="text-lg">💼</span>
                 </div>
                 <h4 className="text-2xl font-medium text-white">{t('about.experience')}</h4>
               </div>
@@ -1214,7 +1210,7 @@ function App() {
               <div className="flex gap-4">
                 {[
                   { Icon: FiGithub, href: "https://github.com/chlebaak", label: "GitHub" },
-                  { Icon: FiLinkedin, href: "#", label: "LinkedIn" },
+                  { Icon: FiLinkedin, href: "https://www.linkedin.com/in/janfiala331/", label: "LinkedIn" },
                   { Icon: FiInstagram, href: "#", label: "Instagram" }
                 ].map((social) => (
                   <motion.a
@@ -1424,7 +1420,7 @@ function App() {
           <div className="flex gap-3">
             {[
               { Icon: FiGithub, href: "https://github.com/chlebaak", label: "GitHub" },
-              { Icon: FiLinkedin, href: "#", label: "LinkedIn" },
+              { Icon: FiLinkedin, href: "https://www.linkedin.com/in/janfiala331/", label: "LinkedIn" },
               { Icon: FiInstagram, href: "https://www.instagram.com/honzafiala_/", label: "Instagram" }
             ].map((social) => (
               <motion.a
