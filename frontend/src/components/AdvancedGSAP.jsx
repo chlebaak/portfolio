@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
+import logoVector from '../assets/logo_vector.png'
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
 
@@ -421,9 +422,9 @@ export const GSAPLoadingScreen = () => {
   }, [])
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center overflow-hidden z-50">
+    <div className="fixed inset-0 flex items-center justify-center overflow-hidden z-50" style={{ background: 'linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%)' }}>
       {/* Background gradient effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5 animate-pulse"></div>
+      <div className="absolute inset-0 opacity-20" style={{ background: 'radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1), rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1))' }}></div>
       
       {/* Main content */}
       <div className="relative flex flex-col items-center gap-12">
@@ -434,9 +435,9 @@ export const GSAPLoadingScreen = () => {
           <div className="loading-circle absolute -inset-8 border-2 border-transparent border-t-white/40 border-r-white/20 rounded-full"></div>
           
           {/* Logo */}
-          <div className="loading-logo relative w-32 h-32 rounded-2xl overflow-hidden backdrop-blur-xl bg-white/5 border border-white/10 flex items-center justify-center shadow-2xl">
+          <div className="loading-logo relative w-32 h-32 rounded-2xl overflow-hidden border border-white/10 flex items-center justify-center shadow-2xl" style={{ background: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(10px)' }}>
             <img 
-              src="/src/assets/logo_vector.png" 
+              src={logoVector} 
               alt="Logo" 
               className="w-24 h-24 object-contain"
             />
