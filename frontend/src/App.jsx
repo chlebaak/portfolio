@@ -38,7 +38,7 @@ import {
   GSAPAnimationProvider, 
   GSAPTimeline 
 } from "./components/GSAPAnimations";
-import logo from "./assets/JF.png";
+import logo from "./assets/logo_vector.png";
 import project2Image from "./assets/image.png";
 import project1Image from "./assets/project1.png";
 import emailjs from "@emailjs/browser";
