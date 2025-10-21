@@ -483,7 +483,7 @@ function App() {
         <div className="flex items-center space-x-2">
           {[
             { icon: <FiGithub />, href: "https://github.com/chlebaak" },
-            { icon: <FiLinkedin />, href: "#" }
+            { icon: <FiLinkedin />, href: "https://www.linkedin.com/in/janfiala331/" }
           ].map((social, index) => (
             <motion.a
               key={index}
@@ -616,7 +616,7 @@ function App() {
             </motion.a>
            
             <motion.a
-              href="#"
+              href="https://www.linkedin.com/in/janfiala331/"
               className="text-gray-400 hover:text-white transition-colors duration-200"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
