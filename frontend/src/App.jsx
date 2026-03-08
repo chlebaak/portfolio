@@ -41,6 +41,7 @@ import {
 import logo from "./assets/logo_vector.png";
 import project2Image from "./assets/image.png";
 import project1Image from "./assets/project1.png";
+import project3Image from "./assets/project3.png"; 
 import emailjs from "@emailjs/browser";
 import "./App.css";
 import pfp from "./assets/image0.jpg";
@@ -368,6 +369,23 @@ function App() {
         "Figma",
       ],
       url: "https://refugio-ruddy.vercel.app",
+    },
+    {
+      id: 3,
+      title: "AI Stock Analyst & portfolio manager",
+      category: "Full stack",
+      description:
+        "Aplikace pro analýzu jednotlivých akcií a stavbu portfolia za pomoci umělé inteligence Google Gemini. Využívá Yahoo Finance API pro aktuální data na trhu.",
+      image: project3Image,
+      tech: [
+        "Next.js",
+        "React",
+        "Tailwind CSS",
+        "Google Gemini AI",
+        "Yahoo Finance API",
+        "Recharts",
+      ],
+      url: "https://trading-six-ecru.vercel.app/",
     },
   ];
 
