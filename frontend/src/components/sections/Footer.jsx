@@ -9,7 +9,7 @@ export default function Footer({ scrollToSection, refs }) {
   return (
     <footer className="relative overflow-hidden">
       {/* Innovative Top Border Design */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(128,0,32,0.4)] to-transparent" />
 
       <div className="container mx-auto px-6 lg:px-8 relative z-10 w-full max-w-7xl">
         <div className="pt-24 pb-16 grid grid-cols-1 lg:grid-cols-4 gap-16 lg:gap-12">
@@ -39,7 +39,7 @@ export default function Footer({ scrollToSection, refs }) {
               </p>
 
               <div className="inline-flex items-center gap-3 px-5 py-3 glass-panel rounded-full border border-white/5">
-                <div className="w-2 h-2 bg-white rounded-full animate-pulse shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
+                <div className="w-2 h-2 bg-[#800020] rounded-full animate-pulse shadow-[0_0_10px_rgba(128,0,32,0.8)]" />
                 <span className="text-white/70 text-xs font-semibold tracking-widest uppercase">{t('common.available')}</span>
               </div>
             </div>
@@ -154,7 +154,7 @@ export default function Footer({ scrollToSection, refs }) {
               
               <motion.button
                 onClick={() => scrollToSection(homeRef)}
-                className="group flex items-center gap-3 px-5 py-2.5 bg-white text-black rounded-full hover:bg-neutral-200 transition-colors duration-300"
+                className="group flex items-center gap-3 px-5 py-2.5 bg-[#800020] text-white rounded-full hover:bg-[#9a1535] transition-colors duration-300 shadow-[0_0_15px_rgba(128,0,32,0.2)]"
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >

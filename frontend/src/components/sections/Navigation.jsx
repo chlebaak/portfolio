@@ -70,7 +70,7 @@ export default function Navigation({
                   {item.name}
                   {activeSection === item.name.toLowerCase() && (
                     <motion.div 
-                      className="absolute -bottom-3 left-0 right-0 h-px bg-white"
+                      className="absolute -bottom-3 left-0 right-0 h-px bg-[#800020]"
                       layoutId="underline"
                       initial={false}
                       transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}

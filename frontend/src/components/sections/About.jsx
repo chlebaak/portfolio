@@ -24,7 +24,7 @@ export default function About({ sectionRef }) {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extralight text-white mb-6">
             {t('about.title')}
           </h2>
-          <div className="w-24 h-px bg-white/10 mx-auto" />
+          <div className="w-24 h-px bg-[rgba(128,0,32,0.4)] mx-auto" />
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
@@ -37,7 +37,7 @@ export default function About({ sectionRef }) {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <div className="glass-panel text-white px-6 py-2 rounded-full text-xs font-semibold tracking-widest uppercase border border-white/20">
+              <div className="glass-panel text-white px-6 py-2 rounded-full text-xs font-semibold tracking-widest uppercase border border-[rgba(128,0,32,0.4)] shadow-[0_0_15px_rgba(128,0,32,0.1)]">
                 {t('about.badge')}
               </div>
             </motion.div>
@@ -107,7 +107,7 @@ export default function About({ sectionRef }) {
             </div>
             
             <div className="mt-12 w-full">
-              <MagneticButton className="magnetic-button w-full group inline-flex items-center justify-center gap-3 bg-white text-black px-8 py-5 rounded-xl font-semibold transition-all duration-300 hover:bg-neutral-200">
+              <MagneticButton className="magnetic-button w-full group inline-flex items-center justify-center gap-3 bg-[#800020] text-white px-8 py-5 rounded-xl font-semibold transition-all duration-300 hover:bg-[#9a1535] shadow-[0_0_20px_rgba(128,0,32,0.3)]">
                 <span className="text-sm tracking-widest uppercase">{t('about.download')}</span>
                 <HiOutlineArrowNarrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
               </MagneticButton>

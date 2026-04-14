@@ -26,7 +26,7 @@ export default function Hero({ sectionRef, projectsRef, contactRef, scrollToSect
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.3 }}
                 >
-                  <span className="glass-panel text-white text-xs font-semibold uppercase tracking-[0.2em] px-4 py-2 rounded-full border border-white/20">
+                  <span className="glass-panel text-white text-xs font-semibold uppercase tracking-[0.2em] px-4 py-2 rounded-full border border-[rgba(128,0,32,0.4)] shadow-[0_0_15px_rgba(128,0,32,0.1)]">
                     {t('hero.badge')}
                   </span>
                 </motion.div>
@@ -59,7 +59,7 @@ export default function Hero({ sectionRef, projectsRef, contactRef, scrollToSect
                   transition={{ duration: 0.6, delay: 0.8 }}
                 >
                   <MagneticButton
-                    className="magnetic-button group px-8 py-4 bg-white text-black rounded-2xl font-semibold flex items-center justify-center gap-2 hover:bg-neutral-200 transition-all duration-300"
+                    className="magnetic-button group px-8 py-4 bg-[#800020] text-white rounded-2xl font-semibold flex items-center justify-center gap-2 hover:bg-[#9a1535] transition-all duration-300 shadow-[0_0_20px_rgba(128,0,32,0.3)]"
                     onClick={() => scrollToSection(projectsRef)}
                   >
                     {t('hero.cta1')}
@@ -89,16 +89,16 @@ export default function Hero({ sectionRef, projectsRef, contactRef, scrollToSect
                 </div>
                 
                 {/* Elegant status indicator */}
-                <div className="absolute bottom-2 right-2 w-6 h-6 bg-black rounded-full flex items-center justify-center border border-white/20">
-                  <div className="w-2.5 h-2.5 bg-white rounded-full animate-pulse shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
+                <div className="absolute bottom-2 right-2 w-6 h-6 bg-black rounded-full flex items-center justify-center border border-[rgba(128,0,32,0.4)]">
+                  <div className="w-2.5 h-2.5 bg-[#800020] rounded-full animate-pulse shadow-[0_0_10px_rgba(128,0,32,0.8)]" />
                 </div>
               </div>
               
               <h3 className="text-white font-medium text-2xl tracking-wide mb-1">Jan Fiala</h3>
               <p className="text-white/40 text-sm tracking-widest uppercase mb-6">{t('common.jobTitle')}</p>
               
-              <div className="flex items-center justify-center gap-2 mb-6 glass-panel px-4 py-2 rounded-full">
-                <div className="w-2 h-2 bg-white rounded-full animate-pulse blur-[1px]" />
+              <div className="flex items-center justify-center gap-2 mb-6 glass-panel px-4 py-2 rounded-full border border-[rgba(128,0,32,0.3)]">
+                <div className="w-2 h-2 bg-[#800020] rounded-full animate-pulse" />
                 <span className="text-white/70 text-xs font-semibold tracking-wider uppercase">{t('common.available')}</span>
               </div>
               
@@ -171,7 +171,7 @@ export default function Hero({ sectionRef, projectsRef, contactRef, scrollToSect
             <div className="flex flex-col items-center">
               <div className="w-0.5 h-12 glass-panel relative overflow-hidden rounded-full">
                 <motion.div
-                  className="w-full h-1/2 bg-white absolute top-0"
+                  className="w-full h-1/2 bg-[#800020] absolute top-0"
                   animate={{ y: [0, 48, 0] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 />

@@ -48,7 +48,7 @@ function ProjectCard({ project, index }) {
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
     >
-      <div className="relative glass-card overflow-hidden transition-all duration-500 hover:border-white/30 hover:-translate-y-2">
+      <div className="relative glass-card overflow-hidden transition-all duration-500 hover:border-[rgba(128,0,32,0.3)] hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(128,0,32,0.06)]">
         <div className="aspect-[4/3] relative overflow-hidden bg-black/50">
           <img
             src={image}
@@ -58,7 +58,7 @@ function ProjectCard({ project, index }) {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent opacity-80" />
           
-          <div className="absolute top-4 left-4 border border-white/20 px-3 py-1 bg-black/40 backdrop-blur-md text-white text-[10px] uppercase font-bold tracking-widest rounded-full">
+          <div className="absolute top-4 left-4 border border-[rgba(128,0,32,0.5)] px-3 py-1 bg-[rgba(128,0,32,0.15)] backdrop-blur-md text-white text-[10px] uppercase font-bold tracking-widest rounded-full">
             {category}
           </div>
         </div>
@@ -88,7 +88,7 @@ function ProjectCard({ project, index }) {
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-white hover:text-white text-xs tracking-widest uppercase font-semibold transition-colors duration-300 group/link"
+            className="inline-flex items-center gap-2 text-[#a63050] hover:text-[#c04565] text-xs tracking-widest uppercase font-semibold transition-colors duration-300 group/link"
             whileHover={{ x: 5 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -120,7 +120,7 @@ export default function Projects({ sectionRef }) {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extralight text-white mb-6">
             {t('projects.title')}
           </h2>
-          <div className="w-24 h-px bg-white/10 mx-auto" />
+          <div className="w-24 h-px bg-[rgba(128,0,32,0.4)] mx-auto" />
         </motion.div>
 
         <GSAPTimeline className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">

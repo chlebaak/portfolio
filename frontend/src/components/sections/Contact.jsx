@@ -186,7 +186,7 @@ function ContactForm() {
       <button
         type="submit"
         disabled={isSubmitting || cooldownRemaining > 0}
-        className="w-full bg-white text-black py-4 px-6 rounded-xl font-medium text-sm tracking-widest uppercase hover:bg-neutral-200 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+        className="w-full bg-[#800020] text-white py-4 px-6 rounded-xl font-medium text-sm tracking-widest uppercase hover:bg-[#9a1535] focus:outline-none focus:ring-2 focus:ring-[rgba(128,0,32,0.5)] transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(128,0,32,0.2)]"
       >
         {isSubmitting ? (
           <>
@@ -225,7 +225,7 @@ export default function Contact({ sectionRef }) {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extralight text-white mb-6">
             {t('contact.title')}
           </h2>
-          <div className="w-24 h-px bg-white/10 mx-auto" />
+          <div className="w-24 h-px bg-[rgba(128,0,32,0.4)] mx-auto" />
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
@@ -302,7 +302,7 @@ export default function Contact({ sectionRef }) {
 
             <GlassCard delay={0.4} className="p-6">
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-3 h-3 bg-white rounded-full animate-pulse shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
+                <div className="w-3 h-3 bg-[#800020] rounded-full animate-pulse shadow-[0_0_10px_rgba(128,0,32,0.8)]" />
                 <span className="text-white font-semibold tracking-widest uppercase text-xs">{t('common.available')}</span>
               </div>
               <p className="text-white/50 text-sm font-light">
