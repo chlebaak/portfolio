@@ -1,16 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import "tailwindcss";
 
 body {
   font-family: 'Manrope', sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+  background-color: #050505;
+  color: #ededed;
+  overflow-x: hidden;
 }
 
 /* Headers with Manrope font */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Manrope', sans-serif;
-  font-optical-sizing: auto;
   font-weight: 300;
   letter-spacing: -0.02em;
 }
@@ -32,90 +35,53 @@ h3 {
 
 /* Paragraphs with improved typography */
 p {
-  font-family: 'Manrope', sans-serif;
-  font-optical-sizing: auto;
   font-weight: 400;
   line-height: 1.6;
   letter-spacing: -0.01em;
 }
 
-/* Button text */
-button {
-  font-family: 'Manrope', sans-serif;
-  font-optical-sizing: auto;
-}
-
-/* Navigation text */
-nav {
-  font-family: 'Manrope', sans-serif;
-  font-optical-sizing: auto;
-}
-
-
+/* Glassmorphism Utilities */
 @layer utilities {
-  .delay-75 {
-    animation-delay: 75ms;
-  }
-  .delay-100 {
-    animation-delay: 100ms;
-  }
-  .delay-150 {
-    animation-delay: 150ms;
-  }
-  .delay-200 {
-    animation-delay: 200ms;
-  }
-  .delay-300 {
-    animation-delay: 300ms;
+  .glass-card {
+    @apply bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-3xl shadow-2xl;
   }
   
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .animate-fadeIn {
-    animation: fadeIn 0.6s ease-out forwards;
-  }
-  
-  .animate-fadeInDelay {
-    animation: fadeIn 0.6s ease-out 0.3s forwards;
-    opacity: 0;
+  .glass-panel {
+    @apply bg-neutral-900/60 backdrop-blur-xl border border-white/5 shadow-inner;
   }
 
-  /* Custom Cursor Styles */
-  body {
-    cursor: none !important;
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-white via-white/80 to-white/40;
   }
   
-  * {
+  /* Aurora Glow Effect (Monochromatic) */
+  .aurora-glow {
+    position: absolute;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: blur(80px);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Custom Cursor */
+  body, * {
     cursor: none !important;
   }
 
   .custom-cursor {
     backdrop-filter: blur(2px);
+    mix-blend-mode: difference;
   }
 
   .custom-cursor.cursor-hover {
-    background: rgba(255, 255, 255, 0.9);
-    border-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
-  }
-
-  .custom-cursor.cursor-magnetic {
-    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-    border-color: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 0 30px rgba(255, 107, 107, 0.4);
-  }
-
-  /* Skryjeme default cursor na všech elementech */
-  button, a, [role="button"], input, textarea, select {
-    cursor: none !important;
+    background: rgba(255, 255, 255, 1);
+    border-color: rgba(255, 255, 255, 1);
+    mix-blend-mode: difference;
+    transform: scale(1.5);
   }
 }
