@@ -51,9 +51,9 @@ function ProjectCard({ project, index }) {
     if (!el) return;
 
     const animation = gsap.fromTo(el, 
-      { yPercent: -8 },
+      { yPercent: -3 },
       {
-        yPercent: 8,
+        yPercent: 3,
         ease: 'none',
         scrollTrigger: {
           trigger: el.parentElement,
@@ -91,7 +91,7 @@ function ProjectCard({ project, index }) {
             ref={imageRef}
             src={image}
             alt={title}
-            className="w-full h-[120%] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] will-change-transform"
+            className="w-full h-[100%] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] will-change-transform"
             style={{ objectPosition: 'center top' }}
             loading="lazy"
           />

@@ -9,12 +9,12 @@ export default function Footer({ scrollToSection, refs }) {
   return (
     <footer className="relative px-6 lg:px-10 pb-6">
       {/* Divider */}
-      <div className="max-w-7xl mx-auto h-px bg-[#4a4640]/30" />
+      <div className="max-w-7xl mx-auto h-px bg-dim/30" />
 
       {/* Tagline — big serif italic */}
       <div className="max-w-7xl mx-auto py-16 lg:py-24">
         <motion.p
-          className="text-3xl sm:text-4xl lg:text-5xl font-serif italic text-[#f0ece2]/10 leading-snug max-w-3xl"
+          className="text-3xl sm:text-4xl lg:text-5xl font-serif italic text-fg/10 leading-snug max-w-3xl"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -25,7 +25,7 @@ export default function Footer({ scrollToSection, refs }) {
       </div>
 
       {/* Bottom bar */}
-      <div className="max-w-7xl mx-auto h-px bg-[#4a4640]/20 mb-6" />
+      <div className="max-w-7xl mx-auto h-px bg-dim/20 mb-6" />
 
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -34,15 +34,15 @@ export default function Footer({ scrollToSection, refs }) {
           <div className="flex items-center gap-4">
             <button
               onClick={() => scrollToSection(homeRef)}
-              className="text-[#f0ece2] text-sm font-semibold tracking-wider uppercase hover:text-[#e8562a] transition-colors duration-300"
+              className="text-fg text-sm font-semibold tracking-wider uppercase hover:text-accent transition-colors duration-300"
             >
               JF
             </button>
-            <span className="text-[#4a4640] text-[11px]">
+            <span className="text-dim text-[11px]">
               © {new Date().getFullYear()} Jan Fiala
             </span>
-            <span className="text-[#4a4640]/40 text-[11px] hidden sm:inline">—</span>
-            <span className="text-[#4a4640] text-[11px] hidden sm:inline">
+            <span className="text-dim/50 text-[11px] hidden sm:inline">—</span>
+            <span className="text-dim text-[11px] hidden sm:inline">
               {t('footer.rights')}
             </span>
           </div>
@@ -50,17 +50,17 @@ export default function Footer({ scrollToSection, refs }) {
           {/* Right */}
           <div className="flex items-center gap-5">
             <div className="flex items-center gap-3">
-              <a href="https://github.com/chlebaak" target="_blank" rel="noopener noreferrer" className="text-[#8a8578] hover:text-[#e8562a] transition-colors duration-300">
+              <a href="https://github.com/chlebaak" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-accent transition-colors duration-300">
                 <FiGithub className="w-4 h-4" />
               </a>
-              <a href="https://www.linkedin.com/in/janfiala331/" target="_blank" rel="noopener noreferrer" className="text-[#8a8578] hover:text-[#e8562a] transition-colors duration-300">
+              <a href="https://www.linkedin.com/in/janfiala331/" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-accent transition-colors duration-300">
                 <FiLinkedin className="w-4 h-4" />
               </a>
             </div>
 
             <motion.button
               onClick={() => scrollToSection(homeRef)}
-              className="text-[#8a8578] hover:text-[#e8562a] transition-colors duration-300 flex items-center gap-2"
+              className="text-muted hover:text-accent transition-colors duration-300 flex items-center gap-2"
               whileHover={{ y: -2 }}
             >
               <span className="text-[10px] font-semibold tracking-wider uppercase">{t('footer.backToTop')}</span>
