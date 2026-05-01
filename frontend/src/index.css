@@ -1,85 +1,145 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import "tailwindcss";
 
+/* ─── Design Tokens — "Warm Noir" ─── */
 :root {
-  /* Accent: Deep Crimson */
-  --accent: 128, 0, 32;
-  --accent-hex: #800020;
-  --accent-light: 160, 20, 50;
+  --bg: #0a0a0a;
+  --bg-elevated: #141414;
+  --fg: #f0ece2;
+  --fg-muted: #8a8578;
+  --fg-dim: #4a4640;
+  --accent: #e8562a;
+  --accent-glow: rgba(232, 86, 42, 0.15);
+  --radius: 0.5rem;
+}
+
+/* ─── Base ─── */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
-  font-style: normal;
-  background-color: #050505;
-  color: #ededed;
+  background-color: var(--bg);
+  color: var(--fg);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Headers with Manrope font */
+/* ─── Typography ─── */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Manrope', sans-serif;
-  font-weight: 300;
-  letter-spacing: -0.02em;
-}
-
-h1 {
-  font-weight: 200;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
   letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--fg);
 }
 
-h2 {
-  font-weight: 300;
-  letter-spacing: -0.025em;
+h1 { font-weight: 700; letter-spacing: -0.04em; line-height: 1; }
+h2 { font-weight: 600; letter-spacing: -0.03em; }
+
+.font-serif {
+  font-family: 'Instrument Serif', Georgia, serif;
 }
 
-h3 {
-  font-weight: 400;
-  letter-spacing: -0.02em;
-}
-
-/* Paragraphs with improved typography */
 p {
   font-weight: 400;
-  line-height: 1.6;
-  letter-spacing: -0.01em;
+  line-height: 1.7;
+  letter-spacing: -0.005em;
+  color: var(--fg-muted);
 }
 
-/* Glassmorphism Utilities */
+::selection {
+  background: var(--accent);
+  color: var(--fg);
+}
+
+/* ─── Typography Scale ─── */
 @layer utilities {
-  .glass-card {
-    @apply bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-3xl shadow-2xl;
-  }
-  
-  .glass-panel {
-    @apply bg-neutral-900/60 backdrop-blur-xl border border-white/5 shadow-inner;
-  }
-
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-br from-white via-white/80 to-white/40;
+  .display-xl {
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
   }
 
-  /* Accent text gradient */
-  .text-accent {
-    color: var(--accent-hex);
+  .display-lg {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1;
   }
 
-  /* Custom Cursor */
-  body, * {
-    cursor: none !important;
+  .display-md {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
   }
 
-  .custom-cursor {
-    backdrop-filter: blur(2px);
-    mix-blend-mode: difference;
+  .label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--fg-dim);
   }
+}
 
-  .custom-cursor.cursor-hover {
-    background: rgba(255, 255, 255, 1);
-    border-color: rgba(255, 255, 255, 1);
-    mix-blend-mode: difference;
-    transform: scale(1.5);
+/* ─── Custom Cursor ─── */
+@media (pointer: fine) {
+  body, * { cursor: none !important; }
+}
+
+.custom-cursor {
+  mix-blend-mode: difference;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.custom-cursor.cursor-hover {
+  background: var(--accent) !important;
+  transform: translate(-50%, -50%) scale(2.5);
+  mix-blend-mode: normal;
+}
+
+/* ─── Animated Horizontal Line ─── */
+.section-line {
+  height: 1px;
+  background: var(--fg-dim);
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+/* ─── Noise Texture Overlay ─── */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ─── Scroll Progress ─── */
+.scroll-progress {
+  background: var(--accent);
+}
+
+/* ─── Form Inputs ─── */
+input, textarea, select {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

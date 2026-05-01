@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { FiMail, FiPhone, FiMapPin, FiGithub, FiLinkedin, FiInstagram } from 'react-icons/fi';
+import { FiMail, FiPhone, FiMapPin, FiGithub, FiLinkedin } from 'react-icons/fi';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import emailjs from '@emailjs/browser';
 import { useLanguage } from '../../context/LanguageContext';
-import { RevealUp } from '../AdvancedGSAP';
-import GlassCard from '../GlassCard';
+import { AnimatedLine, MagneticButton } from '../GSAPComponents';
 
 function ContactForm() {
   const { t, language } = useLanguage();
@@ -13,7 +12,7 @@ function ContactForm() {
     name: "",
     email: "",
     message: "",
-    website: "", // Honeypot field
+    website: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
@@ -100,40 +99,41 @@ function ContactForm() {
       .finally(() => setIsSubmitting(false));
   };
 
+  const inputClasses = "w-full bg-transparent border-b border-[#4a4640]/50 px-0 py-4 text-[#f0ece2] text-sm placeholder-[#4a4640] focus:outline-none focus:border-[#e8562a] transition-colors duration-300";
+
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
-      <div className="space-y-2">
-        <label htmlFor="name" className="block text-xs font-semibold text-white/50 tracking-widest uppercase">
-          {t('common.name')}
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-white/40 focus:bg-white/10 transition-all duration-300 backdrop-blur-sm"
-          placeholder={t('common.yourName')}
-          required
-        />
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <div>
+          <label htmlFor="name" className="label block mb-2">{t('common.name')}</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            className={inputClasses}
+            placeholder={t('common.yourName')}
+            required
+          />
+        </div>
+
+        <div>
+          <label htmlFor="email" className="label block mb-2">{t('contact.email')}</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className={inputClasses}
+            placeholder={t('common.yourEmail')}
+            required
+          />
+        </div>
       </div>
 
-      <div className="space-y-2">
-        <label htmlFor="email" className="block text-xs font-semibold text-white/50 tracking-widest uppercase">
-          {t('contact.email')}
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-white/40 focus:bg-white/10 transition-all duration-300 backdrop-blur-sm"
-          placeholder={t('common.yourEmail')}
-          required
-        />
-      </div>
-
+      {/* Honeypot */}
       <input
         type="text"
         id="website"
@@ -145,52 +145,50 @@ function ContactForm() {
         aria-hidden="true"
       />
 
-      <div className="space-y-2">
-        <label htmlFor="message" className="block text-xs font-semibold text-white/50 tracking-widest uppercase">
-          {t('contact.formMessage')}
-        </label>
+      <div>
+        <label htmlFor="message" className="label block mb-2">{t('contact.formMessage')}</label>
         <textarea
           id="message"
           name="message"
           value={formData.message}
           onChange={handleChange}
           rows="5"
-          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-white/40 focus:bg-white/10 transition-all duration-300 resize-none backdrop-blur-sm"
+          className={`${inputClasses} resize-none`}
           placeholder={t('common.tellMeAbout')}
           required
         />
       </div>
 
       {submitStatus === "success" && (
-        <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-xl backdrop-blur-md">
+        <div className="py-4 border-l-2 border-green-500 pl-4">
           <p className="text-green-400 text-sm font-medium">{t('common.messageSentSuccess')}</p>
-          <p className="text-white/60 text-xs mt-1">{t('common.getBackWithin')}</p>
+          <p className="text-[#8a8578] text-xs mt-1">{t('common.getBackWithin')}</p>
         </div>
       )}
 
       {submitStatus === "error" && (
-        <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl backdrop-blur-md">
+        <div className="py-4 border-l-2 border-red-500 pl-4">
           <p className="text-red-400 text-sm font-medium">{t('common.failedToSend')}</p>
-          <p className="text-white/60 text-xs mt-1">{t('common.tryAgainOrContact')}</p>
+          <p className="text-[#8a8578] text-xs mt-1">{t('common.tryAgainOrContact')}</p>
         </div>
       )}
 
       {submitStatus === "cooldown" && (
-        <div className="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl">
+        <div className="py-4 border-l-2 border-yellow-500 pl-4">
           <p className="text-yellow-400 text-sm font-medium">
              {language === 'cs' ? 'Příliš rychlé odesílání' : 'Too fast sending'}
           </p>
         </div>
       )}
 
-      <button
+      <MagneticButton
         type="submit"
         disabled={isSubmitting || cooldownRemaining > 0}
-        className="w-full bg-[#800020] text-white py-4 px-6 rounded-xl font-medium text-sm tracking-widest uppercase hover:bg-[#9a1535] focus:outline-none focus:ring-2 focus:ring-[rgba(128,0,32,0.5)] transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(128,0,32,0.2)]"
+        className="w-full bg-[#e8562a] text-[#f0ece2] py-4 px-6 rounded-none font-semibold text-sm tracking-wider uppercase hover:bg-[#d14a22] transition-colors duration-300 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-3"
       >
         {isSubmitting ? (
           <>
-            <div className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin" />
+            <div className="w-4 h-4 border-2 border-[#f0ece2]/20 border-t-[#f0ece2] rounded-full animate-spin" />
             <span>{t('common.sending')}</span>
           </>
         ) : cooldownRemaining > 0 ? (
@@ -201,7 +199,7 @@ function ContactForm() {
             <HiOutlineArrowNarrowRight className="w-5 h-5" />
           </>
         )}
-      </button>
+      </MagneticButton>
     </form>
   );
 }
@@ -210,88 +208,71 @@ export default function Contact({ sectionRef }) {
   const { t } = useLanguage();
 
   return (
-    <section id="contact" ref={sectionRef} className="py-24 sm:py-32 relative overflow-hidden">
-      <div className="container mx-auto px-6 lg:px-8 relative z-10 w-full max-w-7xl">
+    <section id="contact" ref={sectionRef} className="py-32 sm:py-40 relative px-6 lg:px-10">
+      <div className="max-w-7xl mx-auto">
+        
+        {/* Big Headline — two-line with accent */}
         <motion.div 
-          className="text-center mb-20"
-          initial={{ opacity: 0, y: 20 }}
+          className="mb-16 lg:mb-20"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7 }}
         >
-          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-white/30 block mb-6">
-            {t('contact.subtitle')}
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extralight text-white mb-6">
+          <span className="label text-[#e8562a] block mb-4">{t('contact.subtitle')}</span>
+          <h2 className="display-lg text-[#f0ece2]">
             {t('contact.title')}
           </h2>
-          <div className="w-24 h-px bg-[rgba(128,0,32,0.4)] mx-auto" />
+          <h2 className="display-lg font-serif italic text-[#e8562a]">
+            {t('contact.titleAccent')}
+          </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          <GlassCard delay={0.1} className="group p-8 text-center" href="mailto:janfiala331@gmail.com" as="a">
-            <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:bg-white transition-colors duration-300">
-              <FiMail className="w-7 h-7 text-white group-hover:text-black transition-colors" />
-            </div>
-            <h3 className="text-lg font-medium text-white mb-2">{t('contact.email')}</h3>
-            <p className="text-white/50 text-sm mb-4">janfiala331@gmail.com</p>
-            <div className="text-[10px] text-white/30 uppercase tracking-[0.2em]">{t('common.clickToSend')}</div>
-          </GlassCard>
+        <AnimatedLine className="mb-16 lg:mb-20" />
 
-          <GlassCard delay={0.2} className="group p-8 text-center" href="tel:+420733164585" as="a">
-            <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:bg-white transition-colors duration-300">
-              <FiPhone className="w-7 h-7 text-white group-hover:text-black transition-colors" />
-            </div>
-            <h3 className="text-lg font-medium text-white mb-2">{t('contact.phone')}</h3>
-            <p className="text-white/50 text-sm mb-4">+420 733 164 585</p>
-            <div className="text-[10px] text-white/30 uppercase tracking-[0.2em]">{t('common.clickToCall')}</div>
-          </GlassCard>
-
-          <GlassCard delay={0.3} className="p-8 text-center">
-            <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mb-6 mx-auto">
-              <FiMapPin className="w-7 h-7 text-white" />
-            </div>
-             <h3 className="text-lg font-medium text-white mb-2">{t('common.location')}</h3>
-            <p className="text-white/50 text-sm mb-4">{t('contact.location')}</p>
-            <div className="text-[10px] text-white/30 uppercase tracking-[0.2em]">{t('common.czechRepublic')}</div>
-          </GlassCard>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mt-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20">
+          
+          {/* Left — Contact Info */}
           <motion.div
-            className="lg:col-span-5 space-y-12"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
+            className="lg:col-span-5 space-y-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div>
-              <RevealUp>
-                <h3 className="text-2xl sm:text-3xl font-light text-white mb-6">
-                  {t('contact.infoTitle')}
-                </h3>
-              </RevealUp>
-              <div className="w-12 h-px bg-white/30 mb-8" />
-              <p className="text-white/50 text-lg font-light leading-relaxed">
-                {t('contact.infoDesc')}
-              </p>
+            <p className="text-[#8a8578] text-base lg:text-lg leading-[1.8]">
+              {t('contact.infoDesc')}
+            </p>
+
+            <div className="space-y-5">
+              <a href="mailto:janfiala331@gmail.com" className="flex items-center gap-4 text-[#f0ece2] hover:text-[#e8562a] transition-colors duration-300 group">
+                <FiMail className="w-4 h-4 text-[#e8562a]" />
+                <span className="text-sm font-medium">janfiala331@gmail.com</span>
+              </a>
+              <a href="tel:+420733164585" className="flex items-center gap-4 text-[#f0ece2] hover:text-[#e8562a] transition-colors duration-300 group">
+                <FiPhone className="w-4 h-4 text-[#e8562a]" />
+                <span className="text-sm font-medium">+420 733 164 585</span>
+              </a>
+              <div className="flex items-center gap-4 text-[#8a8578]">
+                <FiMapPin className="w-4 h-4 text-[#e8562a]" />
+                <span className="text-sm font-medium">{t('contact.location')}</span>
+              </div>
             </div>
 
             <div>
-              <h4 className="text-white/30 text-[10px] font-semibold uppercase tracking-[0.3em] mb-6">
-                {t('contact.connect')}
-              </h4>
-              <div className="flex gap-4">
+              <h4 className="label mb-4">{t('contact.connect')}</h4>
+              <div className="flex gap-3">
                 {[
                   { Icon: FiGithub, href: "https://github.com/chlebaak" },
-                  { Icon: FiLinkedin, href: "https://www.linkedin.com/in/janfiala331/" },
-                  { Icon: FiInstagram, href: "#" }
+                  { Icon: FiLinkedin, href: "https://www.linkedin.com/in/janfiala331/" }
                 ].map((social, i) => (
                   <motion.a
                     key={i}
                     href={social.href}
-                    className="w-12 h-12 glass-panel rounded-xl flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-all duration-300"
-                    whileHover={{ y: -4, scale: 1.05 }}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 border border-[#4a4640]/50 flex items-center justify-center text-[#8a8578] hover:text-[#f0ece2] hover:border-[#e8562a] hover:bg-[#e8562a]/10 transition-all duration-300"
+                    whileHover={{ y: -3 }}
                     whileTap={{ scale: 0.95 }}
                   >
                     <social.Icon className="w-5 h-5" />
@@ -300,29 +281,31 @@ export default function Contact({ sectionRef }) {
               </div>
             </div>
 
-            <GlassCard delay={0.4} className="p-6">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-3 h-3 bg-[#800020] rounded-full animate-pulse shadow-[0_0_10px_rgba(128,0,32,0.8)]" />
-                <span className="text-white font-semibold tracking-widest uppercase text-xs">{t('common.available')}</span>
-              </div>
-              <p className="text-white/50 text-sm font-light">
-                {t('common.currentlyAccepting')}
-              </p>
-            </GlassCard>
+            {/* Available badge */}
+            <div className="flex items-center gap-3 py-4 border-t border-[#4a4640]/30">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+              <span className="text-[#8a8578] text-sm">{t('common.currentlyAccepting')}</span>
+            </div>
           </motion.div>
 
-          <GlassCard delay={0.2} className="lg:col-span-7 p-8 lg:p-12">
-            <div className="mb-10">
-              <h3 className="text-2xl sm:text-3xl font-light text-white mb-6">
+          {/* Right — Form */}
+          <motion.div 
+            className="lg:col-span-7"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <div className="mb-8">
+              <h3 className="text-xl font-semibold text-[#f0ece2] mb-2 tracking-tight">
                 {t('contact.formTitle')}
               </h3>
-              <div className="w-12 h-px bg-white/30 mb-8" />
-              <p className="text-white/50 font-light text-lg">
+              <p className="text-[#8a8578] text-sm">
                 {t('contact.formDesc')}
               </p>
             </div>
             <ContactForm />
-          </GlassCard>
+          </motion.div>
         </div>
       </div>
     </section>

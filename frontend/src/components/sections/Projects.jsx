@@ -1,102 +1,137 @@
+import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useLanguage } from '../../context/LanguageContext';
-import { GSAPTimeline } from '../GSAPAnimations';
+import { AnimatedLine } from '../GSAPComponents';
 import project1Image from '../../assets/project1.png';
 import project2Image from '../../assets/image.png';
 import project3Image from '../../assets/project3.png';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const projects = [
   {
     id: 1,
-    title: "Sociální síť pro čtenáře",
+    title: "Knihotok",
     category: "Full stack",
     description: "Kompletní sociální síť pro čtenáře knih s možností sdílení oblíbených knih, recenzí a komentářů.",
     image: project1Image,
-    tech: ["React", "Node.js/Express.js", "Javascript", "PosgreSQL", "Tailwind CSS"],
+    tech: ["React", "Node.js", "Express", "PostgreSQL", "Tailwind"],
     url: "https://knihotok.vercel.app/",
   },
   {
     id: 2,
-    title: "Restaurace refugio",
+    title: "Refugio",
     category: "Frontend",
     description: "Moderní a responzivní webová stránka pro restauraci Refugio, vytvořená s důrazem na uživatelskou přívětivost.",
     image: project2Image,
-    tech: ["React/Vite", "Tailwind CSS", "Javascript", "Figma"],
+    tech: ["React", "Vite", "Tailwind", "JavaScript", "Figma"],
     url: "https://refugio-ruddy.vercel.app",
   },
   {
     id: 3,
-    title: "AI Stock Analyst",
+    title: "AI Analyst",
     category: "Full stack",
     description: "Aplikace pro analýzu jednotlivých akcií a stavbu portfolia za pomoci umělé inteligence Google Gemini.",
     image: project3Image,
-    tech: ["Next.js", "React", "Tailwind CS", "AI", "Recharts"],
+    tech: ["Next.js", "React", "Tailwind", "AI", "Recharts"],
     url: "https://trading-six-ecru.vercel.app/",
   },
 ];
 
 function ProjectCard({ project, index }) {
   const { t } = useLanguage();
+  const imageRef = useRef();
   const { title, category, description, image, tech, url } = project;
+
+  useEffect(() => {
+    const el = imageRef.current;
+    if (!el) return;
+
+    const animation = gsap.fromTo(el, 
+      { yPercent: -8 },
+      {
+        yPercent: 8,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: el.parentElement,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 0.5,
+        }
+      }
+    );
+
+    return () => animation.kill();
+  }, []);
 
   return (
     <motion.div 
-      className="group relative"
-      initial={{ opacity: 0, y: 30 }}
+      className="group"
+      initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.8, delay: index * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
-      <div className="relative glass-card overflow-hidden transition-all duration-500 hover:border-[rgba(128,0,32,0.3)] hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(128,0,32,0.06)]">
-        <div className="aspect-[4/3] relative overflow-hidden bg-black/50">
+      <a 
+        href={url} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="block"
+      >
+        {/* Project header — number, title, category inline */}
+        <div className="flex items-baseline gap-4 mb-5">
+          <span className="text-[#e8562a] text-xs font-mono tracking-wider">0{index + 1}</span>
+          <h3 className="text-2xl sm:text-3xl font-semibold text-[#f0ece2] tracking-tight group-hover:text-[#e8562a] transition-colors duration-500">
+            {title}
+          </h3>
+          <span className="text-[#4a4640] text-xs tracking-[0.15em] uppercase font-medium hidden sm:inline">— {category}</span>
+        </div>
+
+        {/* Image */}
+        <div className="aspect-[16/10] relative overflow-hidden mb-5 bg-[#141414]">
           <img
+            ref={imageRef}
             src={image}
             alt={title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter hover:brightness-110"
+            className="w-full h-[120%] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03] will-change-transform"
+            style={{ objectPosition: 'center top' }}
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent opacity-80" />
+          <div className="absolute inset-0 bg-[#0a0a0a]/20 group-hover:bg-transparent transition-colors duration-500" />
           
-          <div className="absolute top-4 left-4 border border-[rgba(128,0,32,0.5)] px-3 py-1 bg-[rgba(128,0,32,0.15)] backdrop-blur-md text-white text-[10px] uppercase font-bold tracking-widest rounded-full">
-            {category}
+          {/* Hover overlay */}
+          <div className="absolute inset-0 flex items-end p-6 lg:p-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            <div className="bg-[#0a0a0a]/80 backdrop-blur-sm px-5 py-4 max-w-md">
+              <p className="text-[#f0ece2] text-sm leading-relaxed mb-3">{description}</p>
+              <div className="flex flex-wrap gap-x-3 gap-y-1">
+                {tech.map((item, i) => (
+                  <span key={item} className="text-[10px] text-[#8a8578] font-medium tracking-wider uppercase">
+                    {item}{i < tech.length - 1 && <span className="text-[#4a4640] ml-3">·</span>}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="p-8">
-          <div className="mb-6">
-            <h3 className="text-2xl font-light text-white mb-3 group-hover:text-white transition-colors">
-              {title}
-            </h3>
-            <p className="text-white/50 text-sm leading-relaxed line-clamp-2 font-light">
-              {description}
-            </p>
+        {/* View link */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3 text-[#8a8578] group-hover:text-[#e8562a] transition-colors duration-300">
+            <span className="text-xs tracking-[0.15em] uppercase font-semibold">{t('common.viewProject')}</span>
+            <HiOutlineArrowNarrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
           </div>
-
-          <div className="flex flex-wrap gap-2 mb-8">
-            {tech.map((item) => (
-              <span
-                key={item}
-                className="px-2 py-1 text-[10px] text-white/50 border border-white/10 rounded tracking-widest uppercase bg-white/5"
-              >
+          <div className="hidden sm:flex gap-x-3">
+            {tech.slice(0, 3).map((item) => (
+              <span key={item} className="text-[10px] text-[#4a4640] font-medium tracking-wider uppercase">
                 {item}
               </span>
             ))}
           </div>
-
-          <motion.a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-[#a63050] hover:text-[#c04565] text-xs tracking-widest uppercase font-semibold transition-colors duration-300 group/link"
-            whileHover={{ x: 5 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <span>{t('common.viewProject')}</span>
-            <HiOutlineArrowNarrowRight className="w-5 h-5 transition-transform duration-300 group-hover/link:translate-x-2" />
-          </motion.a>
         </div>
-      </div>
+      </a>
     </motion.div>
   );
 }
@@ -105,29 +140,32 @@ export default function Projects({ sectionRef }) {
   const { t } = useLanguage();
 
   return (
-    <section id="projects" ref={sectionRef} className="py-24 sm:py-32 relative overflow-hidden">
-      <div className="container mx-auto px-6 lg:px-8 relative z-10">
+    <section id="projects" ref={sectionRef} className="py-32 sm:py-40 relative px-6 lg:px-10">
+      <div className="max-w-7xl mx-auto">
+        {/* Section header — label, title, description */}
         <motion.div 
-          className="text-center mb-20"
-          initial={{ opacity: 0, y: 20 }}
+          className="mb-16 lg:mb-20 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-20 items-end"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7 }}
         >
-          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-white/30 block mb-6">
-            {t('projects.subtitle')}
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extralight text-white mb-6">
-            {t('projects.title')}
-          </h2>
-          <div className="w-24 h-px bg-[rgba(128,0,32,0.4)] mx-auto" />
+          <div>
+            <span className="label text-[#e8562a] block mb-4">{t('projects.subtitle')}</span>
+            <h2 className="display-lg text-[#f0ece2]">{t('projects.title')}</h2>
+          </div>
+          <p className="text-[#8a8578] text-base lg:text-lg leading-relaxed lg:text-right">
+            {t('projects.description')}
+          </p>
         </motion.div>
 
-        <GSAPTimeline className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+        <AnimatedLine className="mb-16" />
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-12">
           {projects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
-        </GSAPTimeline>
+        </div>
       </div>
     </section>
   );
