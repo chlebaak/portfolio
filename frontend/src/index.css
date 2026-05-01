@@ -1,6 +1,17 @@
 @import "tailwindcss";
 
-/* ─── Design Tokens — "Warm Noir" ─── */
+/* ─── Register theme colors for Tailwind utilities ─── */
+@theme {
+  --color-surface: var(--bg);
+  --color-elevated: var(--bg-elevated);
+  --color-fg: var(--fg);
+  --color-muted: var(--fg-muted);
+  --color-dim: var(--fg-dim);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+}
+
+/* ─── Dark Theme (default) ─── */
 :root {
   --bg: #0a0a0a;
   --bg-elevated: #141414;
@@ -8,8 +19,18 @@
   --fg-muted: #8a8578;
   --fg-dim: #4a4640;
   --accent: #e8562a;
-  --accent-glow: rgba(232, 86, 42, 0.15);
-  --radius: 0.5rem;
+  --accent-hover: #d14a22;
+}
+
+/* ─── Light Theme ─── */
+[data-theme="light"] {
+  --bg: #f5f2eb;
+  --bg-elevated: #ffffff;
+  --fg: #1a1714;
+  --fg-muted: #6b6560;
+  --fg-dim: #c5c0b8;
+  --accent: #e8562a;
+  --accent-hover: #d14a22;
 }
 
 /* ─── Base ─── */
@@ -26,6 +47,7 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 /* ─── Typography ─── */
@@ -53,7 +75,7 @@ p {
 
 ::selection {
   background: var(--accent);
-  color: var(--fg);
+  color: #fff;
 }
 
 /* ─── Typography Scale ─── */
@@ -94,6 +116,7 @@ p {
 }
 
 .custom-cursor {
+  background: var(--fg);
   mix-blend-mode: difference;
   transition: transform 0.15s ease, background 0.15s ease;
 }
@@ -122,6 +145,10 @@ p {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 256px 256px;
+}
+
+[data-theme="light"] .noise-overlay {
+  opacity: 0.02;
 }
 
 /* ─── Scroll Progress ─── */

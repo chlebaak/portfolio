@@ -19,15 +19,15 @@ export default function About({ sectionRef }) {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7 }}
         >
-          <span className="label text-[#e8562a] block mb-4">{t('about.subtitle')}</span>
-          <h2 className="display-lg text-[#f0ece2]">{t('about.title')}</h2>
+          <span className="label text-accent block mb-4">{t('about.subtitle')}</span>
+          <h2 className="display-lg text-fg">{t('about.title')}</h2>
         </motion.div>
 
         <AnimatedLine className="mb-16 lg:mb-20" />
 
         {/* Big italic heading — full width */}
         <motion.h3
-          className="text-3xl sm:text-4xl lg:text-[3.25rem] font-serif italic text-[#f0ece2] leading-[1.2] mb-16 lg:mb-24 max-w-4xl"
+          className="text-3xl sm:text-4xl lg:text-[3.25rem] font-serif italic text-fg leading-[1.2] mb-16 lg:mb-24 max-w-4xl"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -50,15 +50,15 @@ export default function About({ sectionRef }) {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <p className="text-base lg:text-lg text-[#8a8578] leading-[1.8]">
+              <p className="text-base lg:text-lg text-muted leading-[1.8]">
                 {t('about.description')}
               </p>
-              <p className="text-base lg:text-lg text-[#8a8578] leading-[1.8]">
+              <p className="text-base lg:text-lg text-muted leading-[1.8]">
                 {t('about.description2')}
               </p>
             </motion.div>
 
-            {/* Approach — new section */}
+            {/* Approach */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -69,8 +69,8 @@ export default function About({ sectionRef }) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-4">
                 {(t('about.approachItems') || []).map((item, i) => (
                   <div key={i} className="flex items-center gap-3 group">
-                    <div className="w-1.5 h-1.5 bg-[#e8562a] rounded-full shrink-0 group-hover:scale-150 transition-transform duration-300" />
-                    <span className="text-[#f0ece2] text-sm font-medium">{item}</span>
+                    <div className="w-1.5 h-1.5 bg-accent rounded-full shrink-0 group-hover:scale-150 transition-transform duration-300" />
+                    <span className="text-fg text-sm font-medium">{item}</span>
                   </div>
                 ))}
               </div>
@@ -84,7 +84,7 @@ export default function About({ sectionRef }) {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <h4 className="label mb-6">{t('about.skills')}</h4>
-              <p className="text-[#f0ece2]/80 text-sm leading-loose tracking-wide">
+              <p className="text-fg/80 text-sm leading-loose tracking-wide">
                 React · Next.js · JavaScript · TypeScript · C# · Node.js · Express · PostgreSQL · Tailwind CSS · Figma · Git · UI/UX
               </p>
             </motion.div>
@@ -100,13 +100,14 @@ export default function About({ sectionRef }) {
               <div className="space-y-3">
                 {[
                   { company: 'DPMÚL', role: 'Internship', period: '2023' },
-                  { company: 'DS Smith', role: 'Internship', period: '2024' }
+                  { company: 'DS Smith', role: 'Internship', period: '2024' },
+                  { company: 'Valeo', role: 'Software Script Trainee', period: 'PRESENT' }
                 ].map((exp) => (
                   <div key={exp.company} className="flex items-baseline gap-4 group py-1">
-                    <span className="text-[#e8562a] text-xs font-mono shrink-0 w-10">{exp.period}</span>
-                    <div className="flex-1 h-px bg-[#4a4640]/30 group-hover:bg-[#e8562a]/30 transition-colors mt-2" />
-                    <span className="text-[#f0ece2] font-medium text-sm shrink-0">
-                      {exp.role} <span className="text-[#8a8578] font-normal">— {exp.company}</span>
+                    <span className="text-accent text-xs font-mono shrink-0 w-16">{exp.period}</span>
+                    <div className="flex-1 h-px bg-dim/30 group-hover:bg-accent/30 transition-colors mt-2" />
+                    <span className="text-fg font-medium text-sm shrink-0">
+                      {exp.role} <span className="text-muted font-normal">— {exp.company}</span>
                     </span>
                   </div>
                 ))}
@@ -120,7 +121,7 @@ export default function About({ sectionRef }) {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <MagneticButton className="group inline-flex items-center gap-3 px-8 py-4 bg-[#f0ece2] text-[#0a0a0a] rounded-none font-semibold text-sm tracking-wider uppercase hover:bg-[#e8562a] hover:text-[#f0ece2] transition-colors duration-300">
+              <MagneticButton className="group inline-flex items-center gap-3 px-8 py-4 bg-fg text-surface rounded-none font-semibold text-sm tracking-wider uppercase hover:bg-accent hover:text-white transition-colors duration-300">
                 <span>{t('about.download')}</span>
                 <HiOutlineArrowNarrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
               </MagneticButton>
@@ -141,19 +142,19 @@ export default function About({ sectionRef }) {
                 alt="Jan Fiala"
                 className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700"
               />
-              <div className="absolute inset-0 bg-[#0a0a0a]/10 group-hover:bg-transparent transition-colors duration-500" />
+              <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
 
-              {/* Badge overlay */}
+              {/* Badge overlay — always dark on image */}
               <div className="absolute bottom-0 left-0 right-0 p-6">
-                <div className="bg-[#0a0a0a]/80 backdrop-blur-sm px-5 py-4">
+                <div className="bg-black/80 backdrop-blur-sm px-5 py-4">
                   <div className="flex items-center justify-between mb-2">
-                    <p className="text-[#f0ece2] text-base font-semibold tracking-tight">Jan Fiala</p>
+                    <p className="text-white text-base font-semibold tracking-tight">Jan Fiala</p>
                     <div className="flex items-center gap-2">
                       <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                      <span className="text-[10px] text-[#8a8578] uppercase tracking-wider font-medium">{t('common.available')}</span>
+                      <span className="text-[10px] text-white/60 uppercase tracking-wider font-medium">{t('common.available')}</span>
                     </div>
                   </div>
-                  <p className="text-[#8a8578] text-xs tracking-wide">{t('common.jobTitle')}</p>
+                  <p className="text-white/60 text-xs tracking-wide">{t('common.jobTitle')}</p>
                 </div>
               </div>
             </div>

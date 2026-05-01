@@ -75,23 +75,18 @@ function ProjectCard({ project, index }) {
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.8, delay: index * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
-      <a 
-        href={url} 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="block"
-      >
-        {/* Project header — number, title, category inline */}
+      <a href={url} target="_blank" rel="noopener noreferrer" className="block">
+        {/* Project header */}
         <div className="flex items-baseline gap-4 mb-5">
-          <span className="text-[#e8562a] text-xs font-mono tracking-wider">0{index + 1}</span>
-          <h3 className="text-2xl sm:text-3xl font-semibold text-[#f0ece2] tracking-tight group-hover:text-[#e8562a] transition-colors duration-500">
+          <span className="text-accent text-xs font-mono tracking-wider">0{index + 1}</span>
+          <h3 className="text-2xl sm:text-3xl font-semibold text-fg tracking-tight group-hover:text-accent transition-colors duration-500">
             {title}
           </h3>
-          <span className="text-[#4a4640] text-xs tracking-[0.15em] uppercase font-medium hidden sm:inline">— {category}</span>
+          <span className="text-dim text-xs tracking-[0.15em] uppercase font-medium hidden sm:inline">— {category}</span>
         </div>
 
         {/* Image */}
-        <div className="aspect-[16/10] relative overflow-hidden mb-5 bg-[#141414]">
+        <div className="aspect-[16/10] relative overflow-hidden mb-5 bg-elevated">
           <img
             ref={imageRef}
             src={image}
@@ -100,16 +95,16 @@ function ProjectCard({ project, index }) {
             style={{ objectPosition: 'center top' }}
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-[#0a0a0a]/20 group-hover:bg-transparent transition-colors duration-500" />
+          {/* These overlays stay dark regardless of theme since they're on images */}
+          <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
           
-          {/* Hover overlay */}
           <div className="absolute inset-0 flex items-end p-6 lg:p-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <div className="bg-[#0a0a0a]/80 backdrop-blur-sm px-5 py-4 max-w-md">
-              <p className="text-[#f0ece2] text-sm leading-relaxed mb-3">{description}</p>
+            <div className="bg-black/80 backdrop-blur-sm px-5 py-4 max-w-md">
+              <p className="text-white text-sm leading-relaxed mb-3">{description}</p>
               <div className="flex flex-wrap gap-x-3 gap-y-1">
                 {tech.map((item, i) => (
-                  <span key={item} className="text-[10px] text-[#8a8578] font-medium tracking-wider uppercase">
-                    {item}{i < tech.length - 1 && <span className="text-[#4a4640] ml-3">·</span>}
+                  <span key={item} className="text-[10px] text-white/60 font-medium tracking-wider uppercase">
+                    {item}{i < tech.length - 1 && <span className="text-white/30 ml-3">·</span>}
                   </span>
                 ))}
               </div>
@@ -119,13 +114,13 @@ function ProjectCard({ project, index }) {
 
         {/* View link */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3 text-[#8a8578] group-hover:text-[#e8562a] transition-colors duration-300">
+          <div className="flex items-center gap-3 text-muted group-hover:text-accent transition-colors duration-300">
             <span className="text-xs tracking-[0.15em] uppercase font-semibold">{t('common.viewProject')}</span>
             <HiOutlineArrowNarrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
           </div>
           <div className="hidden sm:flex gap-x-3">
             {tech.slice(0, 3).map((item) => (
-              <span key={item} className="text-[10px] text-[#4a4640] font-medium tracking-wider uppercase">
+              <span key={item} className="text-[10px] text-dim font-medium tracking-wider uppercase">
                 {item}
               </span>
             ))}
@@ -142,7 +137,6 @@ export default function Projects({ sectionRef }) {
   return (
     <section id="projects" ref={sectionRef} className="py-32 sm:py-40 relative px-6 lg:px-10">
       <div className="max-w-7xl mx-auto">
-        {/* Section header — label, title, description */}
         <motion.div 
           className="mb-16 lg:mb-20 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-20 items-end"
           initial={{ opacity: 0, y: 30 }}
@@ -151,10 +145,10 @@ export default function Projects({ sectionRef }) {
           transition={{ duration: 0.7 }}
         >
           <div>
-            <span className="label text-[#e8562a] block mb-4">{t('projects.subtitle')}</span>
-            <h2 className="display-lg text-[#f0ece2]">{t('projects.title')}</h2>
+            <span className="label text-accent block mb-4">{t('projects.subtitle')}</span>
+            <h2 className="display-lg text-fg">{t('projects.title')}</h2>
           </div>
-          <p className="text-[#8a8578] text-base lg:text-lg leading-relaxed lg:text-right">
+          <p className="text-muted text-base lg:text-lg leading-relaxed lg:text-right">
             {t('projects.description')}
           </p>
         </motion.div>

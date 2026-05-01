@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { gsap } from 'gsap'
 
-// Cursor tracking — runs on gsap.ticker for zero-lag
 export const CursorHoverSetup = () => {
   useEffect(() => {
     const cursor = document.querySelector('.custom-cursor')
@@ -22,7 +21,6 @@ export const CursorHoverSetup = () => {
     }
     gsap.ticker.add(tickerFn)
 
-    // Hover states for interactive elements
     const setupHovers = () => {
       document.querySelectorAll('button, a, [role="button"], input, textarea, select').forEach(el => {
         el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'))
@@ -41,10 +39,9 @@ export const CursorHoverSetup = () => {
   return null
 }
 
-// Custom cursor element
 export const CustomCursor = () => (
   <div 
-    className="custom-cursor fixed w-4 h-4 bg-[#f0ece2] rounded-full pointer-events-none z-[100] hidden md:block"
+    className="custom-cursor fixed w-4 h-4 rounded-full pointer-events-none z-[100] hidden md:block"
     style={{ top: 0, left: 0, transform: 'translate(-50%, -50%)' }} 
   />
 )

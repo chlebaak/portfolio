@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { LanguageProvider } from "./context/LanguageContext";
+import { ThemeProvider } from "./context/ThemeContext";
 import { CustomCursor, CursorHoverSetup } from "./components/AdvancedGSAP";
 import { ScrollProgress } from "./components/GSAPComponents";
 
@@ -52,7 +53,6 @@ function AppContent() {
 
   return (
     <div className="min-h-[100svh] relative antialiased">
-      {/* Noise texture overlay */}
       <div className="noise-overlay" />
 
       <CursorHoverSetup />
@@ -86,8 +86,10 @@ function AppContent() {
 
 export default function App() {
   return (
-    <LanguageProvider>
-      <AppContent />
-    </LanguageProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <AppContent />
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }
